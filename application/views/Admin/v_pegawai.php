@@ -46,10 +46,11 @@
                                 <thead>
                                     <tr>
                                         <th>Jabatan</th>
-                                        <th>Email</th>
-                                        <th>Username</th>
                                         <th>Nama</th>
+                                        <th>Email</th>
                                         <th>Alamat</th>
+                                        <th>kodepos</th>
+                                        <th>Telepon</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -57,15 +58,18 @@
                                 <tbody>
                                     <?php 
                                     $number 	=	1;
-                                    foreach ($pegawai as $data) { ?>
+                                    foreach ($pegawai as $data) { 
+                                        $number++;
+                                    ?>
                                     <tr>
-                                        <td><?php echo $data->ID_JABATAN ?></td>
-                                        <td><?php $number++; echo $data->EMAIL_PEGAWAI; ?> </td>
-                                        <td><?php echo $data->USERNAME ?></td>
+                                        <td><?php echo $this->Master->get_tabel( 'jabatan' , array('ID_JABATAN' => $data->ID_JABATAN), 'NAMA_JABATAN') ?></td>
                                         <td>
                                             <?php echo $data->NAMA_PEGAWAI ?>
                                         </td>
+                                        <td><?= $data->EMAIL_PEGAWAI ?></td>
                                         <td><?php echo $data->ALAMAT_PEGAWAI ?></td>
+                                        <td><?= $data->KODEPOS_PEGAWAI ?></td>
+                                        <td><?= $data->TELP_PEGAWAI ?></td>
                                         <td>	
                                         	<a class="btn btn-sm btn-circle btn-danger" data-toggle="tooltip" data-title="Hapus" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("Control_Pegawai/Delete/".$data->ID_PEGAWAI) ?>'" ><i class="fa fa-trash"></i></a>
                                         	<a class="btn btn-sm btn-circle btn-primary" data-toggle="modal" href="#data_<?php echo $number ?>" ><i data-toggle="tooltip" data-title="Edit" class="fa fa-pencil"></i></a>
@@ -91,9 +95,9 @@
                  <div class="form-group">
                 <label for="jabatan">jabatan</label>
                 <select class="form-control" name="jabatan" id="jabatan" required>
-                    <?php if ($data->ID_JABATAN == 1){ ?>
+                    <?php if ($data->ID_JABATAN == 'JB001'){ ?>
                         <option selected disabled 
-                        value="1">Pemilik</option>
+                        value='JB001'>Owner</option>
                     <?php }else{?>
                     <?php
                     foreach ($jabatan as $ot) {

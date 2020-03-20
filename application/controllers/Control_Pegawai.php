@@ -82,15 +82,15 @@
 
 	public function Delete($idpeg){
 
-		$where = 	array('ID_PEG' => $idpeg);
-		$this->Master->update('pegawai',$where ,'update', 'STATUS_PEG');
+		$where = 	array('ID_PEGAWAI' => $idpeg);
+		$this->Master->update('pegawai',$where ,'update', 'STATUS_PEGAWAI');
 
 		$this->session->set_flashdata('konten_err' , 'Data Berhasil di Hapus');	
 		redirect( base_url('admin/Pegawai') );
 	}
 
 	public function Update($idpeg){
-		$where 		    = 	array('ID_PEG' => $idpeg);
+		$where 		    = 	array('ID_PEGAWAI' => $idpeg);
 		$tlpn =	$_POST['teleponpeg'];
 		$tlpn = str_replace('-', '', $tlpn);
 		$data 	=	array(

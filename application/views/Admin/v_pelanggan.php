@@ -44,11 +44,11 @@
                             <table id="example23" class="display nowrap" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                    	<th>Email</th>
-                                        <th>Username</th>
+                                        <th>Kota</th>
                                         <th>Nama</th>
-                                        <th>Alamat</th>
                                         <th>Telepon</th>
+                                        <th>Alamat</th>
+                                        <th>kodepos</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -56,17 +56,19 @@
                                 <tbody>
                                     <?php 
                                     $number 	=	1;
-                                    foreach ($customer as $data) { ?>
+                                    foreach ($pelanggan as $data) { 
+                                        $number++;    
+                                    ?>
                                     <tr>
-                                    	<td><?php $number++; echo $data->EMAIL_CUS; ?> </td>
-                                        <td><?php echo $data->USER_CUS ?></td>
+                                        <td><?= $this->Master->get_tabel('kota',array('ID_KOTA' => $data->ID_KOTA),'NAMA_KOTA') ?></td>
                                         <td>
-                                        	<?php echo $data->NAMA_CUS ?>
+                                        	<?php echo $data->NAMA_PELANGGAN ?>
                                         </td>
-                                        <td><?php echo $data->ALAMAT_CUS ?></td>
-                                        <td><?php echo $data->TELEPON_CUS ?></td>
+                                        <td><?php echo $data->TELP_PELANGGAN ?></td>
+                                        <td><?php echo $data->ALAMAT_PELANGGAN ?></td>
+                                        <td><?php echo $data->KODEPOS_PELANGGAN ?></td>
                                         <td>	
-                                        	<a class="btn btn-sm btn-circle btn-danger" data-toggle="tooltip" data-title="Hapus" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("Control_Pelanggan/Delete/".$data->ID_CUS) ?>'" ><i class="fa fa-trash"></i></a>
+                                        	<a class="btn btn-sm btn-circle btn-danger" data-toggle="tooltip" data-title="Hapus" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("Control_Pelanggan/Delete/".$data->ID_PELANGGAN) ?>'" ><i class="fa fa-trash"></i></a>
                                         	<a class="btn btn-sm btn-circle btn-primary" data-toggle="modal" href="#data_<?php echo $number ?>" ><i data-toggle="tooltip" data-title="Edit" class="fa fa-pencil"></i></a>
                                         	<a class="btn btn-sm btn-circle btn-warning" data-toggle="tooltip" data-title="Detail Pelanggan" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("admin/DetailPelanggan/".($number-1)) ?>'"><i class="fa fa-search"></i></a>
                                         </td>
@@ -80,26 +82,26 @@
                             
         	<!-- Form  -->
           
-          	<form class="form-horizontal" method="post" action='<?php echo base_url('Control_Pelanggan/Update/').$data->ID_CUS ?>' id="form1">
+          	<form class="form-horizontal" method="post" action='<?php echo base_url('Control_Pelanggan/Update/').$data->ID_PELANGGAN ?>' id="form1">
                 <h3><p>INFORMASI DATA PELANGGAN</p></h3>
                 <hr>
                 <div class="form-group">
-                    <label class="col-md-12" for="example-email">Password</label>
-                    <div class="col-md-12">
+                    <label for="example-email">Password</label>
+                    <div>
                        <input type="password" name="passcus" class="form-control" minlength="5" maxlength="20" value=""> </div>
                 </div>
 
                 <h3><p>INFORMASI DATA PELANGGAN</p></h3>
                 <hr>
                 <div class="form-group">
-                    <label class="col-md-12">Nama</label>
-                    <div class="col-md-12">
-                        <input type="text" class="form-control" name="namacus"  minlength="5" maxlength="30" value="<?php echo($data->NAMA_CUS) ?>" required> </div>
+                    <label>Nama</label>
+                    <div>
+                        <input type="text" class="form-control" name="namacus"  minlength="5" maxlength="30" value="<?php echo($data->NAMA_PELANGGAN) ?>" required> </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-12" for="example-email">Alamat</label>
-                    <div class="col-md-12">
-                       <input type="text" name="alamatcus" class="form-control"  minlength="5" maxlength="50" value="<?php echo($data->ALAMAT_CUS) ?>" required> </div>
+                    <label for="example-email">Alamat</label>
+                    <div>
+                       <input type="text" name="alamatcus" class="form-control"  minlength="5" maxlength="50" value="<?php echo($data->ALAMAT_PELANGGAN) ?>" required> </div>
                 </div>
 
                 <div class="form-group">
@@ -131,14 +133,14 @@
                 </div>
                
                 <div class="form-group">
-                    <label class="col-md-12">Telepon</label>
-                    <div class="col-md-12">
-                        <input type="text" class="form-control" name="teleponcus" onkeypress='validate(event)' data-mask='999-999-999-999' value="<?php echo($data->TELEPON_CUS) ?>" required> </div>
+                    <label>Telepon</label>
+                    <div>
+                        <input type="text" class="form-control" name="teleponcus" onkeypress='validate(event)' data-mask='999-999-999-999' value="<?php echo($data->TELP_PELANGGAN) ?>" required> </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-12">Kodepos</label>
-                    <div class="col-md-12">
-                        <input type="text" pattern="[0-9]*" inputmode="numeric" name="kodeposcus" class="form-control" min="5" max="5" onkeypress='validate(event)' data-mask='99999' value="<?php echo($data->KODEPOS_CUS) ?>" required> </div>
+                    <label>Kodepos</label>
+                    <div>
+                        <input type="text" pattern="[0-9]*" inputmode="numeric" name="kodeposcus" class="form-control" min="5" max="5" onkeypress='validate(event)' data-mask='99999' value="<?php echo($data->KODEPOS_PELANGGAN) ?>" required> </div>
                 </div>
 					<!-- <input type="submit" value="asd" class="btn btn-default"> -->
 							
