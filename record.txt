@@ -1,0 +1,4 @@
+insert pemesanan, pembayaran 1 -> status_dp 0 -> status transaksi sukses
+insert pemesanan, pembayaran 1 -> status_dp 1 -> status menunggu pelunasan
+menu pembayaran -> status menunggu pelunasan -> update status pemesanan, insert pembayaran 2
+class="karl-side-menu-open"

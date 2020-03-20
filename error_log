@@ -1,0 +1,80 @@
+[12-Apr-2018 09:52:23 Asia/Jakarta] PHP Fatal error:  Call to a member function select() on null in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Spending.php on line 74
+[12-Apr-2018 09:52:23 Asia/Jakarta] PHP Fatal error:  Call to a member function select() on null in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Spending.php on line 162
+[12-Apr-2018 09:52:46 Asia/Jakarta] PHP Fatal error:  Call to a member function select() on null in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Spending.php on line 74
+[12-Apr-2018 09:52:46 Asia/Jakarta] PHP Fatal error:  Call to a member function select() on null in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Spending.php on line 162
+[12-Apr-2018 09:56:06 Asia/Jakarta] PHP Fatal error:  Call to a member function select() on null in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Spending.php on line 74
+[12-Apr-2018 09:56:07 Asia/Jakarta] PHP Fatal error:  Call to a member function select() on null in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Spending.php on line 162
+[12-Apr-2018 09:58:04 Asia/Jakarta] PHP Fatal error:  Call to a member function select() on null in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Spending.php on line 74
+[12-Apr-2018 09:58:04 Asia/Jakarta] PHP Fatal error:  Call to a member function select() on null in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Spending.php on line 162
+[12-Apr-2018 09:59:48 Asia/Jakarta] PHP Fatal error:  Call to a member function select() on null in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Spending.php on line 74
+[12-Apr-2018 09:59:49 Asia/Jakarta] PHP Fatal error:  Call to a member function select() on null in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Spending.php on line 162
+[12-Apr-2018 10:01:14 Asia/Jakarta] PHP Fatal error:  Call to a member function select() on null in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Spending.php on line 74
+[12-Apr-2018 10:01:14 Asia/Jakarta] PHP Fatal error:  Call to a member function select() on null in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Spending.php on line 162
+[12-Apr-2018 10:02:51 Asia/Jakarta] PHP Fatal error:  Call to a member function select() on null in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Spending.php on line 74
+[12-Apr-2018 10:02:51 Asia/Jakarta] PHP Fatal error:  Call to a member function select() on null in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Spending.php on line 162
+[12-Apr-2018 10:03:50 Asia/Jakarta] PHP Fatal error:  Call to a member function select() on null in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Spending.php on line 74
+[12-Apr-2018 10:03:52 Asia/Jakarta] PHP Fatal error:  Call to a member function select() on null in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Spending.php on line 162
+[09-May-2018 08:42:04 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/Transaksi/t_v_order.php on line 97
+[09-May-2018 08:42:17 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/Transaksi/t_v_order.php on line 97
+[09-May-2018 09:09:55 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/Transaksi/receipt_item_v.php on line 66
+[09-May-2018 09:10:01 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/Transaksi/send_store_v.php on line 78
+[09-May-2018 09:16:20 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/Transaksi/send_store_v.php on line 78
+[22-May-2018 09:50:11 Asia/Jakarta] PHP Fatal error:  Call to undefined method Master::delete_again() in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/L_Pemasukan.php on line 42
+[22-May-2018 09:51:02 Asia/Jakarta] PHP Fatal error:  Call to undefined method Master::delete_again() in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/L_Pemasukan.php on line 42
+[22-May-2018 15:10:35 Asia/Jakarta] PHP Fatal error:  Call to undefined method Master::delete_again() in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/L_Pemasukan.php on line 42
+[22-May-2018 15:10:40 Asia/Jakarta] PHP Fatal error:  Call to undefined method Master::delete_again() in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/L_Pemasukan.php on line 42
+[22-May-2018 15:10:45 Asia/Jakarta] PHP Fatal error:  Call to undefined method Master::delete_again() in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/L_Pemasukan.php on line 42
+[22-May-2018 15:19:50 Asia/Jakarta] PHP Fatal error:  Call to undefined method Master::delete_again() in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/L_Pengeluaran.php on line 39
+[22-May-2018 15:22:53 Asia/Jakarta] PHP Fatal error:  Call to undefined method Master::delete_again() in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/L_Pengeluaran.php on line 39
+[22-May-2018 15:23:01 Asia/Jakarta] PHP Fatal error:  Call to undefined method Master::delete_again() in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/L_Pengeluaran.php on line 39
+[24-May-2018 16:03:29 Asia/Jakarta] PHP Fatal error:  Call to a member function userdata() on null in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/C_Pengiriman.php on line 8
+[24-May-2018 16:03:53 Asia/Jakarta] PHP Fatal error:  Call to a member function userdata() on null in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/C_Pengiriman.php on line 8
+[30-May-2018 12:06:19 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/coa_v.php on line 73
+[30-May-2018 12:06:23 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/coa_v.php on line 73
+[30-May-2018 12:06:24 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/coa_v.php on line 73
+[30-May-2018 12:06:25 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/coa_v.php on line 73
+[30-May-2018 12:06:26 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/coa_v.php on line 73
+[30-May-2018 12:06:26 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/coa_v.php on line 73
+[30-May-2018 12:06:27 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/coa_v.php on line 73
+[30-May-2018 12:06:28 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/coa_v.php on line 73
+[30-May-2018 12:09:18 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/coa_v.php on line 73
+[30-May-2018 12:09:28 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/coa_v.php on line 73
+[30-May-2018 12:09:30 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/coa_v.php on line 73
+[30-May-2018 12:12:47 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/coa_v.php on line 73
+[30-May-2018 12:12:47 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/coa_v.php on line 73
+[30-May-2018 12:12:51 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/coa_v.php on line 73
+[30-May-2018 12:14:29 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/coa_v.php on line 73
+[30-May-2018 12:14:32 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/coa_v.php on line 73
+[30-May-2018 12:15:00 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on array in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/coa_v.php on line 73
+[30-May-2018 12:15:22 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on null in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/coa_v.php on line 73
+[30-May-2018 12:23:22 Asia/Jakarta] PHP Parse error:  syntax error, unexpected 'as' (T_AS) in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/coa_v.php on line 73
+[30-May-2018 12:23:27 Asia/Jakarta] PHP Parse error:  syntax error, unexpected 'as' (T_AS) in /home/jasasoft/lds.jasasoftdroid.com/application/views/Admin/coa_v.php on line 73
+[30-Jun-2018 15:45:45 Asia/Jakarta] PHP Fatal error:  Call to a member function generate() on null in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/C_Transaksi.php on line 65
+[30-Jun-2018 15:54:08 Asia/Jakarta] PHP Parse error:  syntax error, unexpected '$where' (T_VARIABLE) in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/C_Pengiriman.php on line 108
+[30-Jun-2018 15:54:14 Asia/Jakarta] PHP Parse error:  syntax error, unexpected '$where' (T_VARIABLE) in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/C_Pengiriman.php on line 108
+[01-Jul-2018 22:39:52 Asia/Jakarta] PHP Parse error:  syntax error, unexpected 't' (T_STRING) in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/C_Transaksi.php on line 62
+[01-Jul-2018 22:40:00 Asia/Jakarta] PHP Parse error:  syntax error, unexpected 't' (T_STRING) in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/C_Transaksi.php on line 62
+[03-Jul-2018 09:49:26 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 74
+[03-Jul-2018 09:49:26 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 74
+[03-Jul-2018 09:49:26 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 74
+[03-Jul-2018 09:50:15 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 74
+[03-Jul-2018 09:50:15 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 74
+[03-Jul-2018 09:50:15 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 74
+[03-Jul-2018 09:50:16 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 74
+[03-Jul-2018 09:50:16 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 74
+[03-Jul-2018 09:50:16 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 74
+[03-Jul-2018 09:50:24 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 74
+[03-Jul-2018 09:50:24 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 74
+[03-Jul-2018 09:50:24 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 74
+[03-Jul-2018 09:50:27 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 74
+[03-Jul-2018 09:50:27 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 74
+[03-Jul-2018 09:50:27 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 74
+[03-Jul-2018 09:50:29 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 74
+[03-Jul-2018 09:50:29 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 74
+[03-Jul-2018 09:50:29 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 74
+[03-Jul-2018 09:50:40 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 74
+[03-Jul-2018 09:50:40 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 74
+[03-Jul-2018 09:50:40 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 74
+[03-Jul-2018 10:44:49 Asia/Jakarta] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 90
+[03-Jul-2018 10:45:14 Asia/Jakarta] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 90
+[03-Jul-2018 10:45:17 Asia/Jakarta] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /home/jasasoft/lds.jasasoftdroid.com/application/controllers/Auth.php on line 90
