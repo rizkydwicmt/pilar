@@ -32,7 +32,7 @@ class Login extends CI_Controller {
 
 		$where 		=	array(
 			'USERNAME' 	=> $user ,
-			'PASSWORD' 		=> $pass,
+			'PASSWORD' 	=> $pass,
 			);
 		$query 		=	$this->Master->check_session('pegawai' , $where);
 
@@ -42,11 +42,9 @@ class Login extends CI_Controller {
 
 			$data 	=	$query->result();
 
-
-			
 			foreach ($data as $login) {	
 
-				if ($login->STATUS_PEG == '1') {
+				if ($login->STATUS_PEGAWAI == '1') {
 					
 					$id_karyawan 	=	$login->ID_PEG ;
 					$config['nama_user'] 	= $login->NAMA_PEGAWAI;
