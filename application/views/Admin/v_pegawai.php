@@ -33,6 +33,7 @@
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="nav-item" aria-expanded="false"><a href="#bank" class="nav-link active" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"> Data Pegawai</span></a></li>
             <li role="presentation" class="nav-item"><a href="#form" class="nav-link" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Input Data Pegawai</span></a></li>
+            <li role="presentation" class="nav-item"><a href="#form2" class="nav-link" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Input Jabatan</span></a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
@@ -280,6 +281,35 @@
                                 <div class="col-md-12">
                                     <input type="text" pattern="[0-9]*" inputmode="numeric" name="kodepospeg" class="form-control" min="5" max="5" onkeypress='validate(event)' data-mask='99999' required> </div>
                             </div>
+
+
+
+                            
+                            <button type="submit" class="btn btn-success">Simpan</button>
+                            <button type="reset" class="btn btn-info">Reset</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="form2" aria-expanded="false">
+               
+                <div class="col-sm-12">
+                    <div class="white-box">
+                        
+                        <h3><p>Jabatan</p></h3>
+                        <hr>
+                        <form class="form-horizontal" method="post" enctype="multipart/form-data" accept-charset="utf-8" action='<?php echo base_url('Control_Pegawai/SaveJabatan') ?>'>
+                                        
+                            <div class="form-group">
+                                <label class="col-md-12">Nama Jabatan</label>
+                                <div class="col-md-12">
+                                    <input type="text" name="jabatan" class="form-control" required>
+                                </div>
+                            </div>
+
+                           
 
 
 

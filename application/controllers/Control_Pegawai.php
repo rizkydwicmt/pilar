@@ -79,6 +79,17 @@
 		redirect( base_url('admin/Pegawai') );
 	}
 
+	public function SaveJabatan(){
+
+		$data 	=	array(
+			/* Nama Field    => Isi Data $_Post */
+			'NAMA_JABATAN'		=> $_POST['jabatan']
+			);
+
+		$this->Master->save_data('jabatan' , $data);
+		$this->session->set_flashdata('konten' , 'Data Berhasil di Tambahkan');	
+		redirect( base_url('admin/Pegawai') );
+	}
 
 	public function Delete($idpeg){
 

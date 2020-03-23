@@ -78,11 +78,7 @@
                                             <?php echo $data->HARGA ?>
                                         </td>
                                         <td>
-                                        	<?php if($data->STATUS_DOMBA == '1'){ ?>
-                                            <a class="btn btn-sm btn-circle btn-danger" data-toggle="tooltip" data-title="Hapus Stok Barang" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("Control_Domba/Delete/".$data->ID_DOMBA) ?>'" ><i class="fa fa-chevron-circle-down"></i></a>
-                                            <?php }else{ ?>
-                                            <a class="btn btn-sm btn-circle btn-success" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("Control_Domba/Updatestok/".$data->ID_DOMBA) ?>'" ><i data-toggle="tooltip" data-title="Update Stok Barang" class="fa fa-chevron-circle-up"></i></a>
-                                            <?php } ?>
+                                            <a class="btn btn-sm btn-circle btn-danger" data-toggle="tooltip" data-title="Hapus Stok Domba" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("Control_Domba/Delete/".$data->ID_DOMBA) ?>'" ><i class="fa fa-chevron-circle-down"></i></a>
                                         	<a class="btn btn-sm btn-circle btn-primary" data-toggle="modal" href="#data_<?php echo $number ?>" ><i data-toggle="tooltip" data-title="Edit" class="fa fa-pencil"></i></a>
                                         </td>
 <div class="modal fade bs-example-modal-lg" tabindex="-1" id="data_<?php echo $number ?>" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
@@ -95,23 +91,23 @@
                             
         	<!-- Form  -->
           
-          	<form class="form-horizontal" method="post" enctype="multipart/form-data" accept-charset="utf-8" action='<?php echo base_url('Control_Barang/Update/').$data->ID_DOMBA ?>' id="form1">
+          	<form class="form-horizontal" method="post" enctype="multipart/form-data" accept-charset="utf-8" action='<?php echo base_url('Control_Domba/Update/').$data->ID_DOMBA ?>' id="form1">
                 <h3><p><?php echo $this->Master->get_tabel('jenis_domba',array('ID_JENIS' => $data->ID_JENIS),'JENIS_DOMBA').' - '.$data->ID_DOMBA ?></p></h3>
                 <hr>
                 <div class="form-group">
                     <label>Jenis Kelamin</label>
                     <select class="form-control" name="jk" required>
-                        <option value="jantan">Jantan</option>
-                        <option value="betina">Betina</option>
+                        <option value="jantan" <?php if($data->JENIS_KELAMIN=='jantan'){ echo 'selected';} ?>>Jantan</option>
+                        <option value="betina" <?php if($data->JENIS_KELAMIN=='betina'){ echo 'selected';} ?>>Betina</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Berat</label>
-                    <input type="number" name="berbar" class="form-control" min="1" value="<?php echo($data->BERAT) ?>" required>
+                    <input type="number" name="berdom" class="form-control" min="1" value="<?php echo($data->BERAT) ?>" required>
                 </div>
                 <div class="form-group">
                     <label>Harga</label>
-                    <input type="number" name="harbar" class="form-control" min="1" value="<?php echo($data->HARGA) ?>" required>
+                    <input type="number" name="hardom" class="form-control" min="1" value="<?php echo($data->HARGA) ?>" required>
                 </div>
 					<!-- <input type="submit" value="asd" class="btn btn-default"> -->
 							
