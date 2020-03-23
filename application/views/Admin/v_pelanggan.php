@@ -176,59 +176,63 @@
                <div class="col-sm-12">
                    <div class="white-box">
                        
-                           <h3><p>INFORMASI DATA PEGAWAI</p></h3>
-                           <hr>
+                            <h3><p>INFORMASI DATA PEGAWAI</p></h3>
+                            <hr>
 
-                           <form class="form-horizontal" method="post" action='<?php echo base_url('Control_Pelanggan/Save') ?>'>
-                           <div class="form-group">
-                               <label class="col-md-12">Nama</label>
-                               <div class="col-md-12">
-                                   <input type="text" class="form-control" name="namapel"  minlength="5" maxlength="30" required> </div>
-                           </div>
-                           <div class="form-group">
-                               <label class="col-md-12" for="example-email">Alamat</label>
-                               <div class="col-md-12">
-                                  <input type="text" name="alamatpel" class="form-control"  minlength="5" maxlength="50"  required> </div>
-                           </div>
+                            <form class="form-horizontal" method="post" action='<?php echo base_url('Control_Pelanggan/Save') ?>'>
+                            <div class="form-group">
+                                <label class="col-md-12">Nama</label>
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" name="namapel"  minlength="5" maxlength="30" required> </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12" for="example-email">Alamat</label>
+                                <div class="col-md-12">
+                                    <input type="text" name="alamatpel" class="form-control"  minlength="5" maxlength="50"  required> </div>
+                            </div>
 
-                           <div class="form-group">
-                           <label for="provinsi">provinsi</label>
-                           <select class="form-control" name="provinsi" id="provinsi" required>
-                               <?php
-                               foreach ($provinsi as $prov) {
-                                   ?>
-                                   <option <?php echo $provinsi_selected == $prov->ID_PROV ? 'selected="selected"' : '' ?> 
-                                       value="<?php echo $prov->ID_PROV ?>"><?php echo $prov->NAMA_PROV ?></option>
-                                   <?php
-                               }
-                               ?>
-                           </select>
-                           </div>
+                            <div class="form-group">
+                                <label class="col-md-12" for="provinsi">provinsi</label>
+                                <div class="col-md-12">
+                                    <select class="form-control" name="provinsi" id="provinsi" required>
+                                        <?php
+                                        foreach ($provinsi as $prov) {
+                                            ?>
+                                            <option <?php echo $provinsi_selected == $prov->ID_PROV ? 'selected="selected"' : '' ?> 
+                                                value="<?php echo $prov->ID_PROV ?>"><?php echo $prov->NAMA_PROV ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
 
-                           <div class="form-group">
-                           <label for="kota">kota</label>
-                           <select class="form-control" name="kota" id="kota" required>
-                               <?php
-                               foreach ($kota as $kot) {
-                                   ?>
-                                   <option <?php echo $kota_selected == $kot->ID_PROV ? 'selected="selected"' : '' ?> 
-                                       class="<?php echo $kot->ID_PROV ?>" value="<?php echo $kot->ID_KOTA ?>"><?php echo $kot->NAMA_KOTA ?></option>
-                                   <?php
-                               }
-                               ?>
-                           </select>
-                           </div>
-                          
-                           <div class="form-group">
-                               <label class="col-md-12">Telepon</label>
-                               <div class="col-md-12">
-                                   <input type="text" class="form-control" name="teleponpel" onkeypress='validate(event)' data-mask='999-999-999-999' required> </div>
-                           </div>
-                           <div class="form-group">
-                               <label class="col-md-12">Kodepos</label>
-                               <div class="col-md-12">
-                                   <input type="text" pattern="[0-9]*" inputmode="numeric" name="kodepospel" class="form-control" min="5" max="5" onkeypress='validate(event)' data-mask='99999' required> </div>
-                           </div>
+                            <div class="form-group">
+                                <label class="col-md-12" for="kota">kota</label>
+                                <div class="col-md-12">
+                                    <select class="form-control" name="kota" id="kota" required>
+                                        <?php
+                                        foreach ($kota as $kot) {
+                                            ?>
+                                            <option <?php echo $kota_selected == $kot->ID_PROV ? 'selected="selected"' : '' ?> 
+                                                class="<?php echo $kot->ID_PROV ?>" value="<?php echo $kot->ID_KOTA ?>"><?php echo $kot->NAMA_KOTA ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-md-12">Telepon</label>
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" name="teleponpel" onkeypress='validate(event)' data-mask='999-999-999-999' required> </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Kodepos</label>
+                                <div class="col-md-12">
+                                    <input type="text" pattern="[0-9]*" inputmode="numeric" name="kodepospel" class="form-control" min="5" max="5" onkeypress='validate(event)' data-mask='99999' required> </div>
+                            </div>
 
 
 

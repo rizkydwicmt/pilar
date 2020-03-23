@@ -31,10 +31,12 @@
                             <li> <a href="<?= base_url('admin/Pegawai') ?>"><i class="fa fa-users" aria-hidden="true"></i> Data Pegawai</a></li>
                             <li> <a href="<?= base_url('admin/Pelanggan') ?>"><i class="fa fa-users" aria-hidden="true"></i> Data Pelanggan </a></li>
                             <?php //}?>
-                            <li> <a href="<?= base_url('admin/Barang') ?>"><i class="fa fa-suitcase" aria-hidden="true"></i> Data Barang </a></li>
+                            <li> <a href="<?= base_url('admin/Domba') ?>"><i class="fa fa-suitcase" aria-hidden="true"></i> Data Domba </a></li>
+                            <!-- Fitur gakepake
                             <li> <a href="<?= base_url('admin/Ukuran') ?>"><i class="fa fa-suitcase" aria-hidden="true"></i> Data Ukuran </a></li>
                             <li> <a href="<?= base_url('admin/Warna') ?>"><i class="fa fa-suitcase" aria-hidden="true"></i> Data Kain </a></li>
                             <li> <a href="<?= base_url('admin/DetBarang') ?>"><i class="fa fa-suitcase" aria-hidden="true"></i> Data Detail Barang </a>
+                            -->
                         </ul>
                         <?php //}?></li>
                     </li>

@@ -101,11 +101,11 @@ $route['admin/Pegawai']					=	'Control_Pegawai';
 $route['admin/DetailPegawai/(:num)']		=	'Control_Pegawai/index/$1';
 $route['admin/Pelanggan']					=	'Control_Pelanggan';
 $route['admin/DetailPelanggan/(:num)']	=	'Control_Pelanggan/index/$1';
-$route['admin/DetBarang']					=	'Control_DetBarang';
-$route['admin/Barang']					=	'Control_Barang';
-$route['admin/Ukuran']					=	'Control_Ukuran';
+$route['admin/DetDomba']					=	'Control_DetDomba';
+$route['admin/Domba']					=	'Control_Domba';
+//$route['admin/Ukuran']					=	'Control_Ukuran';
 //$route['admin/Kondisi']					=	'Control_Kondisi';
-$route['admin/Warna']					=	'Control_Warna';
+//$route['admin/Warna']					=	'Control_Warna';
 
 /*
  * ============ Routes dari Transaksi ============= *

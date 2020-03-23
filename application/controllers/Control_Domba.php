@@ -1,6 +1,6 @@
 <?php 
 
-	class Control_Barang extends CI_Controller {
+	class Control_Domba extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
@@ -15,12 +15,13 @@
 
 	public function index()
 	{	
-		$order 					= 'ID_BAR ASC';		
+		$order 					= 'ID_DOMBA ASC';		
 		$data = array(
-            'barang' => $this->Master->get_orderby_desc( 'barang' , '' ,$order)->result(),
+			'domba' => $this->Master->get_orderby_desc( 'domba' , '' ,$order)->result(),
+			'jenisdomba' => $this->Master->get_orderby_desc( 'jenis_domba' , '' , '')->result(),
 
         );
-        $data['konten'] 		= $this->load->view('Admin/v_barang',$data,True);
+        $data['konten'] 		= $this->load->view('Admin/v_domba',$data,True);
 		$this->load->view('Admin/index',$data);
 		
 	}
