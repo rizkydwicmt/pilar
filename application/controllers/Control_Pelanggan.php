@@ -44,6 +44,28 @@
 		}
 	}
 
+	public function Save(){
+		
+		$tlpn =	$_POST['teleponpeg'];
+		$tlpn = str_replace('-', '', $tlpn);
+		$pass = md5($_POST['passpeg']);
+
+		$data 	=	array(
+		/* Nama Field    => Isi Data $_Post */
+			'ID_KOTA'		=> $_POST['kota'],
+			'NAMA_PELANGGAN'	=> $_POST['namapel'] ,
+			'ALAMAT_PELANGGAN'	=> $_POST['alamatpel'] ,
+			'TELP_PELANGGAN'	=> $tlpn ,
+			'KODEPOS_PELANGGAN'	=> $_POST['kodepospel'] ,
+			'STATUS_PELANGGAN'	=> '1'
+			);
+
+		$this->Master->save_data('pelanggan' , $data);
+		$this->session->set_flashdata('konten' , 'Data Berhasil di Tambahkan');
+		
+		redirect( base_url('admin/Pelanggan') );
+	}
+
 
 	public function Delete($idcus){
 

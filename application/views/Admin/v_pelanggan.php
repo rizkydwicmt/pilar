@@ -32,6 +32,7 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="nav-item" aria-expanded="false"><a href="#bank" class="nav-link active" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"> Data Pelanggan</span></a></li>
+            <li role="presentation" class="nav-item"><a href="#form" class="nav-link" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Input Data Pelanggan</span></a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
@@ -83,13 +84,6 @@
         	<!-- Form  -->
           
           	<form class="form-horizontal" method="post" action='<?php echo base_url('Control_Pelanggan/Update/').$data->ID_PELANGGAN ?>' id="form1">
-                <h3><p>INFORMASI DATA PELANGGAN</p></h3>
-                <hr>
-                <div class="form-group">
-                    <label for="example-email">Password</label>
-                    <div>
-                       <input type="password" name="passcus" class="form-control" minlength="5" maxlength="20" value=""> </div>
-                </div>
 
                 <h3><p>INFORMASI DATA PELANGGAN</p></h3>
                 <hr>
@@ -177,7 +171,75 @@
            
                                 	
 
+            <div role="tabpanel" class="tab-pane" id="form" aria-expanded="false">
+               
+               <div class="col-sm-12">
+                   <div class="white-box">
+                       
+                           <h3><p>INFORMASI DATA PEGAWAI</p></h3>
+                           <hr>
 
+                           <form class="form-horizontal" method="post" action='<?php echo base_url('Control_Pelanggan/Save') ?>'>
+                           <div class="form-group">
+                               <label class="col-md-12">Nama</label>
+                               <div class="col-md-12">
+                                   <input type="text" class="form-control" name="namapel"  minlength="5" maxlength="30" required> </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-12" for="example-email">Alamat</label>
+                               <div class="col-md-12">
+                                  <input type="text" name="alamatpel" class="form-control"  minlength="5" maxlength="50"  required> </div>
+                           </div>
+
+                           <div class="form-group">
+                           <label for="provinsi">provinsi</label>
+                           <select class="form-control" name="provinsi" id="provinsi" required>
+                               <?php
+                               foreach ($provinsi as $prov) {
+                                   ?>
+                                   <option <?php echo $provinsi_selected == $prov->ID_PROV ? 'selected="selected"' : '' ?> 
+                                       value="<?php echo $prov->ID_PROV ?>"><?php echo $prov->NAMA_PROV ?></option>
+                                   <?php
+                               }
+                               ?>
+                           </select>
+                           </div>
+
+                           <div class="form-group">
+                           <label for="kota">kota</label>
+                           <select class="form-control" name="kota" id="kota" required>
+                               <?php
+                               foreach ($kota as $kot) {
+                                   ?>
+                                   <option <?php echo $kota_selected == $kot->ID_PROV ? 'selected="selected"' : '' ?> 
+                                       class="<?php echo $kot->ID_PROV ?>" value="<?php echo $kot->ID_KOTA ?>"><?php echo $kot->NAMA_KOTA ?></option>
+                                   <?php
+                               }
+                               ?>
+                           </select>
+                           </div>
+                          
+                           <div class="form-group">
+                               <label class="col-md-12">Telepon</label>
+                               <div class="col-md-12">
+                                   <input type="text" class="form-control" name="teleponpel" onkeypress='validate(event)' data-mask='999-999-999-999' required> </div>
+                           </div>
+                           <div class="form-group">
+                               <label class="col-md-12">Kodepos</label>
+                               <div class="col-md-12">
+                                   <input type="text" pattern="[0-9]*" inputmode="numeric" name="kodepospel" class="form-control" min="5" max="5" onkeypress='validate(event)' data-mask='99999' required> </div>
+                           </div>
+
+
+
+                           
+                           <button type="submit" class="btn btn-success">Simpan</button>
+                           <button type="reset" class="btn btn-info">Reset</button>
+                       </form>
+                   </div>
+               </div>
+
+           </div>
         
            
         </div>
