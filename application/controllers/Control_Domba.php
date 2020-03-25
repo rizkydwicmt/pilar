@@ -21,7 +21,7 @@
 			'jenisdomba' => $this->Master->get_orderby_desc( 'jenis_domba' , '' , '')->result(),
 
         );
-        $data['konten'] 		= $this->load->view('Admin/v_domba',$data,True);
+        $data['konten'] 		= $this->load->view('Admin/Master/v_domba',$data,True);
 		$this->load->view('Admin/index',$data);
 		
 	}

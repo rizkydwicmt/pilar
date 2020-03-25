@@ -48,7 +48,7 @@
                         <ul class="nav nav-second-level collapse">
                             <li><a href="<?= base_url('admin/Transaksi') ?>"><i class="fa fa-tags"></i> Informasi Transaksi </a></li>
                             <?php //if($_SESSION['id_role'] =='JB002'){ ?>
-                            <li><a href="<?= base_url('admin/addTransaksi') ?>"><i class="fa fa-tags"></i> Tambah Penjualan </a></li>
+                            <li><a href="<?= base_url('admin/addTransaksi') ?>"><i class="fa fa-tags"></i> Tambah Transaksi </a></li>
                             <li><a href="<?= base_url('admin/Pembayaran')?>"><i class="fa fa-tags"></i> Pembayaran </a></li>
                             <?php //}?>
                             <?php //if($_SESSION['id_role'] =='JB002'){ ?>

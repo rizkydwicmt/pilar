@@ -27,7 +27,7 @@
 	            'kota_selected' => '',
 
 	        );
-			$data['konten'] 		= $this->load->view('Admin/v_pelanggan-detail',$data,TRUE);
+			$data['konten'] 		= $this->load->view('Admin/Master/v_pelanggan-detail',$data,TRUE);
 			$this->load->view('Admin/index',$data);
 		} else { 
 			$order 					= 'ID_PELANGGAN ASC';		
@@ -39,7 +39,7 @@
 	            'kota_selected' => '',
 
 	        );
-	        $data['konten'] 		= $this->load->view('Admin/v_pelanggan',$data,True);
+	        $data['konten'] 		= $this->load->view('Admin/Master/v_pelanggan',$data,True);
 			$this->load->view('Admin/index',$data);
 		}
 	}

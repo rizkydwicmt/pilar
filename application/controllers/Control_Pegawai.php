@@ -27,7 +27,7 @@
 	            'kota_selected' => '',
 
 	        );
-			$data['konten'] 		= $this->load->view('Admin/v_pegawai-detail',$data,TRUE);
+			$data['konten'] 		= $this->load->view('Admin/Master/v_pegawai-detail',$data,TRUE);
 			$this->load->view('Admin/index',$data);
 		} else { 
 			$order 					= 'ID_PEGAWAI ASC';		
@@ -40,7 +40,7 @@
 	            'kota_selected' => '',
 
 	        );
-	        $data['konten'] 		= $this->load->view('Admin/v_pegawai',$data,True);
+	        $data['konten'] 		= $this->load->view('Admin/Master/v_pegawai',$data,True);
 			$this->load->view('Admin/index',$data);
 		}
 	}
