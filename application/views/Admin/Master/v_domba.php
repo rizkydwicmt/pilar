@@ -46,11 +46,10 @@
                             <table id="example23" class="display nowrap" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Foto Domba</th>
+                                        <th>Foto Jenis Domba</th>
                                         <th>Jenis</th>
                                     	<th>ID Domba</th>
                                         <th>Jenis Kelamin</th>
-                                        <th>Berat</th>
                                         <th>Harga</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -62,22 +61,15 @@
                                     foreach ($domba as $data) { ?>
                                     <tr>
                                         <td>
-                                            <img src="<?php echo base_url('assets/img/product-img/').$data->FOTO;
+                                            <img src="<?php echo base_url('assets/img/product-img/').$this->Master->get_tabel('jenis_domba',array('ID_JENIS' => $data->ID_JENIS),'FOTO');
                                              ?>" class="img-responsive" alt="" style="width: 100px; height: 100px;">
                                         </td>
                                         <td>
                                         	<?php echo $this->Master->get_tabel('jenis_domba',array('ID_JENIS' => $data->ID_JENIS),'JENIS_DOMBA') ?>
                                         </td>
                                     	<td><?php $number++; echo $data->ID_DOMBA; ?> </td>
-                                        <!-- <td>
-                                            <img src="<?php //echo base_url('assets/img/product-img/').$data->FOTO_BAR;
-                                             ?>" class="img-responsive" alt="" style="width: 100px; height: 100px;">
-                                        </td> -->
                                         <td>
                                         	<?php echo $data->JENIS_KELAMIN ?>
-                                        </td>
-                                        <td>
-                                        	<?php echo $data->BERAT ?>
                                         </td>
                                         <td>
                                             <?php echo $data->HARGA ?>
@@ -175,21 +167,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-12">Berat</label>
-                                <div class="col-md-12">
-                                    <input type="text" name="berbar" class="form-control" min="1" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-12">Harga</label>
+                                <label class="col-md-12">Harga ( /Kg )</label>
                                 <div class="col-md-12">
                                     <input type="text" name="harbar" class="form-control" min="1" required>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-12">Foto</label>
-                                <div class="col-md-12">
-                                   <input type="file" name="userfile" size="20" style="font-size: 11px;" required> </div>
                             </div>
 
                            
@@ -219,6 +200,11 @@
                                 <div class="col-md-12">
                                     <input type="text" name="jenis" class="form-control" required>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Foto</label>
+                                <div class="col-md-12">
+                                   <input type="file" name="userfile" size="20" style="font-size: 11px;" required> </div>
                             </div>
 
                            

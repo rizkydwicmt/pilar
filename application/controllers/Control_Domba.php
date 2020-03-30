@@ -15,7 +15,7 @@
 
 	public function index()
 	{	
-		$order 					= 'ID_DOMBA ASC';		
+		$order 					= 'ID_JENIS ASC';		
 		$data = array(
 			'domba' => $this->Master->get_orderby_desc( 'domba' , array('STATUS_DOMBA' => '1' ), $order)->result(),
 			'jenisdomba' => $this->Master->get_orderby_desc( 'jenis_domba' , '' , '')->result(),
@@ -26,39 +26,38 @@
 		
 	}
 
-	public function Save(){	
+	public function Save(){		
+		$data 	=	array(
+			/* Nama Field    => Isi Data $_Post */
+			'ID_JENIS'			=> $_POST['jd'],
+			'JENIS_KELAMIN'		=> $_POST['jk'],
+			'HARGA'				=> $_POST['harbar'],
+			'STATUS_DOMBA'		=> '1'
+			);
+
+		$this->Master->save_data('domba' , $data);
+		$this->session->set_flashdata('konten' , 'Data Berhasil di Tambahkan');
+		redirect( base_url('admin/Domba') );
+	}
+
+	public function SaveJenis(){	
 		$filename = $_FILES['userfile']['name'];
 		$format =  pathinfo($filename, PATHINFO_EXTENSION);
 		$namafoto =  rand(1,9999).date("dm").'.'.$format;
 		$tujuan = './assets/img/product-img/';
 		$foto = $this->Master->insert_foto($namafoto,$tujuan,'userfile');
 		if($foto == 'berhasil'){	
-		$data 	=	array(
-			/* Nama Field    => Isi Data $_Post */
-			'ID_JENIS'			=> $_POST['jd'],
-			'JENIS_KELAMIN'		=> $_POST['jk'],
-			'HARGA'				=> $_POST['harbar'],
-			'BERAT'				=> $_POST['berbar'],
-			'FOTO'				=> $namafoto,
-			'STATUS_DOMBA'		=> '1'
-			);
+			$data 	=	array(
+				/* Nama Field    => Isi Data $_Post */
+				'JENIS_DOMBA'		=> $_POST['jenis'],
+				'FOTO'				=> $namafoto,
+				);
 
-		$this->Master->save_data('domba' , $data);
+		$this->Master->save_data('jenis_domba' , $data);
 		$this->session->set_flashdata('konten' , 'Data Berhasil di Tambahkan');
 		}else{
 			$this->session->set_flashdata('konten_err' , 'Format file anda salah atau lebih dari 2 mb');
 		}
-		redirect( base_url('admin/Domba') );
-	}
-
-	public function SaveJenis(){	
-		$data 	=	array(
-			/* Nama Field    => Isi Data $_Post */
-			'JENIS_DOMBA'		=> $_POST['jenis']
-			);
-
-		$this->Master->save_data('jenis_domba' , $data);
-		$this->session->set_flashdata('konten' , 'Data Berhasil di Tambahkan');
 		redirect( base_url('admin/Domba') );
 	}
 
