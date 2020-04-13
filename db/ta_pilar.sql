@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Mar 2020 pada 04.36
+-- Waktu pembuatan: 13 Apr 2020 pada 16.25
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -30,10 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `detail_pemesanan` (
   `ID_DOMBA` char(6) NOT NULL,
-  `ID_PEMESANAN` char(12) NOT NULL,
-  `JML_PEMESANAN` decimal(5,0) NOT NULL,
-  `HARGAD` decimal(12,0) NOT NULL,
-  `BERAT_BELI` decimal(5,0) NOT NULL
+  `ID_PEMESANAN` char(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -47,10 +44,17 @@ CREATE TABLE `domba` (
   `ID_JENIS` char(5) NOT NULL,
   `JENIS_KELAMIN` varchar(6) NOT NULL,
   `HARGA` decimal(12,0) NOT NULL,
-  `BERAT` decimal(5,0) NOT NULL,
-  `FOTO` varchar(12) DEFAULT NULL,
   `STATUS_DOMBA` int(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `domba`
+--
+
+INSERT INTO `domba` (`ID_DOMBA`, `ID_JENIS`, `JENIS_KELAMIN`, `HARGA`, `STATUS_DOMBA`) VALUES
+('D1B001', 'JN001', 'betina', '12500', 1),
+('D1J001', 'JN001', 'jantan', '12000', 1),
+('D2J001', 'JN002', 'jantan', '15000', 1);
 
 --
 -- Trigger `domba`
@@ -113,17 +117,18 @@ DELIMITER ;
 
 CREATE TABLE `jenis_domba` (
   `ID_JENIS` char(5) NOT NULL,
-  `JENIS_DOMBA` varchar(20) NOT NULL
+  `JENIS_DOMBA` varchar(20) NOT NULL,
+  `FOTO` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `jenis_domba`
 --
 
-INSERT INTO `jenis_domba` (`ID_JENIS`, `JENIS_DOMBA`) VALUES
-('JN001', 'Domba Ekor Gemuk'),
-('JN002', 'Domba Ekor Kecil'),
-('JN003', 'Morino');
+INSERT INTO `jenis_domba` (`ID_JENIS`, `JENIS_DOMBA`, `FOTO`) VALUES
+('JN001', 'Domba Ekor Gemuk', '72443003.jpg'),
+('JN002', 'Domba Ekor Kecil', '42643003.jpg'),
+('JN003', 'Domba Marino', '81973003.jpg');
 
 --
 -- Trigger `jenis_domba`
@@ -750,7 +755,7 @@ CREATE TABLE `pembayaran` (
   `ID_PEMBAYARAN` char(13) NOT NULL,
   `ID_PEGAWAI` char(5) NOT NULL,
   `ID_PEMESANAN` char(12) NOT NULL,
-  `TGL_PEMBAYARAN` timestamp NOT NULL,
+  `TGL_PEMBAYARAN` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `TOTAL_PEMBAYARAN` decimal(12,0) NOT NULL,
   `STATUS_PEMBAYARAN` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -769,9 +774,10 @@ CREATE TABLE `pemesanan` (
   `NAMA_PENERIMA` varchar(30) DEFAULT NULL,
   `ALAMAT_PENERIMA` varchar(30) DEFAULT NULL,
   `KODEPOS_PENERIMA` char(5) DEFAULT NULL,
-  `TGL_PESAN` timestamp NOT NULL,
+  `TGL_PESAN` timestamp NOT NULL DEFAULT current_timestamp(),
   `JENIS_BAYAR` varchar(50) NOT NULL,
   `ONGKOS_KIRIM` decimal(12,0) NOT NULL,
+  `TOTAL_BERAT` int(5) NOT NULL,
   `TOTAL_HARGA` decimal(12,0) NOT NULL,
   `STATUS_TRANSAKSI` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -786,7 +792,7 @@ CREATE TABLE `pengiriman` (
   `NO_RESI` char(12) NOT NULL,
   `ID_PEGAWAI` char(5) NOT NULL,
   `ID_PEMBAYARAN` char(13) NOT NULL,
-  `TGL_PENGIRIMAN` timestamp NOT NULL,
+  `TGL_PENGIRIMAN` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `STATUS_PENGIRIMAN` decimal(1,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
