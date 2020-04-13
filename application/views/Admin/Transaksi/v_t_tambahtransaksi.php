@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Tambah Transaksi</h4> </div>
+                        <h4 class="page-title">Transaksi</h4> </div>
                     <!-- Breadcumbs  -->
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> 
                         <ol class="breadcrumb">
@@ -25,199 +25,201 @@
                 </div> 
 
 <div class="col-lg-12 col-sm-6 col-xs-12">
+    <div class="white-box">
         <!-- Tab panes -->
-    <div class="tab-content">
-        <div class="col-sm-12">
-            <div class="white-box">
-                <form class="form-horizontal" method="post" enctype="multipart/form-data" accept-charset="utf-8" action='<?php 
-                    if(isset($id)){
-                        echo base_url('T_TambahTransaksi/Save/').$id;
-                    }else{
-                        echo base_url('T_TambahTransaksi/Save/');
-                    }
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="bank" aria-expanded="true">
+                <div class="col-sm-12">
                         
-                ?>'>
+                        <form class="form-horizontal" method="post" enctype="multipart/form-data" accept-charset="utf-8" action='<?= base_url('T_TambahTransaksi/Save/');?>'>
 
-                    <div id="formbarang">
+                            <div id="formbarang">
+                            <h3><p>Tambah Transaksi</p></h3>
+                            <hr>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Jenis Domba</th>
+                                        <th scope="col">Jenis Kelamin</th>
+                                        <th scope="col">Harga</th>
+                                        <th scope="col" style="width: 150px;">Berat (Kg)</th>
+                                        <th scope="col" style="width: 150px;">Jumlah</th>
+                                        <th scope="col">Subtotal</th>
+                                    </tr>
+                                </thead>
+                                
+                                    
+                            <?php if (isset($id)) {//jika ada id ?>
+                                <tbody>
+                                <?php for ($i=0; $i < $id; $i++) { ?>
+                                    <tr>
+                                        <td>
+                                            <select class="form-control" name="domba[]" id="domba<?php echo $i ?>" onClick="ganti_jk(<?php echo $i ?>)" style="height: calc(3.5rem); font-size: 12px" required>
+                                                <option value="">-PILIH-</option>
+                                                <?php
+                                                foreach ($barang as $brg) {
+                                                    ?>
+                                                    <option  
+                                                        value="<?php echo $brg->ID_BAR ?>"><?php echo $brg->NAMA_BAR ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-control" name="ukuran<?php echo "[".$i."]" ?>" id="ukuran<?php echo $i ?>"  onClick="ganti_kon(<?php echo $i ?>)" style="height: calc(3.5rem); font-size: 12px" required>
+                                                <option value="">-PILIH-</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-control" name="warna<?php echo "[".$i."]" ?>" id="warna<?php echo $i ?>" onClick="ganti_harga(<?php echo $i ?>)" style="height: calc(3.5rem); font-size: 12px" required>
+                                                <option value="">-PILIH-</option>
+                                            </select>
+                                        </td>
+                                        <td id="harga<?php echo $i ?>"></td>
+                                        <td>
+                                            <input type="number" onChange="ganti_subtot(<?php echo $i ?>)" onKeyup="ganti_subtot(<?php echo $i ?>)" onClick="ganti_subtot(<?php echo $i ?>)" id="jumlah<?php echo $i ?>" class="input-text qty text" step="1" min="1" max="" name="jumlah<?php echo "[".$i."]" ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric" required style="width: 60px;text-align-last: center;">
+                                        </td>
+                                        <td id="subtotal<?php echo $i ?>"></td>
+                                    </tr>
+                                <?php } ?>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td id="total"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                                <a class="btn btn-sm btn-circle btn-warning" data-toggle="tooltip" data-title="Tambah barang" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("admin/addTransaksi/".($id+1)) ?>'"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                <a class="btn btn-sm btn-circle btn-danger" data-toggle="tooltip" data-title="Kurang barang" href="javascript:void(0)" onclick="window.location.href='<?php if($id>2){
+                                    echo base_url("admin/addTransaksi/".($id-1));
+                                }else{
+                                    echo base_url("admin/addTransaksi/");
+                                }
+                                ?>'"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
+                            <?php }else{ //jika tidak ada id?>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <select class="form-control" name="domba" id="domba" style="height: calc(3.5rem); font-size: 12px;" required>
+                                                <?php
+                                                foreach ($jenisdomba as $jd) {
+                                                    ?>
+                                                    <option  
+                                                        value="<?php echo $jd->ID_JENIS ?>"><?php echo $jd->JENIS_DOMBA ?></option>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-control" name="jk" id="jk" style="height: calc(3.5rem); font-size: 12px" required>
+                                                <option value="">-PILIH-</option>
+                                            </select>
+                                        </td>
+                                        <td id="harga"></td>
+                                        <td>
+                                            <input type="number" id="berat" class="input-text qty text" step="1" min="1" max="" name="berat" title="Berat" size="4" pattern="[0-9]*" inputmode="numeric" required style="width: 60px;text-align-last: center;">
+                                        </td>
+                                        <td>
+                                            <input type="number" id="jumlah" class="input-text qty text" step="1" min="1" max="" name="jumlah" title="Jumlah" size="4" pattern="[0-9]*" inputmode="numeric" required style="width: 60px;text-align-last: center;">
+                                        </td>
+                                        <td id="subtotal"></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td id="total"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a class="btn btn-sm btn-circle btn-warning" data-toggle="tooltip" data-title="Tabah Barang" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("admin/addTransaksi/".'2') ?>'"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
 
-                    <h3><p>Tambah Transaksi</p></h3>
-                    <hr>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col" width="200px">Jenis Domba</th>
-                                <th scope="col" width="800px">Domba | Berat | Harga</th>
-                                <th scope="col">Subjumlah</th>
-                                <th scope="col">Subtotal</th>
-                            </tr>
-                        </thead>
-                        
-                            
-                    <?php if (isset($id)) {//jika ada id ?>
-                        <tbody>
-                        <?php for ($i=0; $i < $id; $i++) { ?>
-                            <tr>
-                                <td>
-                                    <select class="form-control" name="barang<?php echo "[".$i."]" ?>" id="barang<?php echo $i ?>" onClick="ganti_uk(<?php echo $i ?>)" style="height: calc(3rem); font-size: 12px" required>
-                                        <option value="">-PILIH-</option>
-                                        <?php
-                                        foreach ($barang as $brg) {
-                                            ?>
-                                            <option  
-                                                value="<?php echo $brg->ID_BAR ?>"><?php echo $brg->NAMA_BAR ?></option>
-                                            <?php
-                                        }
-                                        ?>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="form-control" name="ukuran<?php echo "[".$i."]" ?>" id="ukuran<?php echo $i ?>"  onClick="ganti_kon(<?php echo $i ?>)" style="height: calc(3rem); font-size: 12px" required>
-                                        <option value="">-PILIH-</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="form-control" name="warna<?php echo "[".$i."]" ?>" id="warna<?php echo $i ?>" onClick="ganti_harga(<?php echo $i ?>)" style="height: calc(3rem); font-size: 12px" required>
-                                        <option value="">-PILIH-</option>
-                                    </select>
-                                </td>
-                                <td id="harga<?php echo $i ?>"></td>
-                                <td>
-                                    <input type="number" onChange="ganti_subtot(<?php echo $i ?>)" onKeyup="ganti_subtot(<?php echo $i ?>)" onClick="ganti_subtot(<?php echo $i ?>)" id="jumlah<?php echo $i ?>" class="input-text qty text" step="1" min="1" max="" name="jumlah<?php echo "[".$i."]" ?>" title="Qty" size="4" pattern="[0-9]*" inputmode="numeric" required style="width: 60px;text-align-last: center;">
-                                </td>
-                                <td id="subtotal<?php echo $i ?>"></td>
-                            </tr>
-                        <?php } ?>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td id="total"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                        <a class="btn btn-sm btn-circle btn-warning" data-toggle="tooltip" data-title="Tambah barang" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("admin/addTransaksi/".($id+1)) ?>'"><i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        <a class="btn btn-sm btn-circle btn-danger" data-toggle="tooltip" data-title="Kurang barang" href="javascript:void(0)" onclick="window.location.href='<?php if($id>2){
-                            echo base_url("admin/addTransaksi/".($id-1));
-                        }else{
-                            echo base_url("admin/addTransaksi/");
-                        }
-                        ?>'"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
-                    <?php }else{ //jika tidak ada id?>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <select class="form-control" name="jenisd" id="jenisd" style="height: calc(3rem); font-size: 12px" required>
-                                        <?php
-                                        foreach ($jenisdomba as $jd) {
-                                            ?>
-                                            <option  
-                                                value="<?php echo $jd->ID_JENIS ?>"><?php echo $jd->JENIS_DOMBA ?></option>
-                                            <?php
-                                        }
-                                        ?>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="form-control selectpicker" name="domba[]" id="domba" style="height: calc(3rem); font-size: 12px" data-style="btn-default"    data-live-search="true" multiple required>
-                                    </select>
-                                </td>
-                                <td>
-                                </td>
-                                <td id="subtotal"></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td id="total"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <a class="btn btn-sm btn-circle btn-warning" data-toggle="tooltip" data-title="Tabah Barang" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("admin/addTransaksi/".'2') ?>'"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
-
-                    <?php } ?>
-                    <h3><p></p></h3>
-                    <br>
-                </div>
-                <div class="row" id="pengiriman">
-                    <div class="col-12 mb-3">
-                        <label for="nama">Nama</label>
-                        <input type="text" class="form-control" name="nama" id="nama"  minlength="5" maxlength="30"  >
-                    </div>
-                    <div class="col-12 mb-3">
-                        <label for="street_address">Alamat <span>*</span></label>
-                        <input type="text" class="form-control mb-3" name="alamat" id="alamat" minlength="5" maxlength="50"  >
-                    </div>
-                    <div class="col-12 mb-3">
-                        <label for="Kodepos">Kodepos <span>*</span></label>
-                        <input type="text" class="form-control" name="kodepos" id="kodepos"  pattern="[0-9]*" inputmode="numeric" minlength="5" maxlength="5"  >
-                    </div>
-                    <div class="col-12 mb-3">
-                            <label for="Provinsi">Provinsi <span>*</span></label>
-                            <select class="custom-select d-block w-100" name="provinsi" id="provinsi" >
-                            <?php
-                            foreach ($provinsi as $prov) {
-                                ?>
-                                <option 
-                                    value="<?php echo $prov->ID_PROV ?>"><?php echo $prov->NAMA_PROV ?></option>
-                                <?php
-                            }
-                            ?>
-                        </select>
+                            <?php } ?>
+                            <h3><p></p></h3>
+                            <br>
                         </div>
-                    <div class="col-12 mb-3">
-                            <label for="Kota">Kota <span>*</span></label>
-                            <select class="custom-select d-block w-100" name="kota" id="kota" >
-                                <?php
-                            foreach ($kota as $kot) {
-                                ?>
-                                <option
-                                    class="<?php echo $kot->ID_PROV ?>" value="<?php echo $kot->ID_KOTA ?>"><?php echo $kot->NAMA_KOTA ?></option>
-                                <?php
-                            }
-                            ?>
-                        </select>
+                        <div class="row" id="pengiriman">
+                            <div class="col-12 mb-3">
+                                <label for="nama">Nama</label>
+                                <input type="text" class="form-control" name="nama" id="nama"  minlength="5" maxlength="30"  >
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="street_address">Alamat <span>*</span></label>
+                                <input type="text" class="form-control mb-3" name="alamat" id="alamat" minlength="5" maxlength="50"  >
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="Kodepos">Kodepos <span>*</span></label>
+                                <input type="text" class="form-control" name="kodepos" id="kodepos"  pattern="[0-9]*" inputmode="numeric" minlength="5" maxlength="5"  >
+                            </div>
+                            <div class="col-12 mb-3">
+                                    <label for="Provinsi">Provinsi <span>*</span></label>
+                                    <select class="custom-select d-block w-100" name="provinsi" id="provinsi" >
+                                    <?php
+                                    foreach ($provinsi as $prov) {
+                                        ?>
+                                        <option 
+                                            value="<?php echo $prov->ID_PROV ?>"><?php echo $prov->NAMA_PROV ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                                </div>
+                            <div class="col-12 mb-3">
+                                    <label for="Kota">Kota <span>*</span></label>
+                                    <select class="custom-select d-block w-100" name="kota" id="kota" >
+                                     <?php
+                                    foreach ($kota as $kot) {
+                                        ?>
+                                        <option
+                                            class="<?php echo $kot->ID_PROV ?>" value="<?php echo $kot->ID_KOTA ?>"><?php echo $kot->NAMA_KOTA ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                                </div>
+                            <div class="col-12 mb-3">
+                                <label for="Telepon">Telepon <span>*</span></label>
+                                <input type="text" class="form-control" name="telepon" id="telepon" minlength="10" maxlength="13" pattern="[0-9]*" inputmode="numeric" >
+                            </div>
+                            <div class="col-12 mb-3">
+                                    <label for="Kota">jasa pengiriman <span>*</span></label>
+                                    <select class="custom-select d-block w-100" name="kurir" id="kurir" onclick="jasaFunction()">
+                                        <option value="tiki">TIKI</option>
+                                        <option value="pos">POS</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <select class="form-control" name="layanan" id="layanan"  onclick="layananFunction()">
+                                    <option value="">-PILIH-</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mb-3" id="ongkir">
+                            </div>
                         </div>
-                    <div class="col-12 mb-3">
-                        <label for="Telepon">Telepon <span>*</span></label>
-                        <input type="text" class="form-control" name="telepon" id="telepon" minlength="10" maxlength="13" pattern="[0-9]*" inputmode="numeric" >
-                    </div>
-                    <div class="col-12 mb-3">
-                            <label for="Kota">jasa pengiriman <span>*</span></label>
-                            <select class="custom-select d-block w-100" name="kurir" id="kurir" onclick="jasaFunction()">
-                                <option value="tiki">TIKI</option>
-                                <option value="pos">POS</option>
-                        </select>
-                    </div>
-                    <div class="col-12 mb-3">
-                        <select class="form-control" name="layanan" id="layanan"  onclick="layananFunction()">
-                            <option value="">-PILIH-</option>
-                        </select>
-                    </div>
-                    <div class="col-12 mb-3" id="ongkir">
-                    </div>
+                        <input type="checkbox" name="TF" id="TF" onclick="TFFunction()"><label for="customCheck1"> Transfer</label>
+                        <div class="form-group" id="formTF">  
+                        </div>
+                        <input type="checkbox" name="DP" id="DP" onclick="DPFunction()"><label for="customCheck1"> DP</label>
+                        <div class="form-group" id="formDP">  
+                        </div>
+                        <input type="checkbox" name="KIRIM" id="KIRIM" onchange="KIRIMFunction()"><label for="customCheck1"> Kirim</label>
+                            <br><button type="submit" class="btn btn-success">Proses</button>
+                        </form>
+                    
                 </div>
-                <input type="checkbox" name="TF" id="TF" onclick="TFFunction()"><label for="customCheck1"> Transfer</label>
-                <div class="form-group" id="formTF">  
-                </div>
-                <input type="checkbox" name="DP" id="DP" onclick="DPFunction()"><label for="customCheck1"> DP</label>
-                <div class="form-group" id="formDP">  
-                </div>
-                <input type="checkbox" name="KIRIM" id="KIRIM" onchange="KIRIMFunction()"><label for="customCheck1"> Kirim</label>
-                    <br><button type="submit" class="btn btn-success">Proses</button>
-                </form>
             </div>
-        </div>
-        
 
-                        
-        
+                           
+           
+        </div>
     </div>
-    
 
                     </div>
 <script src="<?php echo base_url('assets/js/jquery.chained.min.js') ?>"></script>
@@ -229,7 +231,7 @@
 <script type="text/javascript">
     /* Fungsi formatRupiah */
     function formatRupiah(angka, prefix){
-        var number_string = angka.replace(/[^,\d]/g, '').toString(),
+        var number_string = angka.toString().replace(/[^,\d]/g, ''),
         split   		= number_string.split(','),
         sisa     		= split[0].length % 3,
         rupiah     		= split[0].substr(0, sisa),
@@ -248,91 +250,61 @@
 <?php if(!isset($id)){?>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#jenisd').bind("keyup change click",function(){
-            var iddomba=$(this).val();
+        var that = this;
+        $('#domba').bind("keyup change click",function(){
+            var iddom=$(this).val();
             $.ajax({
                 url : "<?php echo base_url('T_TambahTransaksi/domba/');?>",
                 method : "POST",
-                data : {id: iddomba},
+                data : {id: iddom},
                 async : false,
                 dataType : 'json',
                 success: function(data){
                     var html = '';
+                    var valharga;
                     var i;
                     for(i=0; i<data.length; i++){
-                        html += '<option title='+data[i].ID_DOMBA+' value='+data[i].ID_DOMBA+'>'+data[i].ID_DOMBA+' | '+data[i].BERAT+' | '+formatRupiah(data[i].HARGA, 'Rp.')+'</option>';
+                        html += '<option value='+data[i].ID_DOMBA+'>'+data[i].JENIS_KELAMIN+'</option>';
                     }
-                    $('#domba').selectpicker('refresh');
-                    $('#domba').html(html);
-                }
-            });
-        });
-
-        $('#ukuran').bind("keyup change click",function(){
-            var iduk = $(this).val();
-            var idbar = $("#barang").val();
-            $.ajax({
-                url : "<?php echo base_url('T_TambahTransaksi/warna/');?>",
-                method : "POST",
-                data:"iduk="+iduk+'&idbar='+idbar,
-                async : false,
-                dataType : 'json',
-                success: function(data){
-                    var html = '';
-                    var i;
-                    for(i=0; i<data.length; i++){
-                        html += '<option value='+data[i].ID_WAR+'>'+data[i].WARNA+'</option>';
-                    }
-                    $('#warna').html(html);
+                    valharga = formatRupiah(data[0].HARGA, 'Rp.')+"<input type='hidden' name='hargadom' id='hargadom' value='"+data[0].HARGA+"' readonly>";
+                    $('#jk').html(html);
+                    $('#harga').html(valharga);
                      
                 }
             });
         });
 
-        $('#warna').bind("keyup change click",function(){
-            var idbar = $("#barang").val();
+        $('#jk').bind("keyup change click",function(){
+            var iddom = $(this).val();
             $.ajax({
-                url : "<?php echo base_url('T_TambahTransaksi/harga/');?>",
+                url : "<?php echo base_url('T_TambahTransaksi/domba_jk/');?>",
                 method : "POST",
-                data:'&idbar='+idbar,
+                data: {id: iddom},
                 async : false,
                 dataType : 'json',
                 success: function(data){
-                    var html = '';
-                    var i;
-                    for(i=0; i<data.length; i++){
-                        var reverse = data[i].HARGA_BAR.toString().split('').reverse().join(''),
-                        ribuan  = reverse.match(/\d{1,3}/g);
-                        ribuan  = ribuan.join('.').split('').reverse().join('');
-                        ribuan  = "Rp " + ribuan + ",00";
-                        html += ribuan+"<input type='hidden' name='hargabar' id='hargabar' value='"+data[i].HARGA_BAR+"' readonly>";
-                    }
+                    var html = formatRupiah(data.HARGA, 'Rp.')+"<input type='hidden' name='hargadom' id='hargadom' value='"+data.HARGA+"' readonly>";
                     $('#harga').html(html);
                      
                 }
             });
         });
 
-        $('#jumlah').bind("keyup change click",function(){
-            var html = '';
-            var html2 = '';
-            var jmlh = parseInt($("#jumlah").val());
-            var hrg = parseInt($("#hargabar").val());
-            var subtot = jmlh*hrg;
-            var reverse = subtot.toString().split('').reverse().join(''),
-            ribuan  = reverse.match(/\d{1,3}/g);
-            ribuan  = ribuan.join('.').split('').reverse().join('');
-            ribuan  = "Rp " + ribuan + ",00";
-            html += ribuan+"<input type='hidden' name='subtotal' value='"+subtot+"' readonly>";    
-            html2 += ribuan+"<input type='hidden' name='total' id='valtot' value='"+subtot+"' readonly>";
-            $('#subtotal').html(html);
-            $('#total').html(html2);
+        $('#berat,#jumlah').bind("keyup change click",function(){
+            var berat = parseInt($("#berat").val());
+            var jumlah = parseInt($("#jumlah").val());
+            var harga = parseInt($("#hargadom").val());
+            var subtot = berat*jumlah*harga;
+            var subtotal = formatRupiah(subtot, 'Rp.')+"<input type='hidden' name='subtotal' value='"+subtot+"' readonly>";
+            var total = formatRupiah(subtot, 'Rp.')+"<input type='hidden' name='total' id='valtot' value='"+subtot+"' readonly>";
+            $('#subtotal').html(subtotal);
+            $('#total').html(total);
         });
     });
 </script>
 <?php } else{ ?>
     <script type="text/javascript">
-        function ganti_uk(id){
+        function ganti_jk(id){
             var idbar=$('#barang'+id).val();
             $.ajax({
                 url : "<?php echo base_url('T_TambahTransaksi/ukuran/');?>",

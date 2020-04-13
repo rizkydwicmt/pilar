@@ -17,7 +17,7 @@
 	{	
 		$order 					= 'ID_JENIS ASC';		
 		$data = array(
-			'domba' => $this->Master->get_orderby_desc( 'domba' , array('STATUS_DOMBA' => '1' ), $order)->result(),
+			'domba' => $this->Master->get_orderby_desc( 'domba' ,'', $order)->result(),
 			'jenisdomba' => $this->Master->get_orderby_desc( 'jenis_domba' , '' , '')->result(),
 
         );
@@ -67,6 +67,15 @@
 		$this->Master->update('domba',$where ,'update', array('STATUS_DOMBA' => '0' ));
 
 		$this->session->set_flashdata('konten_err' , 'Data Berhasil di Hapus');	
+		redirect( base_url('admin/Domba') );
+	}
+
+	public function UpdateStok($iddomba){
+
+		$where = 	array('ID_DOMBA' => $iddomba);
+		$this->Master->update('domba',$where ,'update', array('STATUS_DOMBA' => '1' ));
+
+		$this->session->set_flashdata('konten' , 'Data Berhasil di Update');	
 		redirect( base_url('admin/Domba') );
 	}
 

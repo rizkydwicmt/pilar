@@ -14,115 +14,44 @@
 		
 	}
 
-	public function index($id='')
+	public function index()
 	{	
-		if ($id != null) {
-			$order 					= 'NO_INVOICE ASC';	
-			$data = array(
-	            'domba' => $this->Master->get_orderby_desc( 'domba' , array('STATUS_DOMBA' => '1'))->result(),
-	            'provinsi' => $this->Master->lihat_provinsi(),
-				'kota' => $this->Master->lihat_kota(),
-	            'id' => $id,
-
-	        );
-			$data['konten'] 		= $this->load->view('Admin/Transaksi/v_t_tambahtransaksi',$data,TRUE);
-			$this->load->view('Admin/index',$data);
-		} else { 
-			$order 					= 'NO_INVOICE ASC';		
-			$data = array(
-				'jenisdomba' => $this->Master->get_orderby_desc( 'jenis_domba' , '')->result(),
-				'provinsi' => $this->Master->lihat_provinsi(),
-				'kota' => $this->Master->lihat_kota()
-	        );
-	        $data['konten'] 		= $this->load->view('Admin/Transaksi/v_t_tambahtransaksi',$data,True);
-			$this->load->view('Admin/index',$data);
-		}
+		$order 	= 'NO_INVOICE ASC';		
+		$data = array(
+			'jenisdomba' => $this->Master->get_orderby_desc( 'jenis_domba' ,)->result(),
+			'pelanggan' => $this->Master->get_orderby_desc( 'pelanggan' , array('STATUS_PELANGGAN' => 1))->result(),
+			'provinsi' => $this->Master->lihat_provinsi(),
+			'kota' => $this->Master->lihat_kota()
+		);
+		$data['konten'] 		= $this->load->view('Admin/Transaksi/v_tambahtransaksi',$data,True);
+		$this->load->view('Admin/index',$data);
 	}
 
 	public function domba(){
 		$id=$this->input->post('id');
-		$data=$this->db->query("SELECT * FROM `domba` WHERE ID_JENIS = '$id'")->result();
-        //$data=$this->lihat->lihat_warna_att($id);
-        	echo json_encode($data);
-	}
-
-	public function warna(){
-		$idbar=$this->input->post('idbar');
-		$iduk=$this->input->post('iduk');
-		$data=$this->db->query("SELECT * FROM `warna` WHERE ID_WAR IN (SELECT a.ID_WAR FROM `detail_barang` a INNER JOIN `ukuran` b ON a.ID_UK = b.ID_UK INNER JOIN warna c ON a.ID_WAR=c.ID_WAR WHERE a.ID_UK = '$iduk' AND a.ID_BAR = '$idbar' AND STATUS_BAR = '1')")->result();
-        //$data=$this->lihat->lihat_warna_att($id);
-        	echo json_encode($data);
-	}
-
-	public function layanan(){
-		require_once('vendor/autoload.php');
-		$idkota=$this->input->post('idkota');
-		$kurir=$this->input->post('kurir');
-		$layanan = $this->input->post('layanan');
-		$foo = new RajaOngkir\RajaOngkir();
-		$biaya = $foo->Cost([
-		'origin'    => '409', // id kota asal 
-		'destination'   => $idkota, // id kota tujuan
-		'weight'    => '1', // berat satuan gram
-		'courier'     => $kurir , // kode kurir pengantar ( jne / tiki / pos )
-		])->get();
-
-		foreach ($biaya as $key => $value) 
-	  	{
-		    $costs = $value['costs'];
-		    foreach ($costs as $key2 => $value2) 
-		    {
-		    	if (!isset($i)) {
-		    		$i=0;
-		    	}
-		      $cost = $value2['cost'];
-		       $cos = $cost[0]['value'];
-		       $data[$i]=$value2['service'];
-		       $i++;
-		    }
-	  	}
+		$data=$this->db->query("SELECT * FROM `domba` WHERE ID_JENIS = '$id' AND STATUS_DOMBA = 1")->result();
         echo json_encode($data);
 	}
 
-	public function ongkir(){
-		require_once('vendor/autoload.php');
-		$idkota=$this->input->post('idkota');
-		$kurir=$this->input->post('kurir');
-		$layanan = $this->input->post('layanan');
-		$foo = new RajaOngkir\RajaOngkir();
-		$biaya = $foo->Cost([
-		'origin'    => '409', // id kota asal 
-		'destination'   => $idkota, // id kota tujuan
-		'weight'    => '1', // berat satuan gram
-		'courier'     => $kurir , // kode kurir pengantar ( jne / tiki / pos )
-		])->get();
-
-		foreach ($biaya as $key => $value) 
-	  	{
-		    $costs = $value['costs'];
-		    foreach ($costs as $key2 => $value2) 
-		    {
-		     	if ($layanan === $value2['service']) {
-		     		$cost = $value2['cost'];
-		    		$cos  = $cost[0]['value'];
-		     		$data = $cos;
-		     	}
-		    }
-	  	}
+	public function domba_jk(){
+		$id=$this->input->post('id');
+		$data=$this->Master->get_tabel('domba' , array('ID_DOMBA' => $id), '');
         echo json_encode($data);
 	}
 
-	public function harga(){
-		$idbar=$this->input->post('idbar');
-		$arr = array(
-			'ID_BAR' => $idbar,
-		);
-		$data=$this->Master->get_orderby_desc( 'domba' , $arr)->result();
-        //$data=$this->lihat->lihat_warna_att($id);
-        	echo json_encode($data);
+	public function pelanggan(){
+		$id=$this->input->post('id');
+		$data=$this->db->query("SELECT * FROM pelanggan pe join kota ko ON pe.ID_KOTA=ko.ID_KOTA where ID_PELANGGAN = '$id'")->result();
+        echo json_encode($data);
 	}
 
-	public function Save($id=""){
+	public function Save(){
+		print_r($_POST);
+		print_r($_FILES);
+		//echo $_FILES['userfile']['name'];
+	}
+
+	public function Save2($id=""){
 		$idpeg = $_SESSION['id_user'];
 		if(!$this->input->post('total')){
 				$this->session->set_flashdata('konten_err' , 'Silahkan isi semua data pada form');	

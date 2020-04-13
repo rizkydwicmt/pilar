@@ -66,23 +66,6 @@ $route['ubahpassword'] = 'P_Profil/ubahpassword';
 $route['riwayatbelanja'] = 'P_Profil/riwayatbelanja';
 $route['invoice'] = 'P_Invoice';
 $route['logout'] = 'P_Kontak/logout';
-//$route['belanja'] = 'welcome/shop';
-//$route['upload'] = 'welcome/upload';
-//$route['keranjang'] = 'welcome/keranjang';
-//$route['checkout'] = 'welcome/checkout';
-//$route['kurir'] = 'welcome/kurir';
-//$route['invoice'] = 'welcome/invoice';
-//$route['ongkir'] = 'welcome/ongkir';
-//$route['prosesco'] = 'welcome/prosesco';
-//$route['ujicoba'] = 'welcome/ujicoba';
-
-//$route['kontak'] = 'welcome/kontak';
-//$route['coba'] = 'welcome/coba';
-//$route['proseskeranjang'] = 'welcome/proseskeranjang';
-//$route['produk'] = 'welcome/detailshop';
-//$route['masuk'] = 'welcome/login';
-//$route['daftar'] = 'welcome/register';
-//$route['lostpassword'] = 'welcome/lupapass';
 $route['404_override'] = '';
 
 //back
@@ -113,7 +96,7 @@ $route['admin/Transaksi/print/(:any)']		=	'T_Transaksi/print_tagihan/$1';
 $route['admin/Transaksi/print_invoice/(:any)'] = 'T_Transaksi/invoice/$1';
 $route['admin/DetailTransaksi/(:num)']		=	'T_Transaksi/index/$1';
 $route['admin/addTransaksi'] 			=	'T_TambahTransaksi';
-$route['admin/addTransaksi/(:num)']		=	'T_TambahTransaksi/index/$1';
+//$route['admin/addTransaksi/(:num)']		=	'T_TambahTransaksi/index/$1';
 $route['admin/Pembayaran'] 			=	'T_Pembayaran';
 $route['admin/Pengiriman'] 			=	'T_Pengiriman';
 

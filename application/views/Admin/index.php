@@ -37,7 +37,8 @@
     <!-- Link -->
     <link rel="stylesheet" href="<?php echo base_url('asset/') ?>select-bootstrap/dist/css/bootstrap-select.min.css">
     <!-- Script -->
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <!-- <script src="<?php //echo base_url('/') ?>plugins/bower_components/jquery/dist/jquery.min.js"></script> -->
     <style type="text/css">
      #notifications {
