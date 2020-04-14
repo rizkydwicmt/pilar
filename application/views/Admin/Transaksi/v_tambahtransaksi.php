@@ -434,8 +434,16 @@
                         dataType: "html",
                         contentType: false,
                         processData: false,
-                        success: function(response){                
-                            console.log(response);
+                        success: function(){                
+                            setTimeout(function(){
+                                swal({
+                                title:"Data Berhasil Disimpan",
+                                text: "Terimakasih",
+                                type: "success"
+                                }, function(){
+                                window.location="<?php echo base_url('admin/Pembayaran');?>";
+                                });
+                            }, 2000);
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
                             setTimeout(function(){

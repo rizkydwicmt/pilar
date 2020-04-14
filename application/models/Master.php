@@ -82,8 +82,6 @@
 			} else {
 				return false;
 			}
-				
-			
 		}
 
 		function check_session($tbl_user , $where){
@@ -95,21 +93,6 @@
 			return array('status_del' => 'Y');
 		}
 
-		public function get_join_two(){
-			// $find_by 		=	$tbl1.'.'.$column.'='.$tbl2.'.'.$column;
-			// $this->db->select($need);
-			// $this->db->from($tbl2);
-			// $this->db->join($tbl1 , $find_by ,$type );
-			// $this->db->order_by($order);
-
-			// return $this->db->query (
-			// 	"SELECT a.*, b.* FROM $tbl1 a $type JOIN $tbl2 b ON a.$column = b.$column"
-			// 	);
-			
-			return $this->db->query(
-				"SELECT a.*, b.* FROM `tb_karyawan` a right JOIN `tb_cabang` b ON a.id_karyawan = b.id_karyawan where b.status_del = 'T' "
-				);
-		}
 		public function get_table_order_limit_1($table , $order , $limit){
 			$this->db->order_by($order);
 			return $this->db->get($table , $limit);
@@ -135,21 +118,6 @@
 				}else{
 					return 'gagal';
 			}
-		}
-
-
-		public function ambil_tujuan($table,$nama_asal) { // Kota tujuan di t_v_order
-
-			$this->db->where($nama_asal);
-			$result 	=	$this->db->get($table);
-
-			if ($result->num_rows() > 0) {
-				return $result->result_array();
-			} else {
-				return array();
-			}
-
-
 		}
 
 		public function get_custom_query($query){
