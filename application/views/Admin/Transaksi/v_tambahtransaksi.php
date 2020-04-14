@@ -144,7 +144,7 @@
                                             }
                                             ?>
                                         </select>
-                                        </div>
+                                    </div>
                                     <div class="col-12 mb-3">
                                             <label for="Kota">Kota <span>*</span></label>
                                             <select class="custom-select d-block w-100" name="kota" id="kota" disabled="true">
@@ -182,17 +182,12 @@
                         </div>
                         <input type="checkbox" name="KIRIM" id="KIRIM" onchange="KIRIMFunction()"><label for="customCheck1"> Kirim</label>
                             <br><button type="submit" class="btn btn-success">Proses</button>
-                        </form>
-                    
+                        </form> 
                 </div>
-            </div>
-
-                           
-           
+            </div>    
         </div>
     </div>
-
-                    </div>
+</div>
 <script src="<?php echo base_url('assets/js/jquery.chained.min.js') ?>"></script>
         <script>
             $("#kota").chained("#provinsi");
@@ -221,10 +216,15 @@
 
 <script type="text/javascript">
     /* Fungsi insert transfer, DP, Kirim */
+
+    //untuk awal agar form pengiriman tidak terlihat (display=none)
     document.getElementById("pengiriman").style.display = "none";
 
+    //menambahkan barang yang akan dibeli (domba) saat menekan tombol (+)
     function TambahDomba(){
-        var rows = $('#tabel tbody tr').length;
+        //mencari panjang rows pada tabel
+        var rows = $('#tabel tbody tr').length; 
+        //insert form barang yang akan dibeli (domba) ke variabel html
         var html = "";
         html += "<tr id='tr_"+rows+"'>";
         html += "<td><select class='form-control' name='domba[]' id='domba_"+rows+"' onClick='select_domba("+rows+")' style='height: calc(3.5rem); font-size: 12px' required>";
@@ -238,25 +238,36 @@
         html += "<td><input type='number' id='berat_"+rows+"' class='input-text qty text' step='1' min='1' max='' name='berat[]' onChange='ganti_subtot("+rows+")' onKeyup='ganti_subtot("+rows+")' onClick='ganti_subtot("+rows+")' title='Berat' size='4' pattern='[0-9]*' inputmode='numeric' required style='width: 60px;text-align-last: center;'> </td>";
         html += "<td id='subtotal_"+rows+"'></td>";
         html += "</tr>";
-        $("#tr_"+(rows-1)).after(html);
+        //insert data html ke tabel
+        $("#tr_"+(rows-1)).after(html); //mencari nilai baris (tr) ke rows-1 (karena baris yang terakhir untuk total) kemudian melakukan insert data variabel html setelah baris
+        //memunculkan tombol hapus domba karena data baris lebih dari satu
         document.getElementById("hapusdomba").style.display = "block";
+        //menghapus nilai total agar tidak terjadi bug
         $("#total").empty();
     }
 
+    //menghapus barang yang akan dibeli (domba) saat menekan tombol (-)
     function HapusDomba(){
+        //mencari panjang rows pada tabel
         var rows = $('#tabel tbody tr').length;
-        $("#tr_"+(rows-1)).remove();
+        //menghapus barisan ke rows -1
+        $("#tr_"+(rows-1)).remove(); //mencari nilai baris (tr) ke rows-1 (karena baris yang terakhir untuk total) kemudian melakukan remove data setelah baris
+        //menghapus nilai total agar tidak terjadi bug
         $("#total").empty();
+        //jika baris == 2 menghapus tombol hapus domba
         if(rows-1 == 2){
             document.getElementById("hapusdomba").style.display = "none";
         }
     }
 
+    //menambahkan harga DP saat checkbock DP di centang
     function DPFunction() { 
         var checkBox = document.getElementById("DP");
         var html = '';
         var valtot = $("#valtot").val();
+        //jika barang belum terisi maka keluar alert (untuk menghindari bug)
         if(valtot != null){
+            //jika checkbox DP tercentang maka muncul input harga dan dp tidak boleh kurang dari setengah harga barang 
             if (checkBox.checked == true){
                 var dp = parseInt(valtot/2);
                 html += "<input type=\"number\" class=\"form-control\" placeholder=\"harga\" name=\"DPval\" min=\""+dp+"\" style=\"width: 200px\" required> </div>"
@@ -267,14 +278,18 @@
             alert("Silahkan isi semua barang terlebih dahulu");
             checkBox.checked = false;
         }
+        //insert form DP
         $('#formDP').html(html);
     };
 
+    //menambahkan upload bukti TF saat checkbock Transfer di centang
     function TFFunction() { 
         var checkBox = document.getElementById("TF");
         var html = '';
         var valtot = $("#valtot").val();
+        //jika barang belum terisi maka keluar alert (untuk menghindari bug)
         if(valtot != null){
+            //jika checkbox DP tercentang maka muncul form
             if (checkBox.checked == true){
                 html += "<div class=\"col-md-12\">"
                 html += "<input type=\"file\" class=\"form-control\" name=\"userfile\" id='fileInput' onchange=\"AlertFilesize(this.id,2048,'KB')\" required> </div>"
@@ -285,16 +300,20 @@
             alert("Silahkan isi semua barang terlebih dahulu");
             checkBox.checked = false;
         }
+        //insert form TF
         $('#formTF').html(html);
     }
 
+    //menambahkan detail penerima dan ongkir saat checkbox Kirim di centang
     function KIRIMFunction() {
         var checkBox = document.getElementById("KIRIM");
         var pengiriman = document.getElementById("pengiriman");
         var valtot = $("#valtot").val();
         if(valtot != null){
             if (checkBox.checked == true){
+                //jika checkbox Kirim dicentang maka form pengiriman moncul (display=block)
                 pengiriman.style.display = "block";
+                //menambahkan element/property 'required' pada form kirim
                 $("#nama").prop('required', true);
                 $("#alamat").prop('required', true);
                 $("#kodepos").prop('required', true);
@@ -303,7 +322,9 @@
                 $("#telepon").prop('required', true);
                 $("#ongkir").prop('required', true);
             }else{
+                //jika checkbox Kirim tidak dicentang maka form pengiriman tidak muncul (display=none)
                 pengiriman.style.display = "none";
+                //menghapus element/property 'required' pada form kirim
                 $("#nama").prop('required', false);
                 $("#alamat").prop('required', false);
                 $("#kodepos").prop('required', false);
@@ -318,9 +339,11 @@
         }
     }
 
+    //mengganti detail pelanggan dalam fitur Kirim menggunakan ajax
     function PELANGGANFunction(){
         var checkBox = document.getElementById("cek_penerima");
         var idpel=$('#pelanggan').val();
+        //jika penerima tidak di centang
         if (checkBox.checked == false){
             $.ajax({
                 url : "<?php echo base_url('T_TambahTransaksi/pelanggan/');?>",
@@ -329,6 +352,7 @@
                 async : false,
                 dataType : 'json',
                 success: function(data){
+                    //mengisi element readonly atau disabled dan menambahkan attribut value sesuai data pelanggan
                     $('option:selected', "#provinsi").removeAttr('selected');
                     $('option:selected', "#kota").removeAttr('selected');
                     $("#nama").prop('readonly', true).attr('value', data[0].NAMA_PELANGGAN);
@@ -341,16 +365,17 @@
                     $("#kota option[value="+data[0].ID_KOTA+"]").attr('selected', 'selected');
                 }
             });
-        }else{
-
         }
     }
 
+    //mengosongkan form detail pelanggan dalam fitur Kirim jika checkbox 'penerima berbeda' dicentang
     function PENERIMAFunction(){
         var checkBox = document.getElementById("cek_penerima");
         var penerima = document.getElementById("penerima");
+        //jika penerima dicentang
         if (checkBox.checked == true){
             penerima.style.display = "block";
+            //mengosongkan element readonly atau disabled dan attribut value
             $("#nama").prop('readonly', false).attr('value', '');
             $("#alamat").prop('readonly', false).attr('value', '');
             $("#kodepos").prop('readonly', false).attr('value', '');
@@ -364,6 +389,7 @@
         }
     }
 
+    //fitur javascript untuk validasi file foto pada fitur Transfer
     function AlertFilesize(cid,sz,a){
         var controllerID = cid;
         var fileSize = sz;
@@ -398,13 +424,19 @@
         return false;
         }
     }
+
+    //Insert ke database menggunakan ajax ketika form di submit (menekan tombol proses)
     $('#formInput').submit(function(e){
             e.preventDefault();
-            var valid=true;     
+            var valid=true;
+            //agar variable provinsi dan kota dapat masuk ke form (mengatasi bug)
             $("#provinsi").prop('disabled', false);
             $("#kota").prop('disabled', false);
-            var form = $('form')[0]; // You need to use standard javascript object here
-            var formData = new FormData(form); //mengambil semua data di dalam form
+            //generalisasi form agar data file bisa masuk
+            var form = $('form')[0];
+            //mengambil semua data di dalam form
+            var formData = new FormData(form);
+            //fitur swal
             $(this).find('.textbox').each(function(){
                 if (! $(this).val()){
                     get_error_text(this);
@@ -434,6 +466,7 @@
                         dataType: "html",
                         contentType: false,
                         processData: false,
+                        //jika ajax sukses
                         success: function(){                
                             setTimeout(function(){
                                 swal({
@@ -445,6 +478,7 @@
                                 });
                             }, 2000);
                         },
+                        //jika ajax gagal
                         error: function (xhr, ajaxOptions, thrownError) {
                             setTimeout(function(){
                                 swal("Error", "Tolong cek data dan ulangi lagi", "error");
@@ -460,6 +494,7 @@
 </script>
 
 <script type="text/javascript">
+    //untuk memperbaiki bug
     function resetSelect(id){
         $("#jumlah_"+id).empty();
         $("#berat_"+id).empty();
@@ -467,6 +502,7 @@
         $("#total").empty();
     }
 
+    //select domba untuk ketika jenis domba di klik memunculkan option jenis kelamin
     function select_domba(id){
         var iddom=$('#domba_'+id).val();
         $.ajax({
@@ -491,6 +527,7 @@
         });
     }
 
+    //select jenis kelamin ketika jk di klik untuk memunculkan harga
     function select_jk(id){
         var iddom = $("#jk_"+id).val();
         if(iddom!= ""){
@@ -507,10 +544,12 @@
                 }
             });
         }else{
+            //mengatasi bug option jenis kelamin tidak muncul
             alert("Silahkan isi jenis domba terlebih dahulu");
         }
     }
 
+    //ganti subtotal ketika berat diganti
     function ganti_subtot(id){
         if ($("#jumlah_"+id).val() == 0) {
             $("#jumlah_"+id).val(1);
@@ -523,6 +562,7 @@
         ganti_total();
     }
 
+    //ganti total ketika input ongkir di klik
     function ganti_total(){
         var total = 0;
         var ongkir = parseInt($("#ongkir").val());
