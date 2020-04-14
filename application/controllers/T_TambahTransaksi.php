@@ -48,7 +48,75 @@
 	public function Save(){
 		print_r($_POST);
 		print_r($_FILES);
+		$this->savePemesanan();
+		//$this->savePembayaran();
 		//echo $_FILES['userfile']['name'];
+	}
+
+	function savePemesanan(){
+		//jika DP untuk insert sistem bayar
+		if($this->input->post('DP')){
+			$sistem_bayar = 'Cicilan';
+		}else{
+			$sistem_bayar = 'Kontan';
+		}
+
+		//jika dikirim untuk insert status transaksi
+		if($this->input->post('KIRIM')){
+			$status = 'Menunggu pengiriman';
+		}else{
+			$status = 'Selesai';
+		}
+
+		$data =	array(
+			/* Nama Field    => Isi Data $_Post */
+			'ID_PELANGGAN'		=> $this->input->post('pelanggan'),
+			'ID_PEGAWAI'		=> $_SESSION['id_user'],
+			'ID_KOTA'			=> $this->input->post('kota'),
+			'NAMA_PENERIMA'		=> $this->input->post('nama'),
+			'TELP_PENERIMA'		=> $this->input->post('telepon'),
+			'ALAMAT_PENERIMA'	=> $this->input->post('alamat'),
+			'KODEPOS_PENERIMA'	=> $this->input->post('kodepos'),
+			'SISTEM_BAYAR'		=> $sistem_bayar,
+			'ONGKOS_KIRIM'		=> $this->input->post('ongkir'),
+			'TOTAL_BERAT'		=> array_sum($this->input->post('berat')),
+			'TOTAL_HARGA'		=> $this->input->post('total'),
+			'STATUS_TRANSAKSI'	=> $status,
+		);
+		$this->Master->save_data('pemesanan' , $data);
+	}
+
+	function savePembayaran(){
+		//jika DP untuk insert sistem bayar
+		if($this->input->post('DP')){
+			$sistem_bayar = 'Cicilan';
+		}else{
+			$sistem_bayar = 'Kontan';
+		}
+
+		//jika dikirim untuk insert status transaksi
+		if($this->input->post('KIRIM')){
+			$status = 'Menunggu pengiriman';
+		}else{
+			$status = 'Selesai';
+		}
+
+		$data =	array(
+			/* Nama Field    => Isi Data $_Post */
+			'ID_PELANGGAN'		=> $this->input->post('pelanggan'),
+			'ID_PEGAWAI'		=> $_SESSION['id_user'],
+			'ID_KOTA'			=> $this->input->post('kota'),
+			'NAMA_PENERIMA'		=> $this->input->post('nama'),
+			'TELP_PENERIMA'		=> $this->input->post('telepon'),
+			'ALAMAT_PENERIMA'	=> $this->input->post('alamat'),
+			'KODEPOS_PENERIMA'	=> $this->input->post('kodepos'),
+			'SISTEM_BAYAR'		=> $sistem_bayar,
+			'ONGKOS_KIRIM'		=> $this->input->post('ongkir'),
+			'TOTAL_BERAT'		=> array_sum($this->input->post('berat')),
+			'TOTAL_HARGA'		=> $this->input->post('total'),
+			'STATUS_TRANSAKSI'	=> $status,
+		);
+		$this->Master->save_data('pemesanan' , $data);
 	}
 
 	public function Save2($id=""){

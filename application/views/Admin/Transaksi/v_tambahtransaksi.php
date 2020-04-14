@@ -44,7 +44,7 @@
                                         <th scope="col">Harga</th>
                                         <th scope="col" style="width: 150px;">Jumlah</th>
                                         <th scope="col" style="width: 150px;">Berat (Kg)</th>
-                                        <th scope="col">Subtotal</th>
+                                        <th scope="col" style="width: 150px;">Subtotal</th>
                                     </tr>
                                 </thead>
 
@@ -79,12 +79,9 @@
                                         <td id="subtotal_1"></td>
                                     </tr>
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td id="total"></td>
+                                        <td colspan="4"></td>
+                                        <td><h3>TOTAL</h3></td>
+                                        <td><h3 id="total"></h3></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -98,10 +95,10 @@
                             <h3><p></p></h3>
                             <br>
                         </div>
-                        <div class="row" id="pengiriman">
-                            <div class="col-12 mb-3">
+                        <div class="row">
+                            <div class="col-12 mb-5">
                                 <label for="nama">Pelanggan</label>
-                                <select class="form-control" name="pelanggan" id="pelanggan" style="height: calc(3.5rem); font-size: 12px" onchange="PELANGGANFunction()" required>
+                                <select class="form-control" name="pelanggan" id="pelanggan" style="height: calc(3.5rem); font-size: 12px; width: 270px;" onchange="PELANGGANFunction()" required>
                                     <?php
                                     foreach ($pelanggan as $pel) {
                                         ?>
@@ -112,69 +109,70 @@
                                     ?>
                                 </select>
                             </div>
-                            <div class="col-12 mb-3">
-                                <input type="checkbox" name="penerima" id="cek_penerima" onchange="PENERIMAFunction()"><label for="customCheck1"> Penerima beda dengan pengirim?</label>
-                            </div>
-                            <div>
-                                <div class="col-12 mb-3" id="penerima" style='display: none;'>
-                                    <label for="Nama"><span>*</span>FORM PENERIMA</label>
-                                </div>
+                            <div id="pengiriman">
                                 <div class="col-12 mb-3">
-                                    <label for="Nama">Nama <span>*</span></label>
-                                    <input type="text" class="form-control" name="nama" id="nama"  minlength="5" maxlength="30" value="<?= $pelanggan[0]->NAMA_PELANGGAN;?>" readonly>
+                                    <input type="checkbox" name="penerima" id="cek_penerima" onchange="PENERIMAFunction()"><label for="customCheck1"> Penerima beda dengan pengirim?</label>
                                 </div>
-                                <div class="col-12 mb-3">
-                                    <label for="Alamat">Alamat <span>*</span></label>
-                                    <input type="text" class="form-control mb-3" name="alamat" id="alamat" minlength="5" maxlength="50" value="<?= $pelanggan[0]->ALAMAT_PELANGGAN;?>" readonly>
-                                </div>
-                                <div class="col-12 mb-3">
-                                    <label for="Kodepos">Kodepos <span>*</span></label>
-                                    <input type="text" class="form-control" name="kodepos" id="kodepos"  pattern="[0-9]*" inputmode="numeric" minlength="5" maxlength="5" value="<?= $pelanggan[0]->KODEPOS_PELANGGAN;?>" readonly>
-                                </div>
-                                <div class="col-12 mb-3">
-                                        <label for="Provinsi">Provinsi <span>*</span></label>
-                                        <select class="custom-select d-block w-100" name="provinsi" id="provinsi" disabled="true">
-                                        <?php
-                                        foreach ($provinsi as $prov) {
-                                            ?>
-                                            <option 
-                                                value="<?php echo $prov->ID_PROV ?>"
-                                                <?php if($prov->ID_PROV == $this->Master->get_tabel('kota' , array('ID_KOTA' => $pelanggan[0]->ID_KOTA), 'ID_PROV')){
-                                                    echo "selected";
-                                                }?>><?php echo $prov->NAMA_PROV ?></option>
-                                            <?php
-                                        }
-                                        ?>
-                                    </select>
+                                <div>
+                                    <div class="col-12 mb-3" id="penerima" style='display: none;'>
+                                        <label for="Nama"><span>*</span>FORM PENERIMA</label>
                                     </div>
-                                <div class="col-12 mb-3">
-                                        <label for="Kota">Kota <span>*</span></label>
-                                        <select class="custom-select d-block w-100" name="kota" id="kota" disabled="true">
-                                        <?php
-                                        foreach ($kota as $kot) {
-                                            ?>
-                                            <option
-                                                class="<?php echo $kot->ID_PROV ?>" 
-                                                value="<?php echo $kot->ID_KOTA ?>" 
-                                                <?php if($kot->ID_KOTA == $pelanggan[0]->ID_KOTA){
-                                                    echo "selected";
-                                                }?>
-                                                ><?php echo $kot->NAMA_KOTA ?></option>
-                                            <?php
-                                        }
-                                        ?>
-                                    </select>
+                                    <div class="col-12 mb-3">
+                                        <label for="Nama">Nama <span>*</span></label>
+                                        <input type="text" class="form-control" name="nama" id="nama"  minlength="5" maxlength="30" value="<?= $pelanggan[0]->NAMA_PELANGGAN;?>" readonly>
                                     </div>
+                                    <div class="col-12 mb-3">
+                                        <label for="Alamat">Alamat <span>*</span></label>
+                                        <input type="text" class="form-control mb-3" name="alamat" id="alamat" minlength="5" maxlength="50" value="<?= $pelanggan[0]->ALAMAT_PELANGGAN;?>" readonly>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <label for="Kodepos">Kodepos <span>*</span></label>
+                                        <input type="text" class="form-control" name="kodepos" id="kodepos"  pattern="[0-9]*" inputmode="numeric" minlength="5" maxlength="5" value="<?= $pelanggan[0]->KODEPOS_PELANGGAN;?>" readonly>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                            <label for="Provinsi">Provinsi <span>*</span></label>
+                                            <select class="custom-select d-block w-100" name="provinsi" id="provinsi" disabled="true">
+                                            <?php
+                                            foreach ($provinsi as $prov) {
+                                                ?>
+                                                <option 
+                                                    value="<?php echo $prov->ID_PROV ?>"
+                                                    <?php if($prov->ID_PROV == $this->Master->get_tabel('kota' , array('ID_KOTA' => $pelanggan[0]->ID_KOTA), 'ID_PROV')){
+                                                        echo "selected";
+                                                    }?>><?php echo $prov->NAMA_PROV ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                        </div>
+                                    <div class="col-12 mb-3">
+                                            <label for="Kota">Kota <span>*</span></label>
+                                            <select class="custom-select d-block w-100" name="kota" id="kota" disabled="true">
+                                            <?php
+                                            foreach ($kota as $kot) {
+                                                ?>
+                                                <option
+                                                    class="<?php echo $kot->ID_PROV ?>" 
+                                                    value="<?php echo $kot->ID_KOTA ?>" 
+                                                    <?php if($kot->ID_KOTA == $pelanggan[0]->ID_KOTA){
+                                                        echo "selected";
+                                                    }?>
+                                                    ><?php echo $kot->NAMA_KOTA ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                        </div>
+                                    <div class="col-12 mb-3">
+                                        <label for="Telepon">Telepon <span>*</span></label>
+                                        <input type="text" class="form-control" name="telepon" id="telepon" minlength="10" maxlength="13" pattern="[0-9]*" inputmode="numeric" value="<?= $pelanggan[0]->TELP_PELANGGAN;?>" readonly>
+                                    </div>
+                                </div>
                                 <div class="col-12 mb-3">
-                                    <label for="Telepon">Telepon <span>*</span></label>
-                                    <input type="text" class="form-control" name="telepon" id="telepon" minlength="10" maxlength="13" pattern="[0-9]*" inputmode="numeric" value="<?= $pelanggan[0]->TELP_PELANGGAN;?>" readonly>
+                                    <label for="Ongkir">Ongkir <span>*</span></label>
+                                    <input type="number" class="form-control" name="ongkir" id="ongkir"  min="0" pattern="[0-9]*" inputmode="numeric" value='0' onChange="ganti_total()" onKeyup="ganti_total()" onClick="ganti_total()" >
                                 </div>
                             </div>
-                            <div class="col-12 mb-3">
-                                <label for="Ongkir">Ongkir <span>*</span></label>
-                                <input type="number" class="form-control" name="ongkir" id="ongkir" min="1" pattern="[0-9]*" inputmode="numeric" >
-                            </div>
-                            
                         </div>
                         <input type="checkbox" name="TF" id="TF" onclick="TFFunction()"><label for="customCheck1"> Transfer</label>
                         <div class="form-group" id="formTF">  
@@ -403,6 +401,8 @@
     $('#formInput').submit(function(e){
             e.preventDefault();
             var valid=true;     
+            $("#provinsi").prop('disabled', false);
+            $("#kota").prop('disabled', false);
             var form = $('form')[0]; // You need to use standard javascript object here
             var formData = new FormData(form); //mengambil semua data di dalam form
             $(this).find('.textbox').each(function(){
@@ -434,21 +434,16 @@
                         dataType: "html",
                         contentType: false,
                         processData: false,
-                        success: function(){                
-                            setTimeout(function(){
-                                swal({
-                                title:"Data Berhasil Disimpan",
-                                text: "Terimakasih",
-                                type: "success"
-                                }, function(){
-                                window.location="<?php echo base_url('admin/Pembayaran');?>";
-                                });
-                            }, 2000);
+                        success: function(response){                
+                            console.log(response);
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
                             setTimeout(function(){
-                                swal("Error", "Tolong Cek Data dan Ulangi", "error");
-                            }, 2000);}
+                                swal("Error", "Tolong cek data dan ulangi lagi", "error");
+                            }, 2000);
+                            $("#provinsi").prop('disabled', true);
+                            $("#kota").prop('disabled', true);
+                        }
                     });
                 });
             }
@@ -490,18 +485,22 @@
 
     function select_jk(id){
         var iddom = $("#jk_"+id).val();
-        $.ajax({
-            url : "<?php echo base_url('T_TambahTransaksi/domba_jk/');?>",
-            method : "POST",
-            data: {id: iddom},
-            async : false,
-            dataType : 'json',
-            success: function(data){
-                var html = formatRupiah(data.HARGA, 'Rp.')+"<input type='hidden' name='hargadom[]' id='hargadom_"+id+"' value='"+data.HARGA+"' readonly>";
-                $('#harga_'+id).html(html);
-                resetSelect(id);
-            }
-        });
+        if(iddom!= ""){
+            $.ajax({
+                url : "<?php echo base_url('T_TambahTransaksi/domba_jk/');?>",
+                method : "POST",
+                data: {id: iddom},
+                async : false,
+                dataType : 'json',
+                success: function(data){
+                    var html = formatRupiah(data.HARGA, 'Rp.')+"<input type='hidden' name='hargadom[]' id='hargadom_"+id+"' value='"+data.HARGA+"' readonly>";
+                    $('#harga_'+id).html(html);
+                    resetSelect(id);
+                }
+            });
+        }else{
+            alert("Silahkan isi jenis domba terlebih dahulu");
+        }
     }
 
     function ganti_subtot(id){
@@ -518,9 +517,11 @@
 
     function ganti_total(){
         var total = 0;
+        var ongkir = parseInt($("#ongkir").val());
         for (let i = 1; i <= ($('#tabel tbody tr').length-1); i++) {
             total += parseInt($("#subtot_"+i).val());
         }
+        total = total+ongkir;
         var html = formatRupiah(total, 'Rp.')+"<input type='hidden' name='total' id='valtot' value='"+total+"' readonly>";
         $('#total').html(html);
     }
