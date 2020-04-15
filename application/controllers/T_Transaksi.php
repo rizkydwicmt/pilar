@@ -36,7 +36,7 @@
 	            'pelanggan' => $this->Master->get_tabel( 'customer' , $wherepel),
 
 	        );
-			$data['konten'] 		= $this->load->view('Admin/Transaksi/v_t_transaksi-detail',$data,TRUE);
+			$data['konten'] 		= $this->load->view('Admin/Transaksi/v_transaksi-detail',$data,TRUE);
 			$this->load->view('Admin/index',$data);
 		} else { 
 			$order 					= 'ID_PEMESANAN ASC';		
@@ -48,7 +48,7 @@
 	            'kota_selected' => '',
 
 	        );
-	        $data['konten'] 		= $this->load->view('Admin/Transaksi/v_t_transaksi',$data,True);
+	        $data['konten'] 		= $this->load->view('Admin/Transaksi/v_transaksi',$data,True);
 			$this->load->view('Admin/index',$data);
 		}
 	}

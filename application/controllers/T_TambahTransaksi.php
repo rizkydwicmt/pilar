@@ -45,12 +45,9 @@
 	}
 
 	public function Save(){
-		print_r($_POST);
-		print_r($_FILES);
 		$this->Transaksi->savePemesanan();
 		$this->Transaksi->savePembayaran();
 		$this->Transaksi->saveDetailPemesanan();
-		//echo $_FILES['userfile']['name'];
 	}
 
 	public function coba($id){

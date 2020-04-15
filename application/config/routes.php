@@ -96,7 +96,6 @@ $route['admin/Transaksi/print/(:any)']		=	'T_Transaksi/print_tagihan/$1';
 $route['admin/Transaksi/print_invoice/(:any)'] = 'T_Transaksi/invoice/$1';
 $route['admin/DetailTransaksi/(:num)']		=	'T_Transaksi/index/$1';
 $route['admin/addTransaksi'] 			=	'T_TambahTransaksi';
-//$route['admin/addTransaksi/(:num)']		=	'T_TambahTransaksi/index/$1';
 $route['admin/Pembayaran'] 			=	'T_Pembayaran';
 $route['admin/Pengiriman'] 			=	'T_Pengiriman';
 
