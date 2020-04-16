@@ -33,67 +33,51 @@
 		$this->load->view('Admin/index',$data);
 	}
 
-	public function Tolak($id){
+	public function Tunai($id){
+		//inisialisasi id(primary key)
 		$idpeg = $_SESSION['id_user'];
-		$data['ID_STAT'] = 'SPT';
-		$datapem['ID_PEG'] = $idpeg;
-		$where = 	array('NO_INVOICE' => $id);
-		$this->Master->update('pemesanan',$where ,'update', $data);
-		$this->Master->update('pembayaran',$where ,'update',$datapem);
-		$this->session->set_flashdata('konten_err' , 'Pembayaran berhasil ditolak');	
-		redirect( base_url('admin/Pembayaran') );
-	}
+		$id_pembayaran = str_replace('T', 'B', $id).'2';
 
-	public function Hapus($id){
-		$idpeg = $_SESSION['id_user'];
-		$data['ID_STAT'] = 'ST1';
-		$datapem['ID_PEG'] = $idpeg;
-		$where = 	array('NO_INVOICE' => $id);
-		$this->Master->update('pemesanan',$where ,'update', $data);
-		$this->Master->update('pembayaran',$where ,'update',$datapem);
-		$this->session->set_flashdata('konten_err' , 'Pembayaran berhasil dihapus');	
-		redirect( base_url('admin/Pembayaran') );
-	}
+		//mencari harga bayar
+		$telah_dibayar = $this->Master->get_tabel('pembayaran',array('ID_PEMESANAN' => $id),'TOTAL_PEMBAYARAN');
+		$total_harga = $this->Master->get_tabel('pemesanan',array('ID_PEMESANAN' => $id),'TOTAL_HARGA');
+		$harga_bayar = $total_harga-$telah_dibayar;
 
-	public function Approve($id){
-		$idpeg = $_SESSION['id_user'];
-		$data['ID_STAT'] = 'SP4';
-		$datapem['ID_PEG'] = $idpeg;
-		$where = 	array('NO_INVOICE' => $id);
-		$this->Master->update('pemesanan',$where ,'update', $data);
-		$this->Master->update('pembayaran',$where ,'update',$datapem);
-		$this->session->set_flashdata('konten' , 'Pembayaran telah dikonfirmasi');
-		redirect( base_url('admin/Pembayaran') );
-	}
-
-	public function Approve2($id){
-		$idpeg = $_SESSION['id_user'];
-		$now = $this->lihat->lihat_curenttimestamp();
-		$data['ID_STAT'] = 'SJ2';
-		$datapem['ID_PEG'] = $idpeg;
-		$idbayar = str_replace('T', 'B', $id);
-		$idbayar1 = str_replace('T', 'B', $id).'1';
-		$tothar = $this->Master->get_tabel('pemesanan', "NO_INVOICE = '$id'",'TOTAL_HARGA_PESAN');
-		$tatharbayar = $this->Master->get_tabel('pembayaran', "KODE_BAYAR = '$idbayar1'",'HARGA_BAYAR');
-		$total = $tothar-$tatharbayar;
-		$datapem 	=	array(
+		//insert data
+		$data =	array(
 			/* Nama Field    => Isi Data $_Post */
-				'KODE_BAYAR'		=> $idbayar."2",
-				'NO_INVOICE'		=> $id,
-				'ID_PEG'		=> $idpeg,
-				'JENIS_BAYAR'	=> 'Tunai',
-				'TGL_BAYAR'	=> $now,
-				'HARGA_BAYAR' => $total,
+			'ID_PEMBAYARAN'		=> $id_pembayaran,
+			'ID_PEGAWAI'		=> $_SESSION['id_user'],
+			'ID_PEMESANAN'		=> $id,
+			'JENIS_BAYAR'		=> 'Tunai',
+			'TOTAL_PEMBAYARAN'	=> $harga_bayar,
+			'BUKTI_TRANSFER'	=> '',
+			'STATUS_PEMBAYARAN'	=> 'Pelunasan',
 			);
-		$idbayar = $idbayar."2";
+		$this->Master->save_data('pembayaran' , $data);
+		$this->session->set_flashdata('konten' , 'Pembayaran berhasil');
+		redirect( base_url('admin/Pembayaran') );
+	}
+
+	public function Transfer($id){
+		//inisialisasi id(primary key)
+		$idpeg = $_SESSION['id_user'];
+		$id_pembayaran = str_replace('T', 'B', $id).'2';
+
+		//mencari harga bayar
+		$telah_dibayar = $this->Master->get_tabel('pembayaran',array('ID_PEMESANAN' => $id),'TOTAL_PEMBAYARAN');
+		$total_harga = $this->Master->get_tabel('pemesanan',array('ID_PEMESANAN' => $id),'TOTAL_HARGA');
+		$harga_bayar = $total_harga-$telah_dibayar;
+
+		//upload foto
 		if ($_FILES['userfile']['name']) {
 			$datapem['JENIS_BAYAR'] = 'Transfer';
             $filename = $_FILES['userfile']['name'];
             $format =  pathinfo($filename, PATHINFO_EXTENSION);
-            $foto =  $idbayar.'.'.$format;
+            $foto =  $id_pembayaran.'.'.$format;
             $config['upload_path']          = './upload/pembayaran';
             $config['allowed_types']        = 'jpg|png';
-            $config['file_name']            = $idbayar;
+            $config['file_name']            = $id_pembayaran;
             $config['overwrite']            = true;
             $config['max_size']             = 3048; // 1MB
             // $config['max_width']            = 1024;
@@ -102,28 +86,26 @@
             $this->load->library('upload', $config);
             if ($this->upload->do_upload('userfile')) {
                 $this->upload->data("file_name");
-                $datapem['BUKTI_BAYAR'] = $foto;
             }
+		}else{
+			$this->session->set_flashdata('konten_err' , 'Foto tidak tersedia, silahkan melakukan upload kembali');
+			redirect( base_url('admin/Pembayaran') );
 		}
-		$where = 	array('NO_INVOICE' => $id);
-		$this->Master->update('pemesanan',$where ,'update', $data);
-		$this->Master->save_data('pembayaran' , $datapem);
-		$this->session->set_flashdata('konten' , 'Pembayaran telah dikonfirmasi');
-		redirect( base_url('admin/Transaksi') );
-	}
 
-	public function Approve3($id){
-		$idpeg = $_SESSION['id_user'];
-		$data['ID_STAT'] = 'ST2';
-		$where = 	array('NO_INVOICE' => $id);
-		$this->Master->update('pemesanan',$where ,'update', $data);
-		$this->session->set_flashdata('konten' , 'Pembayaran telah dikonfirmasi');
+		//insert data
+		$data =	array(
+			/* Nama Field    => Isi Data $_Post */
+			'ID_PEMBAYARAN'		=> $id_pembayaran,
+			'ID_PEGAWAI'		=> $_SESSION['id_user'],
+			'ID_PEMESANAN'		=> $id,
+			'JENIS_BAYAR'		=> 'Transfer',
+			'TOTAL_PEMBAYARAN'	=> $harga_bayar,
+			'BUKTI_TRANSFER'	=> $foto,
+			'STATUS_PEMBAYARAN'	=> 'Pelunasan',
+			);
+		$this->Master->save_data('pembayaran' , $data);
+		$this->session->set_flashdata('konten' , 'Pembayaran berhasil');
 		redirect( base_url('admin/Pembayaran') );
 	}
-
-	// function asdasd(){
-	// 	return asdasdasdasd;
-	// }
-
 }
  ?>
