@@ -75,17 +75,12 @@
                                         </td>
                                         <td><?= $data->STATUS_TRANSAKSI ?></td>
                                         <td align="right">
-                                                <!-- <input type="file" class="form-control" name="userfile" id='fileInput' onchange="AlertFilesize(this.id,2048,'KB')" style="width:20px" required> -->
                                                 <form id="form" action="<?php echo base_url("T_Pembayaran/Approve2/$data->ID_PEMESANAN") ?>" method="post" enctype="multipart/form-data" accept-charset="utf-8">
                                                 <a class="btn btn-sm btn-circle btn-success" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("T_Pembayaran/Tunai/$data->ID_PEMESANAN") ?>'" ><i data-toggle="tooltip" data-title="Tunai" class="fa fa-chevron-circle-up"></i></a>
                                                 <label class="btn btn-sm btn-circle btn-success"><i data-toggle="tooltip" data-title="Transfer" class="fa fa-upload" style="color: black"></i>
                                                     <input type="file" style="display: none;" name="userfile" id='fileInput' onchange="AlertFilesize(this.id,2048,'KB','<?php echo($data->ID_PEMESANAN); ?>')" required>
                                                 </label>
-                                                <!-- <a class="btn btn-sm btn-circle btn-success" href="javascript:void(0)" onclick="window.location.href='<?php //echo base_url("T_Pembayaran/Approve3/$data->ID_PEMESANAN") ?>'" ><i data-toggle="tooltip" data-title="Selesai" class="fa fa-chevron-circle-up"></i></a> -->
-                                            <!-- <a class="btn btn-sm btn-circle btn-success" href="javascript:void(0)" onclick="window.location.href='<?php //echo base_url("T_Pembayaran/Approve/$data->ID_PEMESANAN") ?>'" ><i data-toggle="tooltip" data-title="Approve" class="fa fa-chevron-circle-up"></i></a> -->
-                                            <!-- <a class="btn btn-sm btn-circle btn-warning" data-toggle="tooltip" data-title="Tolak" href="javascript:void(0)" onclick="window.location.href='<?php //echo base_url("T_Pembayaran/Tolak/$data->ID_PEMESANAN") ?>'" ><i class="fa fa-chevron-circle-down"></i></a> -->
                                             <a class="btn btn-sm btn-circle btn-info" data-toggle="tooltip" data-title="Detail Transaksi" href="javascript:void(0)" onclick="window.open('<?php echo base_url("admin/DetailTransaksi/".(substr($data->ID_PEMESANAN,1))) ?>','_blank')"><i class="fa fa-search"></i></a>
-                                            <!-- <a class="btn btn-sm btn-circle btn-danger" data-toggle="tooltip" data-title="Hapus" href="javascript:void(0)" onclick="window.location.href='<?php //echo base_url("T_Pembayaran/Hapus/$data->ID_PEMESANAN") ?>'" ><i class="fa fa-trash" aria-hidden="true"></i></a> -->
                                             </form>
                                         </td>
                                         <td align="center">
