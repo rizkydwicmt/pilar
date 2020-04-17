@@ -50,6 +50,24 @@
 		$this->Transaksi->saveDetailPemesanan();
 	}
 
+	public function print_tagihan($id=''){
+		$pesan = $this->Master->get_table_order_limit_1( 'pemesanan' , 'NO_INVOICE DESC', 1)->result();//ambil data pemesanan terakhir
+		foreach ($pesan as $key) {
+			$invoice = $key->NO_INVOICE;
+		}
+		if ($id!=null) {
+			$invoice = $id;
+		}
+		$wherepem = array(
+				'NO_INVOICE' => $invoice
+			);
+		$data = array(
+	            'pemesanan' => $this->Master->get_tabel( 'pemesanan' , $wherepem),
+	            'detail' => $this->Master->get_orderby_desc( 'detail_pemesanan' , $wherepem)->result(),
+	        );
+		$this->load->view('Admin/TransaksiPrint/nota',$data);
+	}
+
 	public function coba($id){
 		$data = $this->load->view('Admin/cobaprint','',true);
 		$paper = 'A4';

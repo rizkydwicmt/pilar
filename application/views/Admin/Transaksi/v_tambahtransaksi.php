@@ -87,7 +87,7 @@
                             </table>
                             
                             <table><tr>
-                            <td><a class="btn btn-sm btn-circle btn-warning" data-toggle="tooltip" data-title="Tambah Domba" href="javascript:void(0)" onClick="TambahDomba()"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></td>
+                            <td><a class="btn btn-sm btn-circle btn-primary" data-toggle="tooltip" data-title="Tambah Domba" href="javascript:void(0)" onClick="TambahDomba()"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></td>
                             <td style="width:10px;"></td>
                             <td><a id="hapusdomba" class="btn btn-sm btn-circle btn-danger" data-toggle="tooltip" data-title="Hapus Domba" href="javascript:void(0)" onClick="HapusDomba()" style="display: none;"><i class="fa fa-minus-circle" aria-hidden="true"></i></a></td>
                             </tr></table>

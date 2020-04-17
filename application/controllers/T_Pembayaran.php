@@ -35,7 +35,6 @@
 
 	public function Tunai($id){
 		//inisialisasi id(primary key)
-		$idpeg = $_SESSION['id_user'];
 		$id_pembayaran = str_replace('T', 'B', $id).'2';
 
 		//mencari harga bayar
@@ -55,13 +54,13 @@
 			'STATUS_PEMBAYARAN'	=> 'Pelunasan',
 			);
 		$this->Master->save_data('pembayaran' , $data);
+		$this->UpdateStatus($id);
 		$this->session->set_flashdata('konten' , 'Pembayaran berhasil');
 		redirect( base_url('admin/Pembayaran') );
 	}
 
 	public function Transfer($id){
 		//inisialisasi id(primary key)
-		$idpeg = $_SESSION['id_user'];
 		$id_pembayaran = str_replace('T', 'B', $id).'2';
 
 		//mencari harga bayar
@@ -104,8 +103,20 @@
 			'STATUS_PEMBAYARAN'	=> 'Pelunasan',
 			);
 		$this->Master->save_data('pembayaran' , $data);
+		$this->UpdateStatus($id);
 		$this->session->set_flashdata('konten' , 'Pembayaran berhasil');
 		redirect( base_url('admin/Pembayaran') );
+	}
+
+	function UpdateStatus($id){
+		//mencari status_transaksi
+		$status_transaksi = $this->Master->get_tabel('pemesanan',array('ID_PEMESANAN' => $id),'STATUS_TRANSAKSI');
+		//jika domba sudah dikirim dan menunggu pelunasan
+		if($status_transaksi='Menunggu pelunasan'){
+			$where	= array('ID_PEMESANAN' => $id);
+			$data	= array('STATUS_TRANSAKSI' => 'Selesai');
+			$this->Master->update('pemesanan',$where ,'update', $data);
+		}
 	}
 }
  ?>

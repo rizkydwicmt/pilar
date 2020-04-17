@@ -14,7 +14,11 @@
             if($this->input->post('KIRIM')){
                 $status = 'Menunggu pengiriman';
             }else{
-                $status = 'Selesai';
+                if($this->input->post('DP')){
+                    $status = 'Menunggu pelunasan';
+                }else{
+                    $status = 'Selesai';
+                }
             }
     
             //insert data

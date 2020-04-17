@@ -45,8 +45,8 @@
                                     <tr>
                                         <th>Invoice</th>
                                         <th>Nama penerima</th>
-                                        <th>Layanan</th>
                                         <th>Ongkos kirim</th>
+                                        <th>Total berat</th>
                                         <th>Total harga</th>
                                         <th>Status</th>
                                         <th style="text-align:center;">Aksi</th>
@@ -57,26 +57,20 @@
                                     <?php 
                                     $number     =   1;
                                     foreach ($pemesanan as $data) { 
-
-                                        ?>
+                                    ?>
                                     <tr>
-                                        <td><?php echo '#'.$data->NO_INVOICE ?></td>
-                                        <td><?php $number++; echo $data->NAMA_PEN?> </td>
-                                        <td> <?php echo substr($this->Master->get_tabel('jenis_pengiriman',array('ID_JEN' => $data->ID_JEN),'NAMA_JEN').' - '.$data->LAYANAN_PESAN,0,15).'...' ?></td>
-                                        <td> <?php echo $this->Master->rupiah($data->ONGKIR_PESAN) ?></td>
+                                        <td><?php echo '#'.$data->ID_PEMESANAN ?></td>
+                                        <td><?php $number++; echo $data->NAMA_PENERIMA?> </td>
+                                        <td> <?php echo $this->Master->rupiah($data->ONGKOS_KIRIM) ?></td>
+                                        <td> <?php echo $data->TOTAL_BERAT.' Kg' ?></td>
                                         <td>
-                                            <?php echo $this->Master->rupiah($data->TOTAL_HARGA_PESAN); ?>
+                                            <?php echo $this->Master->rupiah($data->TOTAL_HARGA); ?>
                                         </td>
-                                        <td><?php echo substr($this->Master->get_tabel('status',array('ID_STAT' => $data->ID_STAT),'NAMA_STAT'),0,15).'...' ?></td>
+                                        <td><?php echo $data->STATUS_TRANSAKSI ?></td>
                                         <td align="center">
-                                        <?php if ($data->ID_STAT == 'SP4') { ?>
-                                            <a class="btn btn-sm btn-circle btn-success" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("T_Pengiriman/Packing/$data->NO_INVOICE-SP5") ?>'" ><i data-toggle="tooltip" data-title="Packing barang" class="fa fa-chevron-circle-up"></i></a>
-                                        <?php }elseif ($data->ID_STAT == 'SP6'){ ?>
-                                            <a class="btn btn-sm btn-circle btn-success" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("T_Pengiriman/Packing/$data->NO_INVOICE-ST2") ?>'" ><i data-toggle="tooltip" data-title="Pengiriman selesai" class="fa fa-chevron-circle-up"></i></a>
-                                        <?php }elseif ($data->ID_STAT == 'SP5' or $data->STATUS_DP == 2){ ?>
-                                            <a class="btn btn-sm btn-circle btn-primary" data-toggle="modal" href="#data_<?php echo $number ?>" ><i data-toggle="tooltip" data-title="Edit" class="fa fa-pencil"></i></a>
-                                        <?php } ?>
-                                            <a class="btn btn-sm btn-circle btn-info" data-toggle="tooltip" data-title="Detail Transaksi" href="javascript:void(0)" onclick="window.open('<?php echo base_url("admin/DetailTransaksi/".(substr($data->NO_INVOICE,1))) ?>','_blank')"><i class="fa fa-search"></i></a>
+                                            <a class="btn btn-sm btn-circle btn-primary" data-toggle="modal" href="#data_<?php echo $number ?>" ><i data-toggle="tooltip" data-title="Tambah Pengiriman" class="fa fa-plus-circle"></i></a>
+                                            <a class="btn btn-sm btn-circle btn-success" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("T_Pengiriman/Update/$data->ID_PEMESANAN") ?>'" ><i data-toggle="tooltip" data-title="Pengiriman selesai" class="fa fa-chevron-circle-up"></i></a>
+                                            <a class="btn btn-sm btn-circle btn-info" data-toggle="tooltip" data-title="Detail Transaksi" href="javascript:void(0)" onclick="window.open('<?php echo base_url("admin/DetailTransaksi/".(substr($data->ID_PEMESANAN,1))) ?>','_blank')"><i class="fa fa-search"></i></a>
                                         </td>
 <div class="modal fade bs-example-modal-lg" tabindex="-1" id="data_<?php echo $number ?>" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
                 <div class="modal-dialog modal-lg">
@@ -84,19 +78,15 @@
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                             <h4 class="modal-title" id="myLargeModalLabel">Tambah Pengiriman</h4>
-                            <p><?php echo '#'.$data->NO_INVOICE ?></p>
+                            <p><?php echo '#'.$data->ID_PEMESANAN ?></p>
                         </div>
                         <div class="modal-body">
                             
             <!-- Form  -->
           
             <form class="form-horizontal" method="post" action='
-            <?php
-            if($data->STATUS_DP == 2){
-                echo base_url('T_Pengiriman/Save2/').$data->NO_INVOICE; 
-            }else{
-                echo base_url('T_Pengiriman/Save/').$data->NO_INVOICE;
-            }
+            <?php 
+                echo base_url('T_Pengiriman/Save/').$data->ID_PEMESANAN; 
             ?>
             ' id="form1">
 
@@ -108,7 +98,7 @@
                 <div class="form-group">
                     <label class="col-md-12">Tanggal kirim</label>
                     <div class="col-md-12">
-                       <input type="date" name="tglkirim" class="form-control" min="<?php echo date('Y-m-d'); ?>" max="<?php echo date("Y-m-d", strtotime("+ 3 day")); ?>" required> </div>
+                       <input type="date" name="tglkirim" class="form-control" min="<?php echo date('Y-m-d'); ?>" max="<?php echo date("Y-m-d", strtotime("+ 7 day")); ?>" required> </div>
                 </div>
                     <!-- <input type="submit" value="asd" class="btn btn-default"> -->
                             
