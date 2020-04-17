@@ -16,24 +16,20 @@
 	public function index($id='')
 	{	
 		if ($id != null) {
-			$invoice = 'T'.$id;
-			$idbayar = 'B'.$id;
+			$id_pemesanan = 'T'.$id;
+			$id_pembayaran = 'B'.$id;
 			$where_pemesanan = array(
-				'NO_INVOICE' => $invoice
-			);
-			$wherepeng = array(
-				'KODE_BAYAR' => $idbayar
-			);
-			$order 	= 'NO_INVOICE DESC';	
-			$wherepel = array(
-				'ID_CUS' => $this->Master->get_tabel( 'pemesanan' , array('NO_INVOICE' => $invoice), 'ID_CUS')
+				'ID_PEMESANAN' => $id_pemesanan
+			);	
+			$where_pelanggan = array(
+				'ID_PELANGGAN' => $this->Master->get_tabel( 'pemesanan' , array('ID_PEMESANAN' => $id_pemesanan), 'ID_PELANGGAN')
 			);
 			$data = array(
-	            'pemesanan' => $this->Master->get_tabel( 'pemesanan' , $where_pemesanan, $order),
-	            'detail' => $this->Master->get_orderby_desc( 'detail_pemesanan' , $where_pemesanan)->result(),
-	            'pembayaran' => $this->Master->get_orderby_desc( 'pembayaran' , "KODE_BAYAR LIKE '$idbayar%'")->result(),
-	            'pengiriman' => $this->Master->get_tabel( 'pengiriman' , "KODE_BAYAR LIKE '$idbayar%'"),
-	            'pelanggan' => $this->Master->get_tabel( 'customer' , $wherepel),
+	            'pemesanan' => $this->Master->get_tabel( 'pemesanan' , $where_pemesanan),
+	            'detail_pemesanan' => $this->Master->get_orderby_desc( 'detail_pemesanan' , $where_pemesanan)->result(),
+	            'pembayaran' => $this->Master->get_orderby_desc( 'pembayaran' , "ID_PEMBAYARAN LIKE '$id_pembayaran%'")->result(),
+	            'pengiriman' => $this->Master->get_tabel( 'pengiriman' , "ID_PEMBAYARAN LIKE '$id_pembayaran%'"),
+	            'pelanggan' => $this->Master->get_tabel( 'pelanggan' , $where_pelanggan),
 
 	        );
 			$data['konten'] 		= $this->load->view('Admin/Transaksi/v_transaksi-detail',$data,TRUE);
@@ -56,13 +52,13 @@
 	public function print_tagihan($id=''){
 		$pesan = $this->Master->get_table_order_limit_1( 'pemesanan' , 'NO_INVOICE DESC', 1)->result();//ambil data pemesanan terakhir
 		foreach ($pesan as $key) {
-			$invoice = $key->NO_INVOICE;
+			$id_pemesanan = $key->NO_INVOICE;
 		}
 		if ($id!=null) {
-			$invoice = $id;
+			$id_pemesanan = $id;
 		}
 		$wherepem = array(
-				'NO_INVOICE' => $invoice
+				'NO_INVOICE' => $id_pemesanan
 			);
 		$data = array(
 	            'pemesanan' => $this->Master->get_tabel( 'pemesanan' , $wherepem),
@@ -73,13 +69,13 @@
 
 	public function invoice($id)
 	{
-    	$idbayar = 'B'.substr($id,1);
+    	$id_pembayaran = 'B'.substr($id,1);
     	$where = "ID_CUS IN (SELECT a.ID_CUS FROM `customer` a INNER JOIN `pemesanan` b ON a.ID_CUS = b.ID_CUS WHERE NO_INVOICE = '$id')";
     	$data = array(
 			'pembeli' => $this->Master->get_tabel('customer', $where),
         	'penerima' => $this->lihat->lihat_keranjangpesan($id),
         	'pembayaran' => $this->lihat->lihat_pembayaran($id),
-        	'pengiriman' => $this->lihat->lihat_pengiriman($idbayar),
+        	'pengiriman' => $this->lihat->lihat_pengiriman($id_pembayaran),
             'jmlhdetail' => $this->lihat->lihat_detpesinv($id),
 	        );
 		$this->load->view('invoice',$data);

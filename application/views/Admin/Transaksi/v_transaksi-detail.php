@@ -51,34 +51,17 @@
                             <h4 align="center">Data Pemesan</h4>
                             <hr>
                             <div class="form-group">
-                                <label class="col-md-6">Email</label>
-                                <label class="col-md-6">
-                                 <?php echo $pelanggan->EMAIL_CUS ?>
-                                <label></div>
-                            <div class="form-group">
                                 <label class="col-md-6">Nama</label>
                                 <label class="col-md-6"><?php 
-                                    if(isset($pemesanan->NAMA_KTP)){
-                                        echo $pemesanan->NAMA_KTP;
-                                    }else{
-                                        echo $pelanggan->NAMA_CUS;
-                                    } 
+                                        echo $pelanggan->NAMA_PELANGGAN;
                                 ?></label></div>
                             
                             <div class="form-group">
                                 <label class="col-md-6">telepon</label>
                                 <label class="col-md-6">
-                                 <?php echo $pelanggan->TELEPON_CUS ?>
+                                 <?php echo $pelanggan->TELP_PELANGGAN ?>
                                 <label></div>
-                            <?php if (isset($pemesanan->NOMER_KTP)): ?>
-                            <div class="form-group">
-                                <label class="col-md-6">Nomer KTP</label>
-                                <label class="col-md-6">
-                                 <?php echo $pemesanan->NOMER_KTP ?>
-                                <label></div>
-                            <?php endif ?>
 
-                             
                         <div class="clearfix"></div>
                             <hr>
                         <h4 align="center">Data Penerima</h4>
@@ -86,43 +69,27 @@
                             <div class="form-group">
                                 <label class="col-md-6">Nama</label>
                                 <label class="col-md-6">
-                                 <?php echo $pemesanan->NAMA_PEN; ?>
+                                 <?php echo $pemesanan->NAMA_PENERIMA; ?>
                                  <label></div>
 
                             <div class="form-group">
                                 <label class="col-md-6">Alamat</label>
                                 <label class="col-md-6">
-                                <?php echo $pemesanan->ALAMAT_PEN.', '.$this->Master->get_tabel('kota',array('ID_KOTA' => $pemesanan->ID_KOTA),'NAMA_KOTA').', '.$this->Master->get_tabel('provinsi',array('ID_PROV' => $this->Master->get_tabel('kota',array('ID_KOTA' => $pemesanan->ID_KOTA),'ID_PROV')),'NAMA_PROV'); ?>   
+                                <?php echo $pemesanan->ALAMAT_PENERIMA.', '.$this->Master->get_tabel('kota',array('ID_KOTA' => $pemesanan->ID_KOTA),'NAMA_KOTA').', '.$this->Master->get_tabel('provinsi',array('ID_PROV' => $this->Master->get_tabel('kota',array('ID_KOTA' => $pemesanan->ID_KOTA),'ID_PROV')),'NAMA_PROV'); ?>   
                                 </label></div>
-
                             
                             <div class="form-group">
                                 <label class="col-md-6">Telepon</label>
                                 <label class="col-md-6">
-                                <?php echo $pemesanan->TELEPON_PEN; ?>                        
+                                <?php echo $pemesanan->TELP_PENERIMA; ?>                        
                                 </label></div>
 
                             <div class="form-group">
                                 <label class="col-md-6">Kodepos</label>
                                 <label class="col-md-6">
-                                <?php echo $pemesanan->KODEPOS_PEN; ?>
+                                <?php echo $pemesanan->KODEPOS_PENERIMA; ?>
                                 </label></div>
 
-                            <?php if (isset($pemesanan->ID_JEN)): ?>
-                            <div class="form-group">
-                                <label class="col-md-6">Jasa pengiriman</label>
-                                <label class="col-md-6">
-                                <?php echo $this->Master->get_tabel('jenis_pengiriman',array('ID_JEN' => $pemesanan->ID_JEN),'NAMA_JEN'); ?>
-                                </label></div>
-                            <div class="form-group">
-                                <label class="col-md-6">Layanan pesan</label>
-                                <label class="col-md-6">
-                                <?php echo $pemesanan->LAYANAN_PESAN; ?>
-                                </label></div>    
-                            <?php endif ?>
-                            
-
-                             
                         <div class="clearfix"></div>
                         
                 </div>
@@ -134,39 +101,40 @@
                         <div class="form-group">
                             <label class="col-md-6">Tanggal transaksi</label>
                             <label class="col-md-6" style="text-align: right">
-                             <?php echo $pemesanan->TGL_TRANSAKSI ?>
+                             <?php echo $pemesanan->TGL_PESAN ?>
                             <label></div>
 
                         <div class="form-group">
                             <label class="col-md-6">Status</label>
                             <label class="col-md-6"  style="text-align: right">
-                            <?php echo $this->Master->get_tabel('status',array('ID_STAT' => $pemesanan->ID_STAT),'NAMA_STAT') ?>
+                            <?php echo $pemesanan->STATUS_TRANSAKSI ?>
                             <label></div>
                         <div class="clearfix"></div>
 
                             <table class="table table">
                             <thead>
                               <tr>
-                                <th style="text-align: center;">Barang</th>
-                                <th style="text-align: center;">Ukuran</th>
-                                <th style="text-align: center;">Kain</th>
+                                <th style="text-align: center;">Jenis domba</th>
+                                <th style="text-align: center;">Jenis Kelamin</th>
                                 <th style="text-align: center;">Jumlah</th>
+                                <th style="text-align: center;">Berat</th>
                                 <th style="width: 140px; text-align: right;">Subtotal</th>
                               </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($detail as $det) { ?>
+                                <?php foreach ($detail_pemesanan as $det) { ?>
                                 <tr>
                                     <td><?php
-                                    echo $this->Master->get_tabel('barang',array('ID_BAR' => $det->ID_BAR),'NAMA_BAR');
+                                        //cari jenis domba
+                                        $id_jenis = $this->Master->get_tabel('domba',array('ID_DOMBA' => $det->ID_DOMBA),'ID_JENIS');
+                                        $jenis_domba = $this->Master->get_tabel('jenis_domba',array('ID_JENIS' => $id_jenis),'JENIS_DOMBA');
+                                    echo $jenis_domba;//$this->Master->get_tabel('barang',array('ID_BAR' => $det->ID_BAR),'NAMA_BAR');
                                     ?></td>
                                     <td><?php
-                                    echo $this->Master->get_tabel('ukuran',array('ID_UK' => $det->ID_UK),'UKURAN');
-                                    ?></td>
-                                    <td><?php
-                                    echo $this->Master->get_tabel('warna',array('ID_WAR' => $det->ID_WAR),'WARNA');
+                                    echo $this->Master->get_tabel('domba',array('ID_DOMBA' => $det->ID_DOMBA),'JENIS_KELAMIN');
                                     ?></td>
                                     <td style="text-align: center;"><?php echo $det->JUMLAH?></td>
+                                    <td style="text-align: center;"><?php echo $det->BERAT?></td>
                                     <td style="text-align: right;"><?php echo $this->Master->rupiah($det->SUBTOTAL)?></td>
                                 </tr>
                                 <?php } ?>
@@ -181,19 +149,19 @@
                         <div class="form-group">
                             <label class="col-md-6">Subtotal</label>
                             <label class="col-md-6" style="text-align: right">
-                             <?php echo $this->Master->rupiah($pemesanan->TOTAL_HARGA_PESAN-$pemesanan->ONGKIR_PESAN); ?>
+                             <?php echo $this->Master->rupiah($pemesanan->TOTAL_HARGA-$pemesanan->ONGKOS_KIRIM); ?>
                             <label></div>
 
                         <div class="form-group">
                             <label class="col-md-6">Ongkos kirim</label>
                             <label class="col-md-6" style="text-align: right">
-                             <?php echo $this->Master->rupiah($pemesanan->ONGKIR_PESAN); ?>
+                             <?php echo $this->Master->rupiah($pemesanan->ONGKOS_KIRIM); ?>
                             <label></div>
 
                         <div class="form-group">
                             <label class="col-md-6">Total harga</label>
                             <label class="col-md-6" style="text-align: right">
-                            <?php echo $this->Master->rupiah($pemesanan->TOTAL_HARGA_PESAN);
+                            <?php echo $this->Master->rupiah($pemesanan->TOTAL_HARGA);
                              ?>
                             <label></div>  
 
@@ -216,27 +184,29 @@
                         <div class="form-group">
                             <label class="col-md-6">Nama Pegawai PJ</label>
                             <label class="col-md-6">
-                             <?php echo $this->Master->get_tabel('pegawai',array('ID_PEG' => $bayar->ID_PEG),'NAMA_PEG'); ?>
-                            <label></div>
+                             <?php echo $this->Master->get_tabel('pegawai',array('ID_PEGAWAI' => $bayar->ID_PEGAWAI),'NAMA_PEGAWAI'); ?>
+                            </label></div>
 
                         <div class="form-group">
                             <label class="col-md-6">Tanggal bayar</label>
                             <label class="col-md-6">
-                             <?php echo $bayar->TGL_BAYAR ?>
-                            <label></div>
+                             <?php echo $bayar->TGL_PEMBAYARAN ?>
+                            </label></div>
 
                         <div class="form-group">
                             <label class="col-md-6">Harga bayar</label>
                             <label class="col-md-6">
-                             <?php echo $bayar->HARGA_BAYAR ?><br>
-                            <label></div>
-                        <?php if ($bayar->BUKTI_BAYAR): ?>                            
+                             <?php echo $bayar->TOTAL_PEMBAYARAN ?><br>
+                            </label></div>
+                        <?php if ($bayar->BUKTI_TRANSFER): ?>                            
                         <div class="form-group">
                             <label class="col-md-6">Bukti bayar</label>
                             <label class="col-md-6">
-                             <a href="<?php echo base_url('upload/pembayaran/'.$bayar->BUKTI_BAYAR) ?>" target="_blank"><?php echo $bayar->BUKTI_BAYAR ?></a>
-                            <label></div>
+                             <a href="<?php echo base_url('upload/pembayaran/'.$bayar->BUKTI_TRANSFER) ?>" target="_blank"><?php echo $bayar->BUKTI_TRANSFER ?></a>
+                            </label></div>
                         <?php endif ?>
+                        <div> <label> .</label>
+                        </div>
                         <?php } ?>
 
 
@@ -258,7 +228,7 @@
                         <div class="form-group">
                             <label class="col-md-6">Tanggal kirim</label>
                             <label class="col-md-6">
-                            <?php echo $pengiriman->TGL_KIRIM ?>
+                            <?php echo $pengiriman->TGL_PENGIRIMAN ?>
                             <label></div>
 
 
@@ -270,11 +240,8 @@
             <hr>
             <button class="btn btn-primary" onclick="window.location.href='<?php echo base_url('admin/Transaksi')?>'">Kembali</button>
             <button class="btn btn-success" onclick="window.open('<?php 
-            if ($pelanggan->ID_CUS == 'C00001') {
-                echo base_url('admin/Transaksi/print/'.$pemesanan->NO_INVOICE);    
-            }else{
-                echo base_url('admin/Transaksi/print_invoice/'.$pemesanan->NO_INVOICE);
-            } ?>','_blank')">Print</button>
+                echo base_url('admin/Transaksi/print_tagihan/'.$pemesanan->ID_PEMESANAN);
+            ?>','_blank')">Print</button>
         </div>
     </div>
  </div>
