@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 13 Apr 2020 pada 16.25
+-- Waktu pembuatan: 17 Apr 2020 pada 09.59
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -30,7 +30,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `detail_pemesanan` (
   `ID_DOMBA` char(6) NOT NULL,
-  `ID_PEMESANAN` char(12) NOT NULL
+  `ID_PEMESANAN` char(12) NOT NULL,
+  `JUMLAH` int(11) NOT NULL,
+  `BERAT` int(11) NOT NULL,
+  `SUBTOTAL` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -54,7 +57,8 @@ CREATE TABLE `domba` (
 INSERT INTO `domba` (`ID_DOMBA`, `ID_JENIS`, `JENIS_KELAMIN`, `HARGA`, `STATUS_DOMBA`) VALUES
 ('D1B001', 'JN001', 'betina', '12500', 1),
 ('D1J001', 'JN001', 'jantan', '12000', 1),
-('D2J001', 'JN002', 'jantan', '15000', 1);
+('D2J001', 'JN002', 'jantan', '15000', 1),
+('D3B001', 'JN003', 'betina', '34000', 1);
 
 --
 -- Trigger `domba`
@@ -755,8 +759,10 @@ CREATE TABLE `pembayaran` (
   `ID_PEMBAYARAN` char(13) NOT NULL,
   `ID_PEGAWAI` char(5) NOT NULL,
   `ID_PEMESANAN` char(12) NOT NULL,
-  `TGL_PEMBAYARAN` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `TGL_PEMBAYARAN` timestamp NOT NULL DEFAULT current_timestamp(),
+  `JENIS_BAYAR` varchar(50) NOT NULL,
   `TOTAL_PEMBAYARAN` decimal(12,0) NOT NULL,
+  `BUKTI_TRANSFER` varchar(50) NOT NULL,
   `STATUS_PEMBAYARAN` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -768,19 +774,37 @@ CREATE TABLE `pembayaran` (
 
 CREATE TABLE `pemesanan` (
   `ID_PEMESANAN` char(12) NOT NULL,
-  `ID_PELANGGAN` char(5) NOT NULL,
+  `ID_PELANGGAN` char(5) DEFAULT NULL,
   `ID_KOTA` char(5) NOT NULL,
   `ID_PEGAWAI` char(5) NOT NULL,
   `NAMA_PENERIMA` varchar(30) DEFAULT NULL,
+  `TELP_PENERIMA` varchar(13) DEFAULT NULL,
   `ALAMAT_PENERIMA` varchar(30) DEFAULT NULL,
   `KODEPOS_PENERIMA` char(5) DEFAULT NULL,
   `TGL_PESAN` timestamp NOT NULL DEFAULT current_timestamp(),
-  `JENIS_BAYAR` varchar(50) NOT NULL,
+  `SISTEM_BAYAR` varchar(50) NOT NULL,
   `ONGKOS_KIRIM` decimal(12,0) NOT NULL,
   `TOTAL_BERAT` int(5) NOT NULL,
   `TOTAL_HARGA` decimal(12,0) NOT NULL,
   `STATUS_TRANSAKSI` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Trigger `pemesanan`
+--
+DELIMITER $$
+CREATE TRIGGER `idpemesanan` BEFORE INSERT ON `pemesanan` FOR EACH ROW begin
+	declare jumlah integer;
+    declare urut integer;
+    select count(*) into jumlah from pemesanan where
+	SUBSTRING(ID_PEMESANAN, 2, 2)= LPAD(EXTRACT(DAY FROM CURRENT_TIMESTAMP), 2, "0") and
+	SUBSTRING(ID_PEMESANAN, 4, 2)= LPAD(EXTRACT(MONTH FROM CURRENT_TIMESTAMP), 2, "0") and
+	SUBSTRING(ID_PEMESANAN, 6, 2)= SUBSTRING(EXTRACT(YEAR FROM CURRENT_TIMESTAMP), 3, 2);
+    set urut := jumlah +1;
+	set NEW.`ID_PEMESANAN`:= concat('T',(LPAD(EXTRACT(DAY FROM sysdate()), 2, "0")),(LPAD(EXTRACT(MONTH FROM sysdate()), 2, "0")),(SUBSTRING(EXTRACT(YEAR FROM CURRENT_TIMESTAMP), 3, 2)),LPAD(urut,4,'0'));
+end
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -792,8 +816,7 @@ CREATE TABLE `pengiriman` (
   `NO_RESI` char(12) NOT NULL,
   `ID_PEGAWAI` char(5) NOT NULL,
   `ID_PEMBAYARAN` char(13) NOT NULL,
-  `TGL_PENGIRIMAN` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `STATUS_PENGIRIMAN` decimal(1,0) NOT NULL
+  `TGL_PENGIRIMAN` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
