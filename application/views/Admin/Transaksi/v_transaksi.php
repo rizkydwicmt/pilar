@@ -46,6 +46,7 @@
                                         <th>Invoice</th>
                                         <th>Nama pengirim</th>
                                         <th>Pembayaran</th>
+                                        <th>Total berat</th>
                                         <th>Total harga</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
@@ -57,27 +58,20 @@
                                     $number     =   1;
                                     foreach ($pemesanan as $data) { ?>
                                     <tr>
-                                        <td><?php echo '#'.$data->NO_INVOICE ?></td>
+                                        <td><?php echo '#'.$data->ID_PEMESANAN ?></td>
                                         <td><?php $number++;
-                                        if ($data->ID_CUS != 'C00001') {
-                                            echo $this->Master->get_tabel('customer',array('ID_CUS' => $data->ID_CUS),'NAMA_CUS');
-                                        }else{
-                                            if(isset($data->NAMA_KTP)){
-                                                echo $data->NAMA_KTP;
-                                            }else{
-                                                echo "Pelanggan langsung";
-                                            }
-                                        }
+                                            echo $this->Master->get_tabel('pelanggan',array('ID_PELANGGAN' => $data->ID_PELANGGAN),'NAMA_PELANGGAN');
                                         ?> </td>
                                         <td><?php 
-                                            echo $this->Master->get_tabel('pembayaran',array('NO_INVOICE' => $data->NO_INVOICE),'JENIS_BAYAR');
+                                            echo $data->SISTEM_BAYAR;
                                         ?></td>
+                                        <td><?= $data->TOTAL_BERAT. ' Kg'; ?></td>
                                         <td>
-                                            <?php echo $this->Master->rupiah($data->TOTAL_HARGA_PESAN); ?>
+                                            <?php echo $this->Master->rupiah($data->TOTAL_HARGA); ?>
                                         </td>
-                                        <td><?php echo $this->Master->get_tabel('status',array('ID_STAT' => $data->ID_STAT),'NAMA_STAT') ?></td>
+                                        <td><?php echo $data->STATUS_TRANSAKSI ?></td>
                                         <td>    
-                                            <a class="btn btn-sm btn-circle btn-warning" data-toggle="tooltip" data-title="Detail Transaksi" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("admin/DetailTransaksi/".(substr($data->NO_INVOICE,1))) ?>'"><i class="fa fa-search"></i></a>
+                                            <a class="btn btn-sm btn-circle btn-warning" data-toggle="tooltip" data-title="Detail Transaksi" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("admin/DetailTransaksi/".(substr($data->ID_PEMESANAN  ,1))) ?>'"><i class="fa fa-search"></i></a>
                                         </td>
 
                                     <?php } ?>

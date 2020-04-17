@@ -18,7 +18,7 @@
 		if ($id != null) {
 			$invoice = 'T'.$id;
 			$idbayar = 'B'.$id;
-			$wherepem = array(
+			$where_pemesanan = array(
 				'NO_INVOICE' => $invoice
 			);
 			$wherepeng = array(
@@ -29,8 +29,8 @@
 				'ID_CUS' => $this->Master->get_tabel( 'pemesanan' , array('NO_INVOICE' => $invoice), 'ID_CUS')
 			);
 			$data = array(
-	            'pemesanan' => $this->Master->get_tabel( 'pemesanan' , $wherepem, $order),
-	            'detail' => $this->Master->get_orderby_desc( 'detail_pemesanan' , $wherepem)->result(),
+	            'pemesanan' => $this->Master->get_tabel( 'pemesanan' , $where_pemesanan, $order),
+	            'detail' => $this->Master->get_orderby_desc( 'detail_pemesanan' , $where_pemesanan)->result(),
 	            'pembayaran' => $this->Master->get_orderby_desc( 'pembayaran' , "KODE_BAYAR LIKE '$idbayar%'")->result(),
 	            'pengiriman' => $this->Master->get_tabel( 'pengiriman' , "KODE_BAYAR LIKE '$idbayar%'"),
 	            'pelanggan' => $this->Master->get_tabel( 'customer' , $wherepel),
