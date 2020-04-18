@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Apr 2020 pada 09.59
+-- Waktu pembuatan: 18 Apr 2020 pada 14.25
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -760,10 +760,10 @@ CREATE TABLE `pembayaran` (
   `ID_PEGAWAI` char(5) NOT NULL,
   `ID_PEMESANAN` char(12) NOT NULL,
   `TGL_PEMBAYARAN` timestamp NOT NULL DEFAULT current_timestamp(),
-  `JENIS_BAYAR` varchar(50) NOT NULL,
+  `JENIS_BAYAR` varchar(50) NOT NULL COMMENT 'Tunai, Transfer',
   `TOTAL_PEMBAYARAN` decimal(12,0) NOT NULL,
   `BUKTI_TRANSFER` varchar(50) NOT NULL,
-  `STATUS_PEMBAYARAN` varchar(50) NOT NULL
+  `STATUS_PEMBAYARAN` varchar(50) NOT NULL COMMENT 'Mencicil, Pelunasan'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -782,11 +782,11 @@ CREATE TABLE `pemesanan` (
   `ALAMAT_PENERIMA` varchar(30) DEFAULT NULL,
   `KODEPOS_PENERIMA` char(5) DEFAULT NULL,
   `TGL_PESAN` timestamp NOT NULL DEFAULT current_timestamp(),
-  `SISTEM_BAYAR` varchar(50) NOT NULL,
+  `SISTEM_BAYAR` varchar(50) NOT NULL COMMENT 'Cicilan, Kontan',
   `ONGKOS_KIRIM` decimal(12,0) NOT NULL,
   `TOTAL_BERAT` int(5) NOT NULL,
   `TOTAL_HARGA` decimal(12,0) NOT NULL,
-  `STATUS_TRANSAKSI` varchar(50) NOT NULL
+  `STATUS_TRANSAKSI` varchar(50) NOT NULL COMMENT 'Menunggu pengiriman, Sedang dikirim, Menunggu pelunasan, Selesai'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
