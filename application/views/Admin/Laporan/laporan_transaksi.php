@@ -20,9 +20,10 @@
 	<p align="right">tanggal pembuatan : <?php echo date("Y-m-d H:i:s"); ?></p> 	<table>
  		<thead>
  			<tr class="border_bottom">
-	 			<th>invoice</th>
+	 			<th>Invoice</th>
 	 			<th>Tanggal</th>
 	 			<th>Pelanggan</th>
+				<th>Pembayaran</th>
 	 			<th style="text-align: right;">Ongkir</th>
 	 			<th style="text-align: right;">Total</th>
  			</tr>
@@ -34,28 +35,26 @@
  			$total = 0;
  			foreach ($pemesanan as $data) { ?>
 	 			<tr>
-	 				<td><?php echo '#'.$data->NO_INVOICE; ?></td>
-	 				<td><?php echo $data->TGL_TRANSAKSI; ?></td>
+	 				<td><?php echo '#'.$data->ID_PEMESANAN; ?></td>
+	 				<td><?php echo $data->TGL_PESAN; ?></td>
 	 				<td><?php 
-	 					if ($data->ID_CUS != 'C00001') {
-	 						echo $this->Master->get_tabel('customer',array('ID_CUS' => $data->ID_CUS),'NAMA_CUS');
-	 					}else{
-	 						echo "Pelanggan langsung";
-	 					} ?></td>
+	 					echo $this->Master->get_tabel('pelanggan',array('ID_PELANGGAN' => $data->ID_PELANGGAN),'NAMA_PELANGGAN');
+	 				?></td>
+					<td><?= $data->SISTEM_BAYAR ?></td>
 	 				<td style="text-align: right;"><?php 
-	 					$ongkir = $ongkir+$data->ONGKIR_PESAN;
-	 					echo  $this->Master->rupiah($data->ONGKIR_PESAN); 
+	 					$ongkir = $ongkir+$data->ONGKOS_KIRIM;
+	 					echo  $this->Master->rupiah($data->ONGKOS_KIRIM); 
 	 				?></td>
 	 				<td style="text-align: right;">
 	 					<?php 
-                                echo $this->Master->rupiah($data->TOTAL_HARGA_PESAN);
-                                $total = $total+$data->TOTAL_HARGA_PESAN;
+                                echo $this->Master->rupiah($data->TOTAL_HARGA);
+                                $total = $total+$data->TOTAL_HARGA;
                          ?>
 	 				</td>
 	 			</tr>
  			<?php } ?>
  			<tr class="border_top">
- 				<td colspan="3" align="center">TOTAL HARGA</td>
+ 				<td colspan="4" align="center">TOTAL HARGA</td>
  				<td style="text-align: right;"><?php echo $this->Master->rupiah($ongkir) ?></td>
  				<td style="text-align: right;"><?php echo $this->Master->rupiah($total) ?></td>
  			</tr>

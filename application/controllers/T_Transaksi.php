@@ -49,41 +49,16 @@
 		}
 	}
 
-	public function print_tagihan($id=''){
-		$pesan = $this->Master->get_table_order_limit_1( 'pemesanan' , 'NO_INVOICE DESC', 1)->result();//ambil data pemesanan terakhir
-		foreach ($pesan as $key) {
-			$id_pemesanan = $key->NO_INVOICE;
-		}
-		if ($id!=null) {
-			$id_pemesanan = $id;
-		}
-		$wherepem = array(
-				'NO_INVOICE' => $id_pemesanan
+	public function print_nota($id){
+		$where = array(
+				'ID_PEMESANAN' => $id
 			);
 		$data = array(
-	            'pemesanan' => $this->Master->get_tabel( 'pemesanan' , $wherepem),
-	            'detail' => $this->Master->get_orderby_desc( 'detail_pemesanan' , $wherepem)->result(),
+	            'pemesanan' => $this->Master->get_tabel( 'pemesanan' , $where),
+	            'detail' => $this->Master->get_orderby_desc( 'detail_pemesanan' , $where)->result(),
 	        );
 		$this->load->view('Admin/Laporan/nota',$data);
 	}
-
-	public function invoice($id)
-	{
-    	$id_pembayaran = 'B'.substr($id,1);
-    	$where = "ID_CUS IN (SELECT a.ID_CUS FROM `customer` a INNER JOIN `pemesanan` b ON a.ID_CUS = b.ID_CUS WHERE NO_INVOICE = '$id')";
-    	$data = array(
-			'pembeli' => $this->Master->get_tabel('customer', $where),
-        	'penerima' => $this->lihat->lihat_keranjangpesan($id),
-        	'pembayaran' => $this->lihat->lihat_pembayaran($id),
-        	'pengiriman' => $this->lihat->lihat_pengiriman($id_pembayaran),
-            'jmlhdetail' => $this->lihat->lihat_detpesinv($id),
-	        );
-		$this->load->view('invoice',$data);
-	}
-
-	// function asdasd(){
-	// 	return asdasdasdasd;
-	// }
 
 }
  ?>

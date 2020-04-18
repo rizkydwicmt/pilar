@@ -131,9 +131,12 @@
 			$this->db->delete($table);
 		}
 
-		public function get_tabel($nama_table, $where="", $att=""){
+		public function get_tabel($nama_table, $where="", $att="", $order=""){
 			if ($where !=null) {
 				$this->db->where($where);
+			}
+			if ($order != null) {
+				$this->db->order_by($order);
 			}
 			$res = $this->db->get($nama_table)->result();
 			foreach ($res as $row)

@@ -49,31 +49,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-// $route['admin/Supir'] 				=	'Control_Supir';
-// $route['admin/DetailSupir/(:num)'] = 	'Control_Supir/index/$1';
-//front
-$route['default_controller'] = 'P_Home';
-$route['kontak'] = 'P_Kontak';
-$route['login'] = 'P_Login';
-$route['register'] = 'P_Register';
-$route['lostpassword'] = 'P_Password';
-$route['keranjang'] = 'P_Keranjang';
-$route['checkout'] = 'P_Checkout';
-$route['kurir'] = 'P_Kurir';
-$route['profil'] = 'P_Profil';
-$route['pengaturan'] = 'P_Profil/settingprofil';
-$route['ubahpassword'] = 'P_Profil/ubahpassword';
-$route['riwayatbelanja'] = 'P_Profil/riwayatbelanja';
-$route['invoice'] = 'P_Invoice';
-$route['logout'] = 'P_Kontak/logout';
-$route['404_override'] = '';
-
-//back
 
 $route['admin'] = 'Login';
 $route['admin/404_override'] = '';
 $route['admin/translate_uri_dashes'] = FALSE;
-
 
 /*
  * ============ Routes dari Master DATA =============*
@@ -81,8 +60,8 @@ $route['admin/translate_uri_dashes'] = FALSE;
  */
 $route['admin/Beranda']					=	'Admin';
 $route['admin/Pegawai']					=	'Control_Pegawai';
-$route['admin/DetailPegawai/(:num)']		=	'Control_Pegawai/index/$1';
-$route['admin/Pelanggan']					=	'Control_Pelanggan';
+$route['admin/DetailPegawai/(:num)']	=	'Control_Pegawai/index/$1';
+$route['admin/Pelanggan']				=	'Control_Pelanggan';
 $route['admin/DetailPelanggan/(:num)']	=	'Control_Pelanggan/index/$1';
 $route['admin/Domba']					=	'Control_Domba';
 
@@ -91,9 +70,7 @@ $route['admin/Domba']					=	'Control_Domba';
  */
 
 $route['admin/Transaksi'] 					=	'T_Transaksi';
-$route['admin/Transaksi/print'] 			=	'T_Transaksi/print_tagihan';
-$route['admin/Transaksi/print/(:any)']		=	'T_Transaksi/print_tagihan/$1';
-$route['admin/Transaksi/print_invoice/(:any)'] = 'T_Transaksi/invoice/$1';
+$route['admin/Transaksi/print/(:any)']		=	'T_Transaksi/print_nota/$1';
 $route['admin/DetailTransaksi/(:num)']		=	'T_Transaksi/index/$1';
 $route['admin/addTransaksi'] 			=	'T_TambahTransaksi';
 $route['admin/Pembayaran'] 			=	'T_Pembayaran';

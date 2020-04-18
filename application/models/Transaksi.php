@@ -54,7 +54,7 @@
                 $status_pembayaran = "Mencicil";
             }else{
                 $harga_bayar = $this->input->post('total');
-                $status_pembayaran = "Selesai";
+                $status_pembayaran = "Pelunasan";
             }
     
             //jika Transfer untuk insert jenis_pembayaran dan upload bukti

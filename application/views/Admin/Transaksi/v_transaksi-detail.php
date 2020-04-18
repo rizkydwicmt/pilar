@@ -128,10 +128,10 @@
                                         //cari jenis domba
                                         $id_jenis = $this->Master->get_tabel('domba',array('ID_DOMBA' => $det->ID_DOMBA),'ID_JENIS');
                                         $jenis_domba = $this->Master->get_tabel('jenis_domba',array('ID_JENIS' => $id_jenis),'JENIS_DOMBA');
-                                    echo $jenis_domba;//$this->Master->get_tabel('barang',array('ID_BAR' => $det->ID_BAR),'NAMA_BAR');
+                                        echo $jenis_domba;
                                     ?></td>
                                     <td><?php
-                                    echo $this->Master->get_tabel('domba',array('ID_DOMBA' => $det->ID_DOMBA),'JENIS_KELAMIN');
+                                        echo $this->Master->get_tabel('domba',array('ID_DOMBA' => $det->ID_DOMBA),'JENIS_KELAMIN');
                                     ?></td>
                                     <td style="text-align: center;"><?php echo $det->JUMLAH?></td>
                                     <td style="text-align: center;"><?php echo $det->BERAT?></td>
@@ -240,7 +240,7 @@
             <hr>
             <button class="btn btn-primary" onclick="window.location.href='<?php echo base_url('admin/Transaksi')?>'">Kembali</button>
             <button class="btn btn-success" onclick="window.open('<?php 
-                echo base_url('admin/Transaksi/print_tagihan/'.$pemesanan->ID_PEMESANAN);
+                echo base_url('admin/Transaksi/print/'.$pemesanan->ID_PEMESANAN);
             ?>','_blank')">Print</button>
         </div>
     </div>

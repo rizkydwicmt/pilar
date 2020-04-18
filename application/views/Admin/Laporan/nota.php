@@ -73,26 +73,29 @@
         <div class="white-box">
             
             <!-- Nav tabs -->
-            
+            <?php
+                //mencari status pembayaran dan pegawai
+                $pembayaran = $this->Master->get_tabel('pembayaran',array('ID_PEMESANAN' => $pemesanan->ID_PEMESANAN),'', 'ID_PEMBAYARAN DESC');
+                $status_bayar = $pembayaran->STATUS_PEMBAYARAN;
+                $pegawai = $this->Master->get_tabel('pegawai',array('ID_PEGAWAI' => $pembayaran->ID_PEGAWAI),'NAMA_PEGAWAI');
+            ?>
             <!-- Tab panes -->
             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade 
                 fade active in                " id="pemesanan">
-                <h3 align="center">Batik Sekar Jati Star</h3><br>
+                <h3 align="center">PT.PILAR PUTRA</h3>
+                <p align="center">Dsn. Tambang, Kec. Jatirejo<br>Mojokerto</p>
                         <table width="100%">
                             <tr>
-                                <td rowspan="2" style="color: #686868;" align="center">
+                                <td style="color: #686868;">
                                     <p style="font-size: 12px;margin-bottom: unset;"> 
-                                   Pemesanan dan Penjualan Batik<br>
-                                   <br>
-                                   Jalan Jatipelem-Diwek No.37 RT.01 RW.01, Jatipelem<br>
-                                                         Kecamatan Diwek, Kabupaten Jombang<br>
-                                                         0812-3334-1970<br></p>
+                                        <?php echo 'No.Nota: '.$pemesanan->ID_PEMESANAN ?><br>
+                                        <?php echo 'Status Bayar: '.$status_bayar ?><br>
+                                        <?php echo 'Pegawai: '.$pegawai ?>
+                                    </p>
                                 </td>
-                                <td align="right" style="color: #686868;">#<?php echo $pemesanan->NO_INVOICE ?></td>
-                            </tr>
-                            <tr>
-                                <td align="right" valign="bottom" style="color: #686868;"><?php echo $pemesanan->TGL_TRANSAKSI ?></td>
+                                <td align="right" style="color: #686868;"><?php echo $pemesanan->TGL_PESAN ?>
+                                </td>
                             </tr>
                         </table>
 
@@ -101,10 +104,10 @@
                         <table class="table table">
                             <thead>
                               <tr>
-                                <th style="text-align: center;">Barang</th>
-                                <th style="text-align: center;">Ukuran</th>
-                                <th style="text-align: center;">Kain</th>
+                              <th style="text-align: center;">Jenis domba</th>
+                                <th style="text-align: center;">Jenis Kelamin</th>
                                 <th style="text-align: center;">Jumlah</th>
+                                <th style="text-align: center;">Berat</th>
                                 <th style="width: 140px; text-align: right;">Subtotal</th>
                               </tr>
                             </thead>
@@ -112,15 +115,16 @@
                                 <?php foreach ($detail as $det) { ?>
                                 <tr>
                                     <td style="color: #686868;font-size: 14px;"><?php
-                                    echo $this->Master->get_tabel('barang',array('ID_BAR' => $det->ID_BAR),'NAMA_BAR');
+                                        //cari jenis domba
+                                        $id_jenis = $this->Master->get_tabel('domba',array('ID_DOMBA' => $det->ID_DOMBA),'ID_JENIS');
+                                        $jenis_domba = $this->Master->get_tabel('jenis_domba',array('ID_JENIS' => $id_jenis),'JENIS_DOMBA');
+                                        echo $jenis_domba;
                                     ?></td>
                                     <td style="color: #686868;font-size: 14px;"><?php
-                                    echo $this->Master->get_tabel('ukuran',array('ID_UK' => $det->ID_UK),'UKURAN');
+                                        echo $this->Master->get_tabel('domba',array('ID_DOMBA' => $det->ID_DOMBA),'JENIS_KELAMIN');
                                     ?></td>
-                                    <td style="color: #686868;font-size: 14px;"><?php
-                                    echo $this->Master->get_tabel('warna',array('ID_WAR' => $det->ID_WAR),'WARNA');
-                                    ?></td>
-                                    <td style="text-align: center; color: #686868;font-size: 14px;"><?php echo $det->JUMLAH?></td>
+                                    <td style="color: #686868;font-size: 14px;"><?php echo $det->JUMLAH ?></td>
+                                    <td style="text-align: center; color: #686868;font-size: 14px;"><?php echo $det->BERAT ?></td>
                                     <td style="text-align: right; color: #686868;font-size: 14px;"><?php echo $this->Master->rupiah($det->SUBTOTAL)?></td>
                                 </tr>
                                 <?php } ?>
@@ -131,17 +135,17 @@
                         <table width="100%">
                             <tr>
                                 <td style="color: #686868;">Subtotal</td>
-                                <td align="right" style="color: #686868;"><?php echo $this->Master->rupiah($pemesanan->TOTAL_HARGA_PESAN-$pemesanan->ONGKIR_PESAN); ?></td>
+                                <td align="right" style="color: #686868;"><?php echo $this->Master->rupiah($pemesanan->TOTAL_HARGA-$pemesanan->ONGKOS_KIRIM); ?></td>
                             </tr>
                             <tr>
                                 <td style="color: #686868;">Ongkos kirim</td>
-                                <td align="right" style="color: #686868;">      <?php echo $this->Master->rupiah($pemesanan->ONGKIR_PESAN); ?></td>
+                                <td align="right" style="color: #686868;">      <?php echo $this->Master->rupiah($pemesanan->ONGKOS_KIRIM); ?></td>
                             </tr>
                             </tr>
                             <tr>
                                 <td style="color: #686868;">Total harga</td>
                                 <td align="right" style="color: #686868;"><?php 
-                                    echo $this->Master->rupiah($pemesanan->TOTAL_HARGA_PESAN);
+                                    echo $this->Master->rupiah($pemesanan->TOTAL_HARGA);
                              ?></td>
                             </tr>
                         </table>
@@ -290,7 +294,7 @@
 
 </body></html>
 <script type="text/javascript">
- window.print();
- setTimeout(window.close, 0);
+    window.print();
+    setTimeout(window.close, 0);
 
 </script>

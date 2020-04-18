@@ -467,14 +467,16 @@
                         contentType: false,
                         processData: false,
                         //jika ajax sukses
-                        success: function(){                
+                        success: function(data){    
+                            var id = data.replace("\"", "").replace("\"", "");
                             setTimeout(function(){
                                 swal({
                                 title:"Data Berhasil Disimpan",
                                 text: "Terimakasih",
                                 type: "success"
                                 }, function(){
-                                window.location="<?php echo base_url('admin/Pembayaran');?>";
+                                    window.open("<?php echo base_url('admin/Transaksi/print/');?>"+id, '_blank');
+                                    window.location="<?php echo base_url('admin/Transaksi');?>";
                                 });
                             }, 2000);
                         },

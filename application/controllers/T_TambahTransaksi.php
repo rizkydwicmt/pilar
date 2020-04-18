@@ -45,9 +45,12 @@
 	}
 
 	public function Save(){
-		$this->Transaksi->savePemesanan();
-		$this->Transaksi->savePembayaran();
-		$this->Transaksi->saveDetailPemesanan();
+		//$this->Transaksi->savePemesanan();
+		//$this->Transaksi->savePembayaran();
+		//$this->Transaksi->saveDetailPemesanan();
+		$pesan = $this->Master->get_table_order_limit_1( 'pemesanan' , 'TGL_PESAN DESC', 1)->result();
+		$data = $pesan[0]->ID_PEMESANAN;
+		echo json_encode($data);
 	}
 
 	public function print_tagihan($id=''){
