@@ -72,12 +72,13 @@ $route['admin/Domba']					=	'Control_Domba';
 $route['admin/Transaksi'] 					=	'T_Transaksi';
 $route['admin/Transaksi/print/(:any)']		=	'T_Transaksi/print_nota/$1';
 $route['admin/DetailTransaksi/(:num)']		=	'T_Transaksi/index/$1';
-$route['admin/addTransaksi'] 			=	'T_TambahTransaksi';
-$route['admin/Pembayaran'] 			=	'T_Pembayaran';
-$route['admin/Pengiriman'] 			=	'T_Pengiriman';
+$route['admin/addTransaksi'] 			    =	'T_TambahTransaksi';
+$route['admin/Pembayaran'] 			        =	'T_Pembayaran';
+$route['admin/Pengiriman'] 			        =	'T_Pengiriman';
 
 /*
  * ============ Routes dari Laporan ============= *
  */
 $route['admin/LapTransaksi'] 		=	'L_Transaksi';
-$route['admin/403-Forbidden']  		=	 'S_Forbidden';
+$route['admin/LapPengiriman'] 		=	'L_Pengiriman';
+$route['admin/403-Forbidden']  		=	'S_Forbidden';

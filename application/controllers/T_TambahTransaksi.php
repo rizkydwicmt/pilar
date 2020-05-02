@@ -17,7 +17,7 @@
 	{	
 		$order 	= 'NO_INVOICE ASC';		
 		$data = array(
-			'jenisdomba' => $this->Master->get_orderby_desc( 'jenis_domba' ,)->result(),
+			'jenisdomba' => $this->Master->get_orderby_desc( 'jenis_domba')->result(),
 			'pelanggan' => $this->Master->get_orderby_desc( 'pelanggan' , array('STATUS_PELANGGAN' => 1))->result(),
 			'provinsi' => $this->Master->lihat_provinsi(),
 			'kota' => $this->Master->lihat_kota()
@@ -45,9 +45,9 @@
 	}
 
 	public function Save(){
-		//$this->Transaksi->savePemesanan();
-		//$this->Transaksi->savePembayaran();
-		//$this->Transaksi->saveDetailPemesanan();
+		$this->Transaksi->savePemesanan();
+		$this->Transaksi->savePembayaran();
+		$this->Transaksi->saveDetailPemesanan();
 		$pesan = $this->Master->get_table_order_limit_1( 'pemesanan' , 'TGL_PESAN DESC', 1)->result();
 		$data = $pesan[0]->ID_PEMESANAN;
 		echo json_encode($data);

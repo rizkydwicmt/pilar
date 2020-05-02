@@ -295,6 +295,6 @@
 </body></html>
 <script type="text/javascript">
     window.print();
-    setTimeout(window.close, 0);
+    // setTimeout(window.close, 0);
 
 </script>

@@ -14,14 +14,11 @@
 	public function index($id='')
 	{	
 		$order 					= 'ID_PEMESANAN DESC';		
-		$where = array(
-			'STATUS_TRANSAKSI' => 'Menunggu pengiriman',
-			'STATUS_TRANSAKSI' => 'Sedang dikirim'
-	);
+		$where = "STATUS_TRANSAKSI IN ('Menunggu pengiriman','Sedang dikirim')";
 		$data = array(
             'pemesanan' => $this->Master->get_orderby_desc( 'pemesanan' , $where ,$order)->result(),
 
-        );
+		);
         $data['konten'] 		= $this->load->view('Admin/Transaksi/v_pengiriman',$data,True);
 		$this->load->view('Admin/index',$data);
 	}

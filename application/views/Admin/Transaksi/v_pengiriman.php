@@ -10,7 +10,7 @@
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> 
                         <ol class="breadcrumb">
                             <li><a href="<?php echo base_url('Admin') ?>"> Beranda </a></li>
-                            <li class="active">Data Pengiriman</li>
+                            <li class="active">Pengiriman</li>
                         </ol>
                     </div>
                     <!-- /Breadcumbs  -->
@@ -26,19 +26,11 @@
 
 <div class="col-lg-12 col-sm-6 col-xs-12">
     <div class="white-box">
-        <br>
-        <!-- <p class="text-muted m-b-40">Use default tab with class <code>nav-tabs</code></p> -->
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="nav-item" aria-expanded="false"><a href="#bank" class="nav-link active" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"> Data Pengiriman</span></a></li>
-        </ul>
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="bank" aria-expanded="true">
                 <div class="col-sm-12">
                     <div>
-                        <h3 class="box-title m-b-0">Data Transaksi </h3>
-                        <!-- <p class="text-muted m-b-30">Data dapat di Export menjadi Berikut ini:</p> -->
                         <div class="table-responsive">
                             <table id="myTable" class="display nowrap" cellspacing="0" width="100%">
                                 <thead>
@@ -68,8 +60,15 @@
                                         </td>
                                         <td><?php echo $data->STATUS_TRANSAKSI ?></td>
                                         <td align="center">
+                                            <?php
+                                                if($data->STATUS_TRANSAKSI=='Menunggu pengiriman'){
+                                            ?>
                                             <a class="btn btn-sm btn-circle btn-primary" data-toggle="modal" href="#data_<?php echo $number ?>" ><i data-toggle="tooltip" data-title="Tambah Pengiriman" class="fa fa-plus-circle"></i></a>
+                                            <?php
+                                                }else if($data->STATUS_TRANSAKSI=='Sedang dikirim'){
+                                            ?>
                                             <a class="btn btn-sm btn-circle btn-success" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("T_Pengiriman/Update/$data->ID_PEMESANAN") ?>'" ><i data-toggle="tooltip" data-title="Pengiriman selesai" class="fa fa-chevron-circle-up"></i></a>
+                                            <?php } ?>
                                             <a class="btn btn-sm btn-circle btn-info" data-toggle="tooltip" data-title="Detail Transaksi" href="javascript:void(0)" onclick="window.open('<?php echo base_url("admin/DetailTransaksi/".(substr($data->ID_PEMESANAN,1))) ?>','_blank')"><i class="fa fa-search"></i></a>
                                         </td>
 <div class="modal fade bs-example-modal-lg" tabindex="-1" id="data_<?php echo $number ?>" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">

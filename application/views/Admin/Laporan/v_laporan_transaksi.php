@@ -25,13 +25,6 @@
 
 <div class="col-lg-12 col-sm-6 col-xs-12">
                         <div class="white-box">
-                            <br>
-                            <!-- <p class="text-muted m-b-40">Use default tab with class <code>nav-tabs</code></p> -->
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="nav-item" aria-expanded="false"><a href="#bank" class="nav-link active" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"> Laporan Transaksi</span></a></li>
-                                <!-- <li role="presentation" class="nav-item"><a href="#form" class="nav-link" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Input Data Bank</span></a></li> -->
-                            </ul>
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane active" id="bank" aria-expanded="true">

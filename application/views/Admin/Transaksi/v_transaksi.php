@@ -10,7 +10,7 @@
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> 
                         <ol class="breadcrumb">
                             <li><a href="<?php echo base_url('Admin') ?>"> Beranda </a></li>
-                            <li class="active">Data Transaksi</li>
+                            <li class="active">Informasi Transaksi</li>
                         </ol>
                     </div>
                     <!-- /Breadcumbs  -->
@@ -26,19 +26,11 @@
 
 <div class="col-lg-12 col-sm-6 col-xs-12">
     <div class="white-box">
-        <br>
-        <!-- <p class="text-muted m-b-40">Use default tab with class <code>nav-tabs</code></p> -->
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="nav-item" aria-expanded="false"><a href="#bank" class="nav-link active" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"> Data Transaksi</span></a></li>
-        </ul>
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="bank" aria-expanded="true">
                 <div class="col-sm-12">
                     <div>
-                        <h3 class="box-title m-b-0">Data Transaksi </h3>
-                        <!-- <p class="text-muted m-b-30">Data dapat di Export menjadi Berikut ini:</p> -->
                         <div class="table-responsive">
                             <table id="myTable" class="display nowrap" cellspacing="0" width="100%">
                                 <thead>
