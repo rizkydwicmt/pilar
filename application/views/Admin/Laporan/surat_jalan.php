@@ -71,14 +71,10 @@
     <div class="row">
     
         <div class="white-box">
-            
+        <?php foreach ($transaksi as $data) {
+            # code...
+        }?>
             <!-- Nav tabs -->
-            <?php
-                //mencari status pembayaran dan pegawai
-                $pembayaran = $this->Master->get_tabel('pembayaran',array('ID_PEMESANAN' => $pemesanan->ID_PEMESANAN),'', 'ID_PEMBAYARAN DESC');
-                $status_bayar = $pembayaran->STATUS_PEMBAYARAN;
-                $pegawai = $this->Master->get_tabel('pegawai',array('ID_PEGAWAI' => $pembayaran->ID_PEGAWAI),'NAMA_PEGAWAI');
-            ?>
             <!-- Tab panes -->
             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade 
@@ -89,12 +85,14 @@
                             <tr>
                                 <td style="color: #686868;">
                                     <p style="font-size: 12px;margin-bottom: unset;"> 
-                                        <?php echo 'No.Nota: '.$pemesanan->ID_PEMESANAN ?><br>
-                                        <?php echo 'Status Bayar: '.$status_bayar ?><br>
-                                        <?php echo 'Pegawai: '.$pegawai ?>
+                                        <?php echo 'No.Nota: '.$data->ID_PEMESANAN ?><br>
+                                        <?php echo 'Status Bayar: '.$data->STATUS_PEMBAYARAN ?><br>
+                                        <?php echo 'Alamat pengiriman: '.$data->ALAMAT_PENERIMA ?><br>
+                                        <?php echo 'Tgl kirim: '.$data->TGL_PENGIRIMAN ?><br>
+                                        <?php echo 'Pegawai: '.$this->Master->get_tabel('pegawai',array('ID_PEGAWAI' => $data->id_peg),'NAMA_PEGAWAI'); ?>
                                     </p>
                                 </td>
-                                <td align="right" style="color: #686868;"><?php echo $pemesanan->TGL_PESAN ?>
+                                <td align="right" style="color: #686868;"><?php echo $data->TGL_PESAN ?>
                                 </td>
                             </tr>
                         </table>
@@ -135,17 +133,17 @@
                         <table width="100%">
                             <tr>
                                 <td style="color: #686868;">Subtotal</td>
-                                <td align="right" style="color: #686868;"><?php echo $this->Master->rupiah($pemesanan->TOTAL_HARGA-$pemesanan->ONGKOS_KIRIM); ?></td>
+                                <td align="right" style="color: #686868;"><?php echo $this->Master->rupiah($data->TOTAL_HARGA-$data->ONGKOS_KIRIM); ?></td>
                             </tr>
                             <tr>
                                 <td style="color: #686868;">Ongkos kirim</td>
-                                <td align="right" style="color: #686868;">      <?php echo $this->Master->rupiah($pemesanan->ONGKOS_KIRIM); ?></td>
+                                <td align="right" style="color: #686868;">      <?php echo $this->Master->rupiah($data->ONGKOS_KIRIM); ?></td>
                             </tr>
                             </tr>
                             <tr>
                                 <td style="color: #686868;">Total harga</td>
                                 <td align="right" style="color: #686868;"><?php 
-                                    echo $this->Master->rupiah($pemesanan->TOTAL_HARGA);
+                                    echo $this->Master->rupiah($data->TOTAL_HARGA);
                              ?></td>
                             </tr>
                         </table>
@@ -155,11 +153,11 @@
                         <table width="100%">
                             <tr>
                                 <td style="color: #686868;">Telah Bayar</td>
-                                <td align="right" style="color: #686868;"><?php echo $this->Master->rupiah($pembayaran->TOTAL_PEMBAYARAN) ?></td>
+                                <td align="right" style="color: #686868;"><?php echo $this->Master->rupiah($data->TOTAL_PEMBAYARAN) ?></td>
                             </tr>
                             <tr>
                                 <td style="color: #686868;">Kurang</td>
-                                <td align="right" style="color: #686868;">      <?php echo $this->Master->rupiah($pemesanan->TOTAL_HARGA-$pembayaran->TOTAL_PEMBAYARAN); ?></td>
+                                <td align="right" style="color: #686868;">      <?php echo $this->Master->rupiah($data->TOTAL_HARGA-$data->TOTAL_PEMBAYARAN); ?></td>
                             </tr>
                             </tr>
                         </table>
@@ -179,7 +177,7 @@
                 
                             </div>
             <hr>
-            
+        <?}?>
     </div>
  </div>                                            
 
@@ -196,6 +194,6 @@
 </body></html>
 <script type="text/javascript">
     window.print();
-    // setTimeout(window.close, 0);
+    //location.replace("<?= //base_url('admin/Pengiriman')?>");
 
 </script>

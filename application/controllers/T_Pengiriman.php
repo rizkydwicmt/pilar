@@ -56,7 +56,7 @@
 		$this->Master->save_data('pengiriman' , $data);
 		$this->Master->update('pemesanan', $where ,'update', $data_pemesanan);
 		$this->session->set_flashdata('konten' , 'Data Pengiriman Berhasil di Tambahkan');
-		redirect( base_url('admin/Pengiriman') );
+		redirect( base_url('T_Pengiriman/print_suratjalan/'.$id) );
 	}
 	
 	public function Update($id){
@@ -85,5 +85,20 @@
 		$this->session->set_flashdata('konten' , 'Berhasil mengupdate status');
 		redirect( base_url('admin/Pengiriman') );
 	}
+
+	public function print_suratjalan($id){
+		$query_transaksi = "select *, pen.ID_PEGAWAI as id_peg from pemesanan p join pembayaran pe on p.ID_PEMESANAN = pe.ID_PEMESANAN join pengiriman pen on pe.ID_PEMBAYARAN = pen.ID_PEMBAYARAN where p.ID_PEMESANAN = '$id'";
+
+		$where_detail = array(
+			'ID_PEMESANAN' => $id
+		);
+		$data = array(
+				'transaksi' => $this->db->query($query_transaksi)->result(),
+				'detail' => $this->Master->get_orderby_desc( 'detail_pemesanan' , $where_detail)->result(),
+			);
+		//print_r($data);die();
+		$this->load->view('Admin/Laporan/surat_jalan',$data);
+	}
+
 }
  ?>
