@@ -46,7 +46,7 @@
                             <table id="example23" class="display nowrap" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Foto Jenis Domba</th>
+                                        <th>Foto Domba</th>
                                         <th>Jenis</th>
                                     	<th>ID Domba</th>
                                         <th>Jenis Kelamin</th>
@@ -61,7 +61,7 @@
                                     foreach ($domba as $data) { ?>
                                     <tr>
                                         <td>
-                                            <img src="<?php echo base_url('assets/img/product-img/').$this->Master->get_tabel('jenis_domba',array('ID_JENIS' => $data->ID_JENIS),'FOTO');
+                                            <img src="<?php echo base_url('assets/img/product-img/').$data->FOTO;
                                              ?>" class="img-responsive" alt="" style="width: 100px; height: 100px;">
                                         </td>
                                         <td>
@@ -98,6 +98,11 @@
                 <div class="form-group">
                     <label>Harga</label>
                     <input type="number" name="hardom" class="form-control" min="1" value="<?php echo($data->HARGA) ?>" required>
+                </div>
+                <div class="form-group">
+                    <label>Foto</label>
+                    <input type="file" name="userfile" size="20" style="font-size: 11px;"> 
+                    <input type="hidden" name="nama_foto" value="<?= $data->FOTO; ?>" />
                 </div>
 					<!-- <input type="submit" value="asd" class="btn btn-default"> -->
 							
@@ -167,6 +172,11 @@
                                     <input type="text" name="harbar" class="form-control" min="1" required>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Foto</label>
+                                <div class="col-md-12">
+                                   <input type="file" name="userfile" size="20" style="font-size: 11px;" required> </div>
+                            </div>
 
                            
 
@@ -195,11 +205,6 @@
                                 <div class="col-md-12">
                                     <input type="text" name="jenis" class="form-control" required>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-12">Foto</label>
-                                <div class="col-md-12">
-                                   <input type="file" name="userfile" size="20" style="font-size: 11px;" required> </div>
                             </div>
 
                            

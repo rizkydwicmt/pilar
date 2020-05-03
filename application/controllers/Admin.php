@@ -28,31 +28,34 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
+		$where_status_menunggu = array('STATUS_TRANSAKSI' => 'Menunggu pelunasan');
+		$where_status_dikirim = array('STATUS_TRANSAKSI' => 'Sedang dikirim');
+		$where_status_sukses = array('STATUS_TRANSAKSI' => 'Selesai');
 		$isi = array(
-			'total' => 0,
-			'menunggu' => 0,
-			'sukses' => 0,
-			'gagal' => 0,
+			'total' => $this->Master->get_tabelcount('pemesanan'),
+			'menunggu' => $this->Master->get_tabelcount('pemesanan', $where_status_menunggu),
+			'dikirim' => $this->Master->get_tabelcount('pemesanan', $where_status_dikirim),
+			'sukses' => $this->Master->get_tabelcount('pemesanan', $where_status_sukses),
 		);
 		$data['konten'] = $this->load->view('Admin/v_beranda',$isi,True);
 		$this->load->view('Admin/index',$data);
 	}
 
-	public function update(){
-		header('Content-Type: text/event-stream');
-		header('Cache-Control: no-cache');
-		header("Connection: keep-alive");
+	// public function update(){
+	// 	header('Content-Type: text/event-stream');
+	// 	header('Cache-Control: no-cache');
+	// 	header("Connection: keep-alive");
 
-		$isi = array(
-			'total' => 0,
-			'menunggu' => 0,
-			'sukses' => 0,
-			'gagal' => 0,
-		);
+	// 	$isi = array(
+	// 		'total' => 0,
+	// 		'menunggu' => 0,
+	// 		'sukses' => 0,
+	// 		'gagal' => 0,
+	// 	);
 
-		$str = json_encode($isi);
-		echo "data: {$str}\n\n";
-		flush();
-	}
+	// 	$str = json_encode($isi);
+	// 	echo "data: {$str}\n\n";
+	// 	flush();
+	// }
 
 }

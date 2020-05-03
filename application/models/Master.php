@@ -98,10 +98,6 @@
 			return $this->db->get($table , $limit);
 		}
 
-		public function get_cabang($where){
-			return $this->db->get_where('tb_cabang',$where);
-		}
-
 		public function insert_foto($filename,$tujuan,$postname){
 			$config['upload_path']          = $tujuan;
 			$config['allowed_types']        = 'jpg|png';

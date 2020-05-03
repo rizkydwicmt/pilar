@@ -23,7 +23,10 @@
 		$this->load->view('Admin/index',$data);
 	}
 
-	public function Save($id){
+	public function Save(){
+		//inisialisasi id_pemesanan
+		$id=$this->input->post('id_pemesanan');
+
 		//cari id_pembayaran
 		$query_transaksi = "SELECT p.SISTEM_BAYAR, count(pe.ID_PEMBAYARAN) as jumlah_pembayaran FROM pemesanan p join pembayaran pe
 		on p.ID_PEMESANAN=pe.ID_PEMESANAN
@@ -55,8 +58,8 @@
 		//proses input atau update kedalam database
 		$this->Master->save_data('pengiriman' , $data);
 		$this->Master->update('pemesanan', $where ,'update', $data_pemesanan);
-		$this->session->set_flashdata('konten' , 'Data Pengiriman Berhasil di Tambahkan');
-		redirect( base_url('T_Pengiriman/print_suratjalan/'.$id) );
+
+		echo json_encode($id);
 	}
 	
 	public function Update($id){

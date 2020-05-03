@@ -27,37 +27,37 @@
 	}
 
 	public function Save(){		
-		$data 	=	array(
-			/* Nama Field    => Isi Data $_Post */
-			'ID_JENIS'			=> $_POST['jd'],
-			'JENIS_KELAMIN'		=> $_POST['jk'],
-			'HARGA'				=> $_POST['harbar'],
-			'STATUS_DOMBA'		=> '1'
-			);
-
-		$this->Master->save_data('domba' , $data);
-		$this->session->set_flashdata('konten' , 'Data Berhasil di Tambahkan');
-		redirect( base_url('admin/Domba') );
-	}
-
-	public function SaveJenis(){	
 		$filename = $_FILES['userfile']['name'];
 		$format =  pathinfo($filename, PATHINFO_EXTENSION);
 		$namafoto =  rand(1,9999).date("dm").'.'.$format;
 		$tujuan = './assets/img/product-img/';
 		$foto = $this->Master->insert_foto($namafoto,$tujuan,'userfile');
-		if($foto == 'berhasil'){	
+		if($foto == 'berhasil'){
 			$data 	=	array(
 				/* Nama Field    => Isi Data $_Post */
-				'JENIS_DOMBA'		=> $_POST['jenis'],
+				'ID_JENIS'			=> $_POST['jd'],
+				'JENIS_KELAMIN'		=> $_POST['jk'],
+				'HARGA'				=> $_POST['harbar'],
 				'FOTO'				=> $namafoto,
+				'STATUS_DOMBA'		=> '1'
 				);
 
-		$this->Master->save_data('jenis_domba' , $data);
-		$this->session->set_flashdata('konten' , 'Data Berhasil di Tambahkan');
+			$this->Master->save_data('domba' , $data);
+			$this->session->set_flashdata('konten' , 'Data Berhasil di Tambahkan');
 		}else{
 			$this->session->set_flashdata('konten_err' , 'Format file anda salah atau lebih dari 2 mb');
 		}
+		redirect( base_url('admin/Domba') );
+	}
+
+	public function SaveJenis(){	
+		$data 	=	array(
+			/* Nama Field    => Isi Data $_Post */
+			'JENIS_DOMBA'		=> $_POST['jenis'],
+			);
+
+		$this->Master->save_data('jenis_domba' , $data);
+		$this->session->set_flashdata('konten' , 'Data Berhasil di Tambahkan');
 		redirect( base_url('admin/Domba') );
 	}
 
@@ -80,18 +80,20 @@
 	}
 
 	public function Update($iddomba){
+
+		//input data
 		$where 	= 	array('ID_DOMBA' => $iddomba);
 		$data 	=	array(
 			/* Nama Field    => Isi Data $_Post */
-			'BERAT'			=> $_POST['berdom'],
 			'HARGA'			=> $_POST['hardom'],
 			'STATUS_DOMBA'	=> '1'
 			);		
 		
+		//jika foto diganti maka input foto baru
 		if($_FILES['userfile']['name']){
 			$filename = $_FILES['userfile']['name'];
 			$format =  pathinfo($filename, PATHINFO_EXTENSION);
-			$namafoto =  $_POST['namafile'];
+			$namafoto =  $_POST['nama_foto'];
 			$tujuan = './assets/img/product-img/';
 			$foto = $this->Master->insert_foto($namafoto,$tujuan,'userfile');
 			if($foto == 'berhasil'){
@@ -101,6 +103,7 @@
 			}
 		}
 
+		//insert data
 		$this->Master->update('domba',$where ,'update' , $data);
 		$this->session->set_flashdata('konten' , 'Data Berhasil di Rubah');	
 		redirect( base_url('admin/Domba') );

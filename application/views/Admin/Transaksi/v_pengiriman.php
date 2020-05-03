@@ -83,12 +83,8 @@
                             
             <!-- Form  -->
           
-            <form class="form-horizontal" method="post" action='
-            <?php 
-                echo base_url('T_Pengiriman/Save/').$data->ID_PEMESANAN; 
-            ?>
-            ' id="form1">
-
+            <!-- <form class="form-horizontal"> -->
+            <form class="form-horizontal">
                 <div class="form-group">
                     <label class="col-md-12">Nomer resi</label>
                     <div class="col-md-12">
@@ -98,6 +94,7 @@
                     <label class="col-md-12">Tanggal kirim</label>
                     <div class="col-md-12">
                        <input type="date" name="tglkirim" class="form-control" min="<?php echo date('Y-m-d'); ?>" max="<?php echo date("Y-m-d", strtotime("+ 7 day")); ?>" required> </div>
+                       <input type="hidden" name="id_pemesanan" value="<?= $data->ID_PEMESANAN; ?>" />
                 </div>
                     <!-- <input type="submit" value="asd" class="btn btn-default"> -->
                             
@@ -142,4 +139,70 @@
 
                     </div>
                     <script src="<?php echo base_url('asset/js/jquery.chained.min.js') ?>"></script>
+
+
      
+<script type="text/javascript">
+$( "form" ).on( "submit", function( e ) {
+    e.preventDefault();
+    var valid=true;
+    //generalisasi form agar data file bisa masuk
+    var form = $(this)[0];
+    //mengambil semua data di dalam form
+    var formData = new FormData(form);
+    //mengambil semua data di dalam form
+    //fitur swal
+    $(this).find('.textbox').each(function(){
+        if (! $(this).val()){
+            get_error_text(this);
+            valid = false;
+            $('html,body').animate({scrollTop: 0},"slow");
+        } 
+        if ($(this).hasClass('no-valid')){
+            valid = false;
+            $('html,body').animate({scrollTop: 0},"slow");
+        }
+    });
+    if (valid){
+        swal({
+            title: "Konfirmasi Simpan Data",
+            text: "Data Akan di Simpan Ke Database",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#1da1f2",
+            confirmButtonText: "Yakin, dong!",
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+        }, function () { //apabila sweet alert d confirm maka akan mengirim data ke T_TambahTransaksi/Save/ melalui proses ajax
+            $.ajax({
+                url: "<?php echo base_url('T_Pengiriman/Save');?>",
+                type: "POST",
+                data: formData,
+                dataType: "html",
+                contentType: false,
+                processData: false,
+                //jika ajax sukses
+                success: function(id){
+                    var id_pemesanan = id.replace("\"", "").replace("\"", "");
+                    setTimeout(function(){
+                        swal({
+                        title:"Data Berhasil Disimpan",
+                        text: "Terimakasih",
+                        type: "success"
+                        }, function(){
+                            window.open("<?php echo base_url('T_Pengiriman/print_suratjalan/');?>"+id_pemesanan, '_blank');
+                            window.location="<?php echo base_url('admin/Pengiriman');?>";
+                        });
+                    }, 2000);
+                },
+                //jika ajax gagal
+                error: function (xhr, ajaxOptions, thrownError) {
+                    setTimeout(function(){
+                        swal("Error", "Nomer resi telah dipakai untuk pengiriman lain, Silahkan ganti nomer resi", "error");
+                    }, 2000);
+                }
+            });
+        });
+    }
+});
+</script>

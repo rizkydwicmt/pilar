@@ -194,6 +194,6 @@
 </body></html>
 <script type="text/javascript">
     window.print();
-    //location.replace("<?= //base_url('admin/Pengiriman')?>");
+    //location.replace("");
 
 </script>

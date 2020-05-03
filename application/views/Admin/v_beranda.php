@@ -26,25 +26,25 @@
                                     <div class="col-sm-3">
                                         <a href="<?= base_url('admin/Transaksi') ?>"><i class="ti-shopping-cart" style="background: blue;"></i></a>
                                         <div class="bodystate">
-                                            <h4 id="total"><?php echo $total; ?></h4> <span class="text-muted">Total Transaksi</span> 
+                                            <h4><?php echo $total; ?></h4> <span class="text-muted">Total Transaksi</span> 
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
-                                        <a href="<?= base_url('admin/Pembayaran') ?>"><i class="ti-shopping-cart" style="background: orange;"></i></a>
+                                        <a href="<?= base_url('admin/Pembayaran') ?>"><i class="ti-shopping-cart" style="background: red;"></i></a>
                                         <div class="bodystate">
-                                            <h4 id="menunggu"><?php echo $menunggu; ?></h4> <span class="text-muted">Menunggu konfirmasi</span> 
+                                            <h4><?php echo $sukses; ?></h4> <span class="text-muted">Menunggu pelunasan</span> 
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <a href="<?= base_url('admin/Pengiriman') ?>"><i class="ti-shopping-cart" style="background: orange;"></i></a>
+                                        <div class="bodystate">
+                                            <h4><?php echo $dikirim; ?></h4> <span class="text-muted">Sedang dikirim</span> 
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <a href="<?= base_url('admin/Transaksi') ?>"><i class="ti-shopping-cart" style="background: green;"></i></a>
                                         <div class="bodystate">
-                                            <h4 id="sukses"><?php echo $sukses; ?></h4> <span class="text-muted">Transaksi Sukses</span> 
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <a href="<?= base_url('admin/Transaksi') ?>"><i class="ti-shopping-cart" style="background: red;"></i></a>
-                                        <div class="bodystate">
-                                            <h4 id="gagal"><?php echo $gagal; ?></h4> <span class="text-muted">Pelanggan Gagal</span> 
+                                            <h4><?php echo $sukses; ?></h4> <span class="text-muted">Transaksi Sukses</span> 
                                         </div>
                                     </div>    
                                 </div>
@@ -57,14 +57,14 @@
 
 <script src="assets/js/jquery/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
-    if(typeof(EventSource) !== "undefined") {
-      var source = new EventSource("<?php echo base_url('SSE/updateAdminDashboard/'); ?>");
-      source.onmessage = function(event) {
-        var obj = JSON.parse(event.data);
-        $('#total').html(obj.total);
-        $('#menunggu').html(obj.menunggu);
-        $('#sukses').html(obj.sukses);
-        $('#gagal').html(obj.gagal);
-      };
-    }
+    // if(typeof(EventSource) !== "undefined") {
+    //   var source = new EventSource("<?php //echo base_url('SSE/updateAdminDashboard/'); ?>");
+    //   source.onmessage = function(event) {
+    //     var obj = JSON.parse(event.data);
+    //     $('#total').html(obj.total);
+    //     $('#menunggu').html(obj.menunggu);
+    //     $('#sukses').html(obj.sukses);
+    //     $('#gagal').html(obj.gagal);
+    //   };
+    // }
 </script>
