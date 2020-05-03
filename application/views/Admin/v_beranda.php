@@ -30,13 +30,25 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
-                                        <a href="<?= base_url('admin/Pembayaran') ?>"><i class="ti-shopping-cart" style="background: red;"></i></a>
+                                        <a href="
+                                        <?php 
+                                            if($_SESSION['id_role'] =='JB002'){ 
+                                                echo base_url('admin/Pembayaran');
+                                            } 
+                                        ?>
+                                        "><i class="ti-shopping-cart" style="background: red;"></i></a>
                                         <div class="bodystate">
                                             <h4><?php echo $sukses; ?></h4> <span class="text-muted">Menunggu pelunasan</span> 
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
-                                        <a href="<?= base_url('admin/Pengiriman') ?>"><i class="ti-shopping-cart" style="background: orange;"></i></a>
+                                        <a href="
+                                        <?php 
+                                            if($_SESSION['id_role'] =='JB002'){ 
+                                                echo base_url('admin/Pengiriman');
+                                            } 
+                                        ?>
+                                        "><i class="ti-shopping-cart" style="background: orange;"></i></a>
                                         <div class="bodystate">
                                             <h4><?php echo $dikirim; ?></h4> <span class="text-muted">Sedang dikirim</span> 
                                         </div>
