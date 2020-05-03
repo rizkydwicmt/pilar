@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Apr 2020 pada 14.25
+-- Waktu pembuatan: 03 Bulan Mei 2020 pada 10.15
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -47,6 +47,7 @@ CREATE TABLE `domba` (
   `ID_JENIS` char(5) NOT NULL,
   `JENIS_KELAMIN` varchar(6) NOT NULL,
   `HARGA` decimal(12,0) NOT NULL,
+  `FOTO` varchar(13) NOT NULL,
   `STATUS_DOMBA` int(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -54,11 +55,13 @@ CREATE TABLE `domba` (
 -- Dumping data untuk tabel `domba`
 --
 
-INSERT INTO `domba` (`ID_DOMBA`, `ID_JENIS`, `JENIS_KELAMIN`, `HARGA`, `STATUS_DOMBA`) VALUES
-('D1B001', 'JN001', 'betina', '12500', 1),
-('D1J001', 'JN001', 'jantan', '12000', 1),
-('D2J001', 'JN002', 'jantan', '15000', 1),
-('D3B001', 'JN003', 'betina', '34000', 1);
+INSERT INTO `domba` (`ID_DOMBA`, `ID_JENIS`, `JENIS_KELAMIN`, `HARGA`, `FOTO`, `STATUS_DOMBA`) VALUES
+('D1B001', 'JN001', 'betina', '13000', '46440305.jpg', 1),
+('D1J001', 'JN001', 'jantan', '12000', '16770305.jpg', 1),
+('D2B001', 'JN002', 'betina', '22000', '28990305.jpg', 1),
+('D2J001', 'JN002', 'jantan', '21000', '35050305.jpg', 1),
+('D3B001', 'JN003', 'betina', '35000', '17160305.jpg', 1),
+('D3J001', 'JN003', 'jantan', '31000', '3410305.jpg', 1);
 
 --
 -- Trigger `domba`
@@ -121,18 +124,17 @@ DELIMITER ;
 
 CREATE TABLE `jenis_domba` (
   `ID_JENIS` char(5) NOT NULL,
-  `JENIS_DOMBA` varchar(20) NOT NULL,
-  `FOTO` varchar(12) NOT NULL
+  `JENIS_DOMBA` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `jenis_domba`
 --
 
-INSERT INTO `jenis_domba` (`ID_JENIS`, `JENIS_DOMBA`, `FOTO`) VALUES
-('JN001', 'Domba Ekor Gemuk', '72443003.jpg'),
-('JN002', 'Domba Ekor Kecil', '42643003.jpg'),
-('JN003', 'Domba Marino', '81973003.jpg');
+INSERT INTO `jenis_domba` (`ID_JENIS`, `JENIS_DOMBA`) VALUES
+('JN001', 'Domba Ekor Gemuk'),
+('JN002', 'Domba Ekor Kecil'),
+('JN003', 'Domba Marino');
 
 --
 -- Trigger `jenis_domba`
@@ -692,7 +694,7 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`ID_PEGAWAI`, `ID_JABATAN`, `ID_KOTA`, `NAMA_PEGAWAI`, `ALAMAT_PEGAWAI`, `KODEPOS_PEGAWAI`, `TELP_PEGAWAI`, `EMAIL_PEGAWAI`, `USERNAME`, `PASSWORD`, `STATUS_PEGAWAI`) VALUES
-('P0001', 'JB001', '444', 'owner satu', 'jl. kalikepiting', '51225', '08546231821', 'owner@owner.com', 'owner', 'de06d20060c639c59c42737ddf002535', 1),
+('P0001', 'JB001', '444', 'owner satu', 'jl. kalikepiting', '51225', '08546231821', 'owner@owner.com', 'owner', '72122ce96bfec66e2396d2e25225d70a', 1),
 ('P0002', 'JB002', '444', 'staf satu', 'jl.simolowaru', '51225', '081325486480', 'staf@staf.com', 'staf', '7b8a17c3f48d4453fde0fd74b4fa9212', 1),
 ('P0003', 'JB002', '17', 'MR RYAN ACUNA', 'alamatnya pegawai satu', '45345', '085732753245', 'c.donewar.2004@gmail.com', 'fiereseshi', '8ef8dcb30c52f4a5097a26c06197a0ae', 1);
 
