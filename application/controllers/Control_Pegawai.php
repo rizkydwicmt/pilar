@@ -30,16 +30,28 @@
 			$data['konten'] 		= $this->load->view('Admin/Master/v_pegawai-detail',$data,TRUE);
 			$this->load->view('Admin/index',$data);
 		} else { 
-			$order 					= 'ID_PEGAWAI ASC';		
+
+			//inisialisasi query
+			$order 	= 'ID_PEGAWAI ASC';	
+
+			//jika owner maka bisa lihat pegawai lain, jika staff maka hanya bisa lihat dirinya sendiri
+			if($_SESSION['id_role'] == 'JB001'){
+				$query_pegawai = $this->Master->get_orderby_desc( 'pegawai' , array('STATUS_PEGAWAI' => '1') ,$order)->result();
+			}else{
+				$query_pegawai = $this->Master->get_orderby_desc( 'pegawai' , array('ID_PEGAWAI' =>  $_SESSION['id_user']) ,$order)->result();
+			}
+			
+			//input data
 			$data = array(
-	            'pegawai' => $this->Master->get_orderby_desc( 'pegawai' , array('STATUS_PEGAWAI' => '1') ,$order)->result(),
+	            'pegawai' => $query_pegawai,
 	            'jabatan' => $this->Master->get_orderby_desc('jabatan', "ID_JABATAN != 'JB001'")->result(),
 	            'provinsi' => $this->Master->lihat_provinsi(),
 	            'kota' => $this->Master->lihat_kota(),
 	            'provinsi_selected' => '',
 	            'kota_selected' => '',
 
-	        );
+			);
+			
 	        $data['konten'] 		= $this->load->view('Admin/Master/v_pegawai',$data,True);
 			$this->load->view('Admin/index',$data);
 		}

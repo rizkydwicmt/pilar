@@ -22,7 +22,7 @@
                     </li>
                     
                     <li> 
-                        <?php //if($_SESSION['id_role'] =='JB001' or $_SESSION['id_role'] =='JB002'){ ?>
+                        <?php if($_SESSION['id_role'] =='JB001' or $_SESSION['id_role'] =='JB002'){ ?>
                         <a href="javascript:void(0);" class="waves-effect"><i class="ti-calendar p-r-10"></i> <span class="hide-menu"> Master Data <span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level collapse">
                             <?php //if($_SESSION['id_role'] =='JB001'){ ?>
@@ -31,7 +31,7 @@
                             <?php //}?>
                             <li> <a href="<?= base_url('admin/Domba') ?>"><i class="fa fa-suitcase" aria-hidden="true"></i> Data Domba </a></li>
                         </ul>
-                        <?php //}?></li>
+                        <?php }?></li>
                     </li>
                     
                     
@@ -40,17 +40,15 @@
                     <li> <a href="javascript:void(0);" class="waves-effect"><i class="ti-shopping-cart p-r-10"></i> <span class="hide-menu">Transaksi<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li><a href="<?= base_url('admin/Transaksi') ?>"><i class="fa fa-tags"></i> Informasi Transaksi </a></li>
-                            <?php //if($_SESSION['id_role'] =='JB002'){ ?>
+                            <?php if($_SESSION['id_role'] =='JB002'){ ?>
                             <li><a href="<?= base_url('admin/addTransaksi') ?>"><i class="fa fa-tags"></i> Tambah Transaksi </a></li>
                             <li><a href="<?= base_url('admin/Pembayaran')?>"><i class="fa fa-tags"></i> Pembayaran </a></li>
-                            <?php //}?>
-                            <?php //if($_SESSION['id_role'] =='JB002'){ ?>
                             <li><a href="<?= base_url('admin/Pengiriman') ?>"><i class="fa fa-tags"></i> Pengiriman </a></li>
-                            <?php //}?>
+                            <?php }?>
                             
                        </ul>
                     </li>
-                    <?php //if($_SESSION['id_role'] =='JB001'){ ?>
+                    <?php if($_SESSION['id_role'] =='JB001'){ ?>
                     <li> <a href="javascript:void(0);" class="waves-effect"><i class="ti-pencil-alt p-r-10"></i> <span class="hide-menu">Laporan<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level collapse">
                            <li><a href="<?= base_url('admin/LapTransaksi') ?>"><i class="fa fa-file-text"></i> Laporan Transaksi </a></li>
@@ -58,7 +56,7 @@
                            
                        </ul>
                     </li>
-                    <?php //}?>
+                    <?php }?>
                     
                 </ul>
             </div>

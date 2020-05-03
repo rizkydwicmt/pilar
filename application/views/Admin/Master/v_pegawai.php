@@ -32,8 +32,10 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="nav-item" aria-expanded="false"><a href="#bank" class="nav-link active" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true"><span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs"> Data Pegawai</span></a></li>
+            <?php if($_SESSION['id_role'] == 'JB001'){ ?>
             <li role="presentation" class="nav-item"><a href="#form" class="nav-link" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Input Data Pegawai</span></a></li>
             <li role="presentation" class="nav-item"><a href="#form2" class="nav-link" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Input Jabatan</span></a></li>
+            <?php } ?>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
@@ -55,7 +57,6 @@
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
-                                
                                 <tbody>
                                     <?php 
                                     $number 	=	1;
@@ -72,7 +73,9 @@
                                         <td><?= $data->KODEPOS_PEGAWAI ?></td>
                                         <td><?= $data->TELP_PEGAWAI ?></td>
                                         <td>	
-                                        	<a class="btn btn-sm btn-circle btn-danger" data-toggle="tooltip" data-title="Hapus" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("Control_Pegawai/Delete/".$data->ID_PEGAWAI) ?>'" ><i class="fa fa-trash"></i></a>
+                                            <?php if($_SESSION['id_role'] =='JB001'){ ?>
+                                        	    <a class="btn btn-sm btn-circle btn-danger" data-toggle="tooltip" data-title="Hapus" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("Control_Pegawai/Delete/".$data->ID_PEGAWAI) ?>'" ><i class="fa fa-trash"></i></a>
+                                            <?php } ?>
                                         	<a class="btn btn-sm btn-circle btn-primary" data-toggle="modal" href="#data_<?php echo $number ?>" ><i data-toggle="tooltip" data-title="Edit" class="fa fa-pencil"></i></a>
                                         	<a class="btn btn-sm btn-circle btn-warning" data-toggle="tooltip" data-title="Detail Pegawai" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("admin/DetailPegawai/".($number-1)) ?>'"><i class="fa fa-search"></i></a>
                                         </td>
@@ -192,7 +195,7 @@
            
                                 	
 
-
+            <?php if($_SESSION['id_role'] == 'JB001'){ ?>        
             <div role="tabpanel" class="tab-pane" id="form" aria-expanded="false">
                
                 <div class="col-sm-12">
@@ -321,6 +324,8 @@
                 </div>
 
             </div>
+
+            <?php } ?>
            
         </div>
     </div>
