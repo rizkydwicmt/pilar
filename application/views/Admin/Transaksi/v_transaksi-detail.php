@@ -241,7 +241,16 @@
             <button class="btn btn-primary" onclick="window.location.href='<?php echo base_url('admin/Transaksi')?>'">Kembali</button>
             <button class="btn btn-success" onclick="window.open('<?php 
                 echo base_url('admin/Transaksi/print/'.$pemesanan->ID_PEMESANAN);
-            ?>','_blank')">Print</button>
+            ?>','_blank')">Print Nota</button>
+            <?php 
+                if ($pengiriman != null) { 
+            ?>
+                <button class="btn btn-success" onclick="window.open('<?php 
+                echo base_url('T_Pengiriman/print_suratjalan/'.$pemesanan->ID_PEMESANAN);
+                ?>','_blank')">Print Surat Jalan</button>
+            <?php 
+                } 
+            ?>
         </div>
     </div>
  </div>

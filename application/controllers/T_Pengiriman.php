@@ -47,7 +47,6 @@
 		//data yang akan diinputkan ke database
 		$data 	=	array(
 			/* Nama Field    => Isi Data $_Post */
-			'NO_RESI'		 => $this->input->post('noresi'),
 			'ID_PEGAWAI'	 => $_SESSION['id_user'],
 			'ID_PEMBAYARAN'	 => $id_pembayaran,
 			'TGL_PENGIRIMAN' => $this->input->post('tglkirim')

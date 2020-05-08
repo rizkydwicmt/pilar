@@ -270,7 +270,7 @@
             //jika checkbox DP tercentang maka muncul input harga dan dp tidak boleh kurang dari setengah harga barang 
             if (checkBox.checked == true){
                 var dp = parseInt(valtot/2);
-                html += "<input type=\"number\" class=\"form-control\" placeholder=\"harga\" name=\"DPval\" min=\""+dp+"\" style=\"width: 200px\" required> </div>"
+                html += "<input type=\"number\" class=\"form-control\" placeholder=\"harga\" name=\"DPval\" min=\""+dp+"\" max=\""+valtot+"\" style=\"width: 200px\" required> </div>"
             }else{
                 html = '';
             }

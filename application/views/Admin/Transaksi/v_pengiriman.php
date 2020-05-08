@@ -40,6 +40,7 @@
                                         <th>Ongkos kirim</th>
                                         <th>Total berat</th>
                                         <th>Total harga</th>
+                                        <th>Tanggal kirim</th>
                                         <th>Status</th>
                                         <th style="text-align:center;">Aksi</th>
                                     </tr>
@@ -58,6 +59,11 @@
                                         <td>
                                             <?php echo $this->Master->rupiah($data->TOTAL_HARGA); ?>
                                         </td>
+                                        <td><?php 
+                                        $tgl_kirim = $this->db->query("SELECT TGL_PENGIRIMAN FROM pengiriman WHERE ID_PEMBAYARAN in (SELECT ID_PEMBAYARAN from pembayaran where ID_PEMESANAN = '$data->ID_PEMESANAN')")->result();
+                                        if($tgl_kirim){
+                                            echo $tgl_kirim[0]->TGL_PENGIRIMAN;  
+                                        }?></td>
                                         <td><?php echo $data->STATUS_TRANSAKSI ?></td>
                                         <td align="center">
                                             <?php
@@ -85,11 +91,6 @@
           
             <!-- <form class="form-horizontal"> -->
             <form class="form-horizontal">
-                <div class="form-group">
-                    <label class="col-md-12">Nomer resi</label>
-                    <div class="col-md-12">
-                        <input type="text" class="form-control" name="noresi"  minlength="5" maxlength="12" required> </div>
-                </div>
                 <div class="form-group">
                     <label class="col-md-12">Tanggal kirim</label>
                     <div class="col-md-12">

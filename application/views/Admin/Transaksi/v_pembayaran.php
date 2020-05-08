@@ -76,9 +76,13 @@
                                             </form>
                                         </td>
                                         <td align="center">
-                                            <a class="btn btn-sm btn-circle btn-secondary" data-toggle="tooltip" data-title="Bukti bayar" href="javascript:void(0)" onclick="window.open('<?php 
-                                            echo base_url('upload/pembayaran/'.$this->Master->get_tabel('pembayaran',array('ID_PEMESANAN' => $data->ID_PEMESANAN),'BUKTI_TRANSFER'))
-                                            ?>','_blank')" ><i class="fa fa-file-text-o" aria-hidden="true"></i></a>
+                                            <?php 
+                                                if($this->Master->get_tabel('pembayaran',array('ID_PEMESANAN' => $data->ID_PEMESANAN),'JENIS_BAYAR') == 'Transfer'){
+                                            ?>
+                                                <a class="btn btn-sm btn-circle btn-secondary" data-toggle="tooltip" data-title="Bukti bayar" href="javascript:void(0)" onclick="window.open('<?php 
+                                                echo base_url('upload/pembayaran/'.$this->Master->get_tabel('pembayaran',array('ID_PEMESANAN' => $data->ID_PEMESANAN),'BUKTI_TRANSFER'))
+                                                ?>','_blank')" ><i class="fa fa-file-text-o" aria-hidden="true"></i></a>
+                                            <?php }?>
                                         </td>
 
                                     <?php } ?>
