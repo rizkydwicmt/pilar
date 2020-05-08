@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Bulan Mei 2020 pada 10.15
+-- Waktu pembuatan: 08 Bulan Mei 2020 pada 14.32
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -820,6 +820,23 @@ CREATE TABLE `pengiriman` (
   `ID_PEMBAYARAN` char(13) NOT NULL,
   `TGL_PENGIRIMAN` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Trigger `pengiriman`
+--
+DELIMITER $$
+CREATE TRIGGER `idpengiriman` BEFORE INSERT ON `pengiriman` FOR EACH ROW begin
+	declare jumlah integer;
+    declare urut integer;
+    select count(*) into jumlah from pengiriman where
+	SUBSTRING(NO_RESI, 2, 2)= LPAD(EXTRACT(DAY FROM CURRENT_TIMESTAMP), 2, "0") and
+	SUBSTRING(NO_RESI, 4, 2)= LPAD(EXTRACT(MONTH FROM CURRENT_TIMESTAMP), 2, "0") and
+	SUBSTRING(NO_RESI, 6, 2)= SUBSTRING(EXTRACT(YEAR FROM CURRENT_TIMESTAMP), 3, 2);
+    set urut := jumlah +1;
+	set NEW.`NO_RESI`:= concat('K',(LPAD(EXTRACT(DAY FROM sysdate()), 2, "0")),(LPAD(EXTRACT(MONTH FROM sysdate()), 2, "0")),(SUBSTRING(EXTRACT(YEAR FROM CURRENT_TIMESTAMP), 3, 2)),LPAD(urut,4,'0'));
+end
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
