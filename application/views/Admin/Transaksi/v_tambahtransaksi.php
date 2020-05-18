@@ -72,7 +72,7 @@
                                             <input type="number" id="jumlah_1" class="input-text qty text" step="1" min="1" max="" name="jumlah[]" title="Jumlah" size="4" pattern="[0-9]*" inputmode="numeric" required style="width: 60px;text-align-last: center;">
                                         </td>
                                         <td>
-                                            <input type="number" id="berat_1" class="input-text qty text" step="1" min="1" max="" name="berat[]" 
+                                            <input type="number" id="berat_1" class="input-text qty text" step="0.01" min="1" max="" name="berat[]" 
                                             onChange="ganti_subtot(1)" onKeyup="ganti_subtot(1)" onClick="ganti_subtot(1)"
                                             title="Berat" size="4" pattern="[0-9]*" inputmode="numeric" required style="width: 60px;text-align-last: center;">
                                         </td>
@@ -235,7 +235,7 @@
         html += "<td><select class='form-control' name='jk[]' id='jk_"+rows+"'  onClick='select_jk("+rows+")' style='height: calc(3.5rem); font-size: 12px' required><option value=''>-PILIH-</option></select></td>";
         html += "<td id='harga_"+rows+"'></td>";
         html += "<td><input type='number' id='jumlah_"+rows+"' class='input-text qty text' step='1' min='1' max='' name='jumlah[]' title='Jumlah' size='4' pattern='[0-9]*' inputmode='numeric' required style='width: 60px;text-align-last: center;'></td>";
-        html += "<td><input type='number' id='berat_"+rows+"' class='input-text qty text' step='1' min='1' max='' name='berat[]' onChange='ganti_subtot("+rows+")' onKeyup='ganti_subtot("+rows+")' onClick='ganti_subtot("+rows+")' title='Berat' size='4' pattern='[0-9]*' inputmode='numeric' required style='width: 60px;text-align-last: center;'> </td>";
+        html += "<td><input type='number' id='berat_"+rows+"' class='input-text qty text' step='0.01' min='1' max='' name='berat[]' onChange='ganti_subtot("+rows+")' onKeyup='ganti_subtot("+rows+")' onClick='ganti_subtot("+rows+")' title='Berat' size='4' pattern='[0-9]*' inputmode='numeric' required style='width: 60px;text-align-last: center;'> </td>";
         html += "<td id='subtotal_"+rows+"'></td>";
         html += "</tr>";
         //insert data html ke tabel
