@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 08 Bulan Mei 2020 pada 14.32
+-- Waktu pembuatan: 18 Bulan Mei 2020 pada 05.58
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -32,7 +32,7 @@ CREATE TABLE `detail_pemesanan` (
   `ID_DOMBA` char(6) NOT NULL,
   `ID_PEMESANAN` char(12) NOT NULL,
   `JUMLAH` int(11) NOT NULL,
-  `BERAT` int(11) NOT NULL,
+  `BERAT` decimal(11,2) NOT NULL,
   `SUBTOTAL` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -786,9 +786,9 @@ CREATE TABLE `pemesanan` (
   `TGL_PESAN` timestamp NOT NULL DEFAULT current_timestamp(),
   `SISTEM_BAYAR` varchar(50) NOT NULL COMMENT 'Cicilan, Kontan',
   `ONGKOS_KIRIM` decimal(12,0) NOT NULL,
-  `TOTAL_BERAT` int(5) NOT NULL,
+  `TOTAL_BERAT` decimal(11,2) NOT NULL,
   `TOTAL_HARGA` decimal(12,0) NOT NULL,
-  `STATUS_TRANSAKSI` varchar(50) NOT NULL COMMENT 'Menunggu pengiriman, Sedang dikirim, Menunggu pelunasan, Selesai'
+  `STATUS_TRANSAKSI` varchar(50) NOT NULL COMMENT 'Menunggu pengiriman, Sedang dikirim, Belum lunas, Selesai'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
