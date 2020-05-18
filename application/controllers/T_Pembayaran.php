@@ -111,8 +111,8 @@
 	function UpdateStatus($id){
 		//mencari status_transaksi
 		$status_transaksi = $this->Master->get_tabel('pemesanan',array('ID_PEMESANAN' => $id),'STATUS_TRANSAKSI');
-		//jika domba sudah dikirim dan menunggu pelunasan
-		if($status_transaksi=='Menunggu pelunasan'){
+		//jika domba sudah dikirim dan Belum lunas
+		if($status_transaksi=='Belum lunas'){
 			$where	= array('ID_PEMESANAN' => $id);
 			$data	= array('STATUS_TRANSAKSI' => 'Selesai');
 			$this->Master->update('pemesanan',$where ,'update', $data);

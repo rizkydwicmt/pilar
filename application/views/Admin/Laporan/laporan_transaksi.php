@@ -24,6 +24,7 @@
 	 			<th>Tanggal</th>
 	 			<th>Pelanggan</th>
 				<th>Pembayaran</th>
+				<th>Status</th>
 	 			<th style="text-align: right;">Ongkir</th>
 	 			<th style="text-align: right;">Total</th>
  			</tr>
@@ -41,6 +42,7 @@
 	 					echo $this->Master->get_tabel('pelanggan',array('ID_PELANGGAN' => $data->ID_PELANGGAN),'NAMA_PELANGGAN');
 	 				?></td>
 					<td><?= $data->SISTEM_BAYAR ?></td>
+					<td><?= $data->STATUS_TRANSAKSI ?></td>
 	 				<td style="text-align: right;"><?php 
 	 					$ongkir = $ongkir+$data->ONGKOS_KIRIM;
 	 					echo  $this->Master->rupiah($data->ONGKOS_KIRIM); 
@@ -54,7 +56,7 @@
 	 			</tr>
  			<?php } ?>
  			<tr class="border_top">
- 				<td colspan="4" align="center">TOTAL HARGA</td>
+ 				<td colspan="5" align="center">TOTAL HARGA</td>
  				<td style="text-align: right;"><?php echo $this->Master->rupiah($ongkir) ?></td>
  				<td style="text-align: right;"><?php echo $this->Master->rupiah($total) ?></td>
  			</tr>

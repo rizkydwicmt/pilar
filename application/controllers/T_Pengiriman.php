@@ -74,7 +74,7 @@
 		}
 
 		if($sistem_bayar == 'Cicilan' && $jumlah_bayar == 1){
-			$status_transaksi = 'Menunggu pelunasan';
+			$status_transaksi = 'Belum lunas';
 		}else{
 			$status_transaksi = 'Selesai';
 		}

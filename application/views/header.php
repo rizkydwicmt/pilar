@@ -64,12 +64,9 @@
 
                                     <div class="collapse navbar-collapse align-items-start collapse" id="karl-navbar">
                                         <ul class="navbar-nav animated" id="nav">
-                                            <li class="nav-item active"><a class="nav-link" href="<?php echo base_url() ?>">Home</a></li>
-                                            <?php
-                                            if($this->session->userdata('idcus')){?>
-                                                <li class="nav-item active"><a class="nav-link" href="<?php echo base_url('profil') ?>">Profil</a></li>
-                                            <?php }?>
-                                            <!-- <li class="nav-item"><a class="nav-link" href="<?php //echo base_url('kontak') ?>">Contact</a></li> -->
+                                            <li class="nav-item active"><a class="nav-link" href="<?php echo base_url() ?>">Beranda</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="<?php echo base_url('cek_pesanan') ?>">cek pesanan</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="<?php echo base_url('kontak') ?>">Kontak</a></li>
                                         </ul>
                                     </div>
                                 </nav>

@@ -15,7 +15,7 @@
                 $status = 'Menunggu pengiriman';
             }else{
                 if($this->input->post('DP')){
-                    $status = 'Menunggu pelunasan';
+                    $status = 'Belum lunas';
                 }else{
                     $status = 'Selesai';
                 }

@@ -48,7 +48,7 @@
                             
                        </ul>
                     </li>
-                    <?php if($_SESSION['id_role'] =='JB001'){ ?>
+                    <?php //if($_SESSION['id_role'] =='JB001'){ ?>
                     <li> <a href="javascript:void(0);" class="waves-effect"><i class="ti-pencil-alt p-r-10"></i> <span class="hide-menu">Laporan<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level collapse">
                            <li><a href="<?= base_url('admin/LapTransaksi') ?>"><i class="fa fa-file-text"></i> Laporan Transaksi </a></li>
@@ -56,7 +56,7 @@
                            
                        </ul>
                     </li>
-                    <?php }?>
+                    <?php //}?>
                     
                 </ul>
             </div>

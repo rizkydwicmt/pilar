@@ -39,7 +39,7 @@ class L_Transaksi extends CI_Controller {
 
 		//inisialisasi data query pemesanan
 		$data = array(
-	            'pemesanan' => $this->db->query("SELECT * FROM `pemesanan` WHERE STATUS_TRANSAKSI = 'Selesai' and SUBSTRING(ID_PEMESANAN, 6, 2)= '$tahun' $bulan and SISTEM_BAYAR like '%$sistem_bayar%'")->result(),
+	            'pemesanan' => $this->db->query("SELECT * FROM `pemesanan` WHERE SUBSTRING(ID_PEMESANAN, 6, 2)= '$tahun' $bulan and SISTEM_BAYAR like '%$sistem_bayar%'")->result(),
 	            'name' => $filename,
 			);
 

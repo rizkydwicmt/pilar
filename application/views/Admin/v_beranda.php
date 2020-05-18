@@ -38,7 +38,7 @@
                                         ?>
                                         "><i class="ti-shopping-cart" style="background: red;"></i></a>
                                         <div class="bodystate">
-                                            <h4><?php echo $sukses; ?></h4> <span class="text-muted">Menunggu pelunasan</span> 
+                                            <h4><?php echo $sukses; ?></h4> <span class="text-muted">Belum lunas</span> 
                                         </div>
                                     </div>
                                     <div class="col-sm-3">

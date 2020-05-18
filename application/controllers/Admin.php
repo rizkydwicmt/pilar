@@ -28,7 +28,7 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		$where_status_menunggu = array('STATUS_TRANSAKSI' => 'Menunggu pelunasan');
+		$where_status_menunggu = array('STATUS_TRANSAKSI' => 'Belum lunas');
 		$where_status_dikirim = array('STATUS_TRANSAKSI' => 'Sedang dikirim');
 		$where_status_sukses = array('STATUS_TRANSAKSI' => 'Selesai');
 		$isi = array(
