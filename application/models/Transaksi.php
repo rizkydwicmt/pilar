@@ -34,6 +34,7 @@
                 'SISTEM_BAYAR'		=> $sistem_bayar,
                 'ONGKOS_KIRIM'		=> $this->input->post('ongkir'),
                 'TOTAL_BERAT'		=> array_sum($this->input->post('berat')),
+                'TOTAL_DISKON'		=> array_sum($this->input->post('diskon')),
                 'TOTAL_HARGA'		=> $this->input->post('total'),
                 'STATUS_TRANSAKSI'	=> $status,
             );
@@ -105,6 +106,7 @@
                     'ID_PEMESANAN'	=> $id_pemesanan,
                     'JUMLAH'		=> $this->input->post('jumlah')[$i],
                     'BERAT'			=> $this->input->post('berat')[$i],
+                    'DISKON'		=> $this->input->post('diskon')[$i],
                     'SUBTOTAL'		=> $this->input->post('subtotal')[$i],
                 ); 
                 $this->Master->save_data('detail_pemesanan' , $data);

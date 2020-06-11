@@ -44,6 +44,7 @@
                                         <th scope="col">Harga</th>
                                         <th scope="col" style="width: 150px;">Jumlah</th>
                                         <th scope="col" style="width: 150px;">Berat (Kg)</th>
+                                        <th scope="col" style="width: 150px;">Diskon</th>
                                         <th scope="col" style="width: 150px;">Subtotal</th>
                                     </tr>
                                 </thead>
@@ -76,10 +77,15 @@
                                             onChange="ganti_subtot(1)" onKeyup="ganti_subtot(1)" onClick="ganti_subtot(1)"
                                             title="Berat" size="4" pattern="[0-9]*" inputmode="numeric" required style="width: 60px;text-align-last: center;">
                                         </td>
+                                        <td>
+                                            <input type="number" id="diskon_1" class="input-text qty text" step="100" min="0" max="" name="diskon[]" 
+                                            onChange="ganti_subtot(1)" onKeyup="ganti_subtot(1)" onClick="ganti_subtot(1)"
+                                            title="Diskon" size="4" pattern="[0-9]*" inputmode="numeric" required style="width: 100px;text-align-last: center;">
+                                        </td>
                                         <td id="subtotal_1"></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="4"></td>
+                                        <td colspan="5"></td>
                                         <td><h3>TOTAL</h3></td>
                                         <td><h3 id="total"></h3></td>
                                     </tr>
@@ -236,6 +242,7 @@
         html += "<td id='harga_"+rows+"'></td>";
         html += "<td><input type='number' id='jumlah_"+rows+"' class='input-text qty text' step='1' min='1' max='' name='jumlah[]' title='Jumlah' size='4' pattern='[0-9]*' inputmode='numeric' required style='width: 60px;text-align-last: center;'></td>";
         html += "<td><input type='number' id='berat_"+rows+"' class='input-text qty text' step='0.01' min='1' max='' name='berat[]' onChange='ganti_subtot("+rows+")' onKeyup='ganti_subtot("+rows+")' onClick='ganti_subtot("+rows+")' title='Berat' size='4' pattern='[0-9]*' inputmode='numeric' required style='width: 60px;text-align-last: center;'> </td>";
+        html += "<td><input type='number' id='diskon_"+rows+"' class='input-text qty text' step='100' min='0' max='' name='diskon[]' onChange='ganti_subtot("+rows+")' onKeyup='ganti_subtot("+rows+")' onClick='ganti_subtot("+rows+")' title='Diskon' size='4' pattern='[0-9]*' inputmode='numeric' required style='width: 100px;text-align-last: center;'> </td>";
         html += "<td id='subtotal_"+rows+"'></td>";
         html += "</tr>";
         //insert data html ke tabel
@@ -269,7 +276,7 @@
         if(valtot != null){
             //jika checkbox DP tercentang maka muncul input harga dan dp tidak boleh kurang dari setengah harga barang 
             if (checkBox.checked == true){
-                var dp = parseInt(valtot/2);
+                var dp = parseFloat(valtot/2);
                 html += "<input type=\"number\" class=\"form-control\" placeholder=\"harga\" name=\"DPval\" min=\""+dp+"\" max=\""+valtot+"\" style=\"width: 200px\" required> </div>"
             }else{
                 html = '';
@@ -551,14 +558,19 @@
         }
     }
 
-    //ganti subtotal ketika berat diganti
+    //ganti subtotal ketika berat diganti   
     function ganti_subtot(id){
         if ($("#jumlah_"+id).val() == 0) {
             $("#jumlah_"+id).val(1);
         }
-        var berat = parseInt($("#berat_"+id).val());
-        var harga = parseInt($("#hargadom_"+id).val());
+        if ($("#diskon_"+id).val() == "") {
+            $("#diskon_"+id).val(0);
+        }
+        var berat = parseFloat($("#berat_"+id).val());
+        var harga = parseFloat($("#hargadom_"+id).val());
+        var diskon = parseInt($("#diskon_"+id).val());
         var subtot = berat*harga;
+        subtot = parseInt(subtot-diskon);
         var subtotal = formatRupiah(subtot, 'Rp.')+"<input type='hidden' name='subtotal[]' id='subtot_"+id+"' value='"+subtot+"' readonly>";
         $('#subtotal_'+id).html(subtotal);
         ganti_total();
@@ -567,9 +579,9 @@
     //ganti total ketika input ongkir di klik
     function ganti_total(){
         var total = 0;
-        var ongkir = parseInt($("#ongkir").val());
+        var ongkir = parseFloat($("#ongkir").val());
         for (let i = 1; i <= ($('#tabel tbody tr').length-1); i++) {
-            total += parseInt($("#subtot_"+i).val());
+            total += parseFloat($("#subtot_"+i).val());
         }
         total = total+ongkir;
         var html = formatRupiah(total, 'Rp.')+"<input type='hidden' name='total' id='valtot' value='"+total+"' readonly>";

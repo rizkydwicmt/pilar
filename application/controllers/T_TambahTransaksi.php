@@ -45,6 +45,7 @@
 	}
 
 	public function Save(){
+		//print_r($_POST);die();
 		$this->Transaksi->savePemesanan();
 		$this->Transaksi->savePembayaran();
 		$this->Transaksi->saveDetailPemesanan();

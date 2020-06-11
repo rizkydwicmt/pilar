@@ -108,6 +108,7 @@
                                 <th style="text-align: center;">Jenis Kelamin</th>
                                 <th style="text-align: center;">Jumlah</th>
                                 <th style="text-align: center;">Berat</th>
+                                <th style="text-align: center;">Diskon</th>
                                 <th style="width: 140px; text-align: right;">Subtotal</th>
                               </tr>
                             </thead>
@@ -125,6 +126,7 @@
                                     ?></td>
                                     <td style="color: #686868;font-size: 14px;"><?php echo $det->JUMLAH ?></td>
                                     <td style="text-align: center; color: #686868;font-size: 14px;"><?php echo $det->BERAT ?></td>
+                                    <td style="text-align: center; color: #686868;font-size: 14px;"><?php echo $this->Master->rupiah(-$det->DISKON) ?></td>
                                     <td style="text-align: right; color: #686868;font-size: 14px;"><?php echo $this->Master->rupiah($det->SUBTOTAL)?></td>
                                 </tr>
                                 <?php } ?>
@@ -135,18 +137,21 @@
                         <table width="100%">
                             <tr>
                                 <td style="color: #686868;">Subtotal</td>
-                                <td align="right" style="color: #686868;"><?php echo $this->Master->rupiah($pemesanan->TOTAL_HARGA-$pemesanan->ONGKOS_KIRIM); ?></td>
+                                <td align="right" style="color: #686868;">
+                                    <?= $this->Master->rupiah($pemesanan->TOTAL_HARGA-$pemesanan->ONGKOS_KIRIM); ?>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="color: #686868;">Ongkos kirim</td>
-                                <td align="right" style="color: #686868;">      <?php echo $this->Master->rupiah($pemesanan->ONGKOS_KIRIM); ?></td>
-                            </tr>
+                                <td align="right" style="color: #686868;">
+                                    <?= $this->Master->rupiah($pemesanan->ONGKOS_KIRIM); ?>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="color: #686868;">Total harga</td>
-                                <td align="right" style="color: #686868;"><?php 
-                                    echo $this->Master->rupiah($pemesanan->TOTAL_HARGA);
-                             ?></td>
+                                <td align="right" style="color: #686868;">
+                                    <?= $this->Master->rupiah($pemesanan->TOTAL_HARGA);?>
+                                </td>
                             </tr>
                         </table>
                         

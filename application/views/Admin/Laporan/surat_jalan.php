@@ -106,6 +106,7 @@
                                 <th style="text-align: center;">Jenis Kelamin</th>
                                 <th style="text-align: center;">Jumlah</th>
                                 <th style="text-align: center;">Berat</th>
+                                <th style="text-align: center;">Diskon</th>
                                 <th style="width: 140px; text-align: right;">Subtotal</th>
                               </tr>
                             </thead>
@@ -123,6 +124,7 @@
                                     ?></td>
                                     <td style="color: #686868;font-size: 14px;"><?php echo $det->JUMLAH ?></td>
                                     <td style="text-align: center; color: #686868;font-size: 14px;"><?php echo $det->BERAT ?></td>
+                                    <td style="text-align: center; color: #686868;font-size: 14px;"><?php echo $this->Master->rupiah(-$det->DISKON) ?></td>
                                     <td style="text-align: right; color: #686868;font-size: 14px;"><?php echo $this->Master->rupiah($det->SUBTOTAL)?></td>
                                 </tr>
                                 <?php } ?>
