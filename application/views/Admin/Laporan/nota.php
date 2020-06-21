@@ -90,11 +90,18 @@
                                 <td style="color: #686868;">
                                     <p style="font-size: 12px;margin-bottom: unset;"> 
                                         <?php echo 'No.Nota: '.$pemesanan->ID_PEMESANAN ?><br>
-                                        <?php echo 'Status Bayar: '.$status_bayar ?><br>
                                         <?php echo 'Pegawai: '.$pegawai ?>
                                     </p>
                                 </td>
-                                <td align="right" style="color: #686868;"><?php echo $pemesanan->TGL_PESAN ?>
+                                <td align="right" style="color: #686868;">
+                                <?php echo 'Status Bayar: ';
+                                                if($pemesanan->SISTEM_BAYAR=='Kontan'){
+                                                    echo 'Lunas';
+                                                }else{
+                                                    echo $status_bayar;
+                                                }
+                                        ?><br>
+                                <?php echo $pemesanan->TGL_PESAN ?>
                                 </td>
                             </tr>
                         </table>

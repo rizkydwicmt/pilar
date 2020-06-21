@@ -86,13 +86,21 @@
                                 <td style="color: #686868;">
                                     <p style="font-size: 12px;margin-bottom: unset;"> 
                                         <?php echo 'No.Nota: '.$data->ID_PEMESANAN ?><br>
-                                        <?php echo 'Status Bayar: '.$data->STATUS_PEMBAYARAN ?><br>
+                                        <?php echo 'Nama pengirim: '.$this->Master->get_tabel('pelanggan',array('ID_PELANGGAN' => $data->ID_PELANGGAN),'NAMA_PELANGGAN'); ?><br>
                                         <?php echo 'Alamat pengiriman: '.$data->ALAMAT_PENERIMA ?><br>
                                         <?php echo 'Tgl kirim: '.$data->TGL_PENGIRIMAN ?><br>
                                         <?php echo 'Pegawai: '.$this->Master->get_tabel('pegawai',array('ID_PEGAWAI' => $data->id_peg),'NAMA_PEGAWAI'); ?>
                                     </p>
                                 </td>
-                                <td align="right" style="color: #686868;"><?php echo $data->TGL_PESAN ?>
+                                <td align="right" style="color: #686868;">
+                                    <?php echo 'Status Bayar: ';
+                                                if($data->SISTEM_BAYAR=='Kontan'){
+                                                    echo 'Lunas';
+                                                }else{
+                                                    echo $data->STATUS_PEMBAYARAN;
+                                                }
+                                        ?><br>
+                                    <?php echo $data->TGL_PESAN ?>
                                 </td>
                             </tr>
                         </table>

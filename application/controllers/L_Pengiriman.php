@@ -31,7 +31,7 @@ class L_Pengiriman extends CI_Controller {
 
 		//inisialisasi bulan untuk query pemesanan dan filename untuk nama file pdf
 		if ($bulan != 0) {
-			$filename = "laporan pengiriman bulanan $bulan 20$tahun";
+			$filename = "laporan pengiriman bulan ".$this->bulan($bulan)." 20$tahun";
 			$bulan = "and SUBSTRING(p.ID_PEMESANAN, 4, 2) = '$bulan'";
 		}else{
 			$filename = "laporan pengiriman tahunan 20$tahun";
@@ -52,12 +52,56 @@ class L_Pengiriman extends CI_Controller {
 		if ($data['transaksi'] != null) {
 			$print = $this->load->view('Admin/Laporan/laporan_pengiriman',$data,true);
 			$paper = 'A4';
-	    	$orientation = 'portrait';
+	    	$orientation = 'landscape';
 			$this->pdfgenerator->generate($print , $filename , $paper , $orientation );
 		}else{
 			$this->session->set_flashdata('konten_err' , 'laporan tidak tersedia');	
 			redirect( base_url('admin/LapPengiriman') );
 		}
+	}
+
+	function bulan($bulan){
+		switch ($bulan) {
+			case "01":
+			  $nama_bulan = 'Januari';
+			  break;
+			case "02":
+			  $nama_bulan = 'Februari';
+			  break;
+			case "03":
+			  $nama_bulan = 'Maret';
+			  break;
+			case "04":
+			  $nama_bulan = 'April';
+			  break;
+			case "05":
+			  $nama_bulan = 'Mei';
+			  break;
+			case "06":
+			  $nama_bulan = 'Juni';
+			  break;
+			case "07":
+			  $nama_bulan = 'Juli';
+			  break;
+			case "08":
+			  $nama_bulan = 'Agustus';
+			  break;
+			case "09":
+			  $nama_bulan = 'September';
+			  break;
+			case "10":
+			  $nama_bulan = 'Oktober';
+			  break;
+			case "11":
+			  $nama_bulan = 'November';
+			  break;
+			case "12":
+			  $nama_bulan = 'Desember';
+			  break;
+			default:
+			  $nama_bulan =  "asdasd";
+		  }
+		return $nama_bulan;
 	}
 }
 ?>

@@ -44,7 +44,7 @@
                                         <th scope="col">Harga</th>
                                         <th scope="col" style="width: 150px;">Jumlah</th>
                                         <th scope="col" style="width: 150px;">Berat (Kg)</th>
-                                        <th scope="col" style="width: 150px;">Diskon</th>
+                                        <th scope="col" style="width: 150px;">Potongan (Rp.)</th>
                                         <th scope="col" style="width: 150px;">Subtotal</th>
                                     </tr>
                                 </thead>
@@ -103,8 +103,8 @@
                         </div>
                         <div class="row">
                             <div class="col-12 mb-5">
-                                <label for="nama">Pelanggan</label>
-                                <select class="form-control" name="pelanggan" id="pelanggan" style="height: calc(3.5rem); font-size: 12px; width: 270px;" onchange="PELANGGANFunction()" required>
+                                <label for="nama">Pelanggan</label><br>
+                                <select class="selectpicker" data-live-search="true" name="pelanggan" id="pelanggan" style="height: calc(3.5rem); font-size: 12px;" onchange="PELANGGANFunction()" required>
                                     <?php
                                     foreach ($pelanggan as $pel) {
                                         ?>
@@ -277,7 +277,7 @@
             //jika checkbox DP tercentang maka muncul input harga dan dp tidak boleh kurang dari setengah harga barang 
             if (checkBox.checked == true){
                 var dp = parseFloat(valtot/2);
-                html += "<input type=\"number\" class=\"form-control\" placeholder=\"harga\" name=\"DPval\" min=\""+dp+"\" max=\""+valtot+"\" style=\"width: 200px\" required> </div>"
+                html += "<input type=\"number\" class=\"form-control\" placeholder=\"harga\" name=\"DPval\" min=\""+dp+"\" max=\""+valtot+"\" style=\"width: 200px\" required>"
             }else{
                 html = '';
             }
@@ -299,7 +299,11 @@
             //jika checkbox DP tercentang maka muncul form
             if (checkBox.checked == true){
                 html += "<div class=\"col-md-12\">"
-                html += "<input type=\"file\" class=\"form-control\" name=\"userfile\" id='fileInput' onchange=\"AlertFilesize(this.id,2048,'KB')\" required> </div>"
+                html += "<input type=\"text\" class=\"form-control\" placeholder=\"Nama Bank\" name=\"NamaBANK\" style=\"width:200px\" required> </div>"
+                html += "<div class=\"col-md-12\">"
+                html += "<input type=\"text\" class=\"form-control\" placeholder=\"Atas Nama\" name=\"AtasNama\" style=\"width:200px\" required> </div>"
+                html += "<div class=\"col-md-12\">"
+                html += "<input type=\"file\" class=\"form-control\" name=\"userfile\" id='fileInput' onchange=\"AlertFilesize(this.id,2048,'KB')\" style=\"width:200px\" required> </div>"
             }else{
                 html = '';
             }

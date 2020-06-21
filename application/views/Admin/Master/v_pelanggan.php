@@ -50,6 +50,7 @@
                                         <th>Telepon</th>
                                         <th>Alamat</th>
                                         <th>kodepos</th>
+                                        <th>Jumlah Beli</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -68,6 +69,7 @@
                                         <td><?php echo $data->TELP_PELANGGAN ?></td>
                                         <td><?php echo $data->ALAMAT_PELANGGAN ?></td>
                                         <td><?php echo $data->KODEPOS_PELANGGAN ?></td>
+                                        <td><?php echo $this->Master->get_tabelcount('pemesanan',array('ID_PELANGGAN' => $data->ID_PELANGGAN, 'STATUS_TRANSAKSI' => 'Selesai')) ?></td>
                                         <td>	
                                         	<a class="btn btn-sm btn-circle btn-danger" data-toggle="tooltip" data-title="Hapus" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("Control_Pelanggan/Delete/".$data->ID_PELANGGAN) ?>'" ><i class="fa fa-trash"></i></a>
                                         	<a class="btn btn-sm btn-circle btn-primary" data-toggle="modal" href="#data_<?php echo $number ?>" ><i data-toggle="tooltip" data-title="Edit" class="fa fa-pencil"></i></a>

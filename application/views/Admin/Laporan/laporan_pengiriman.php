@@ -39,7 +39,10 @@
 				 	<td><?php echo $data->NO_RESI ?></td>
 	 				<td><?php echo $data->NAMA_PENERIMA; ?></td>
 					<td><?php echo $data->ALAMAT_PENERIMA; ?></td>
-					<td><?php echo $data->TGL_PENGIRIMAN ?></td>
+					<td><?php 
+						$mydate = strtotime($data->TGL_PENGIRIMAN);
+						echo date('j M Y', $mydate);
+					?></td>
 					<td><?php echo $data->STATUS_TRANSAKSI; ?></td>
 	 				
 	 			</tr>

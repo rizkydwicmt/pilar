@@ -52,7 +52,7 @@
             if ($this->input->post('DP') == 'on') {
                 $id_pembayaran = $id_pembayaran."1";
                 $harga_bayar = $this->input->post('DPval');
-                $status_pembayaran = "Mencicil";
+                $status_pembayaran = "Angsuran";
             }else{
                 $harga_bayar = $this->input->post('total');
                 $status_pembayaran = "Pelunasan";
@@ -87,6 +87,8 @@
                 'ID_PEMESANAN'		=> $id_pemesanan,
                 'JENIS_BAYAR'		=> $jenis_bayar,
                 'TOTAL_PEMBAYARAN'	=> $harga_bayar,
+                'NAMA_BANK'     	=> $this->input->post('NamaBANK'),
+                'ATAS_NAMA'	        => $this->input->post('AtasNama'),
                 'BUKTI_TRANSFER'	=> $foto,
                 'STATUS_PEMBAYARAN'	=> $status_pembayaran,
             );

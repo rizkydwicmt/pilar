@@ -37,7 +37,10 @@
  			foreach ($pemesanan as $data) { ?>
 	 			<tr>
 	 				<td><?php echo '#'.$data->ID_PEMESANAN; ?></td>
-	 				<td><?php echo $data->TGL_PESAN; ?></td>
+					<td><?php 
+						$mydate = strtotime($data->TGL_PESAN);
+						echo date('j M Y', $mydate);
+					?></td>
 	 				<td><?php 
 	 					echo $this->Master->get_tabel('pelanggan',array('ID_PELANGGAN' => $data->ID_PELANGGAN),'NAMA_PELANGGAN');
 	 				?></td>
