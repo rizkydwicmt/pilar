@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 11 Jun 2020 pada 09.40
+-- Waktu pembuatan: 24 Jun 2020 pada 05.33
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.3
 
@@ -36,6 +36,14 @@ CREATE TABLE `detail_pemesanan` (
   `DISKON` int(11) NOT NULL,
   `SUBTOTAL` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `detail_pemesanan`
+--
+
+INSERT INTO `detail_pemesanan` (`ID_DOMBA`, `ID_PEMESANAN`, `JUMLAH`, `BERAT`, `DISKON`, `SUBTOTAL`) VALUES
+('D2J001', 'T2106200001', 1, '1.00', 0, 21000),
+('D3J001', 'T2106200002', 1, '1.00', 100, 30900);
 
 -- --------------------------------------------------------
 
@@ -764,10 +772,20 @@ CREATE TABLE `pembayaran` (
   `ID_PEMESANAN` char(12) NOT NULL,
   `TGL_PEMBAYARAN` timestamp NOT NULL DEFAULT current_timestamp(),
   `JENIS_BAYAR` varchar(50) NOT NULL COMMENT 'Tunai, Transfer',
+  `NAMA_BANK` varchar(50) DEFAULT NULL,
+  `ATAS_NAMA` varchar(50) DEFAULT NULL,
   `TOTAL_PEMBAYARAN` decimal(12,0) NOT NULL,
   `BUKTI_TRANSFER` varchar(50) NOT NULL,
-  `STATUS_PEMBAYARAN` varchar(50) NOT NULL COMMENT 'Mencicil, Pelunasan'
+  `STATUS_PEMBAYARAN` varchar(50) NOT NULL COMMENT 'Angsuran, Pelunasan'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `pembayaran`
+--
+
+INSERT INTO `pembayaran` (`ID_PEMBAYARAN`, `ID_PEGAWAI`, `ID_PEMESANAN`, `TGL_PEMBAYARAN`, `JENIS_BAYAR`, `NAMA_BANK`, `ATAS_NAMA`, `TOTAL_PEMBAYARAN`, `BUKTI_TRANSFER`, `STATUS_PEMBAYARAN`) VALUES
+('B2106200001', 'P0002', 'T2106200001', '2020-06-21 06:30:19', 'Transfer', NULL, NULL, '53000', 'B2106200001.png', 'Pelunasan'),
+('B2106200002', 'P0002', 'T2106200002', '2020-06-21 06:58:12', 'Transfer', 'BCA', 'saya', '60400', 'B2106200002.png', 'Pelunasan');
 
 -- --------------------------------------------------------
 
@@ -792,6 +810,14 @@ CREATE TABLE `pemesanan` (
   `TOTAL_HARGA` decimal(12,0) NOT NULL,
   `STATUS_TRANSAKSI` varchar(50) NOT NULL COMMENT 'Menunggu pengiriman, Sedang dikirim, Belum lunas, Selesai'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `pemesanan`
+--
+
+INSERT INTO `pemesanan` (`ID_PEMESANAN`, `ID_PELANGGAN`, `ID_KOTA`, `ID_PEGAWAI`, `NAMA_PENERIMA`, `TELP_PENERIMA`, `ALAMAT_PENERIMA`, `KODEPOS_PENERIMA`, `TGL_PESAN`, `SISTEM_BAYAR`, `ONGKOS_KIRIM`, `TOTAL_BERAT`, `TOTAL_DISKON`, `TOTAL_HARGA`, `STATUS_TRANSAKSI`) VALUES
+('T2106200001', 'C0001', '60', 'P0002', 'nama pelanggan 1', '0857309875', 'alamat pelanggan 1', '12357', '2020-06-21 06:30:19', 'Kontan', '32000', '1.00', 0, '53000', 'Selesai'),
+('T2106200002', 'C0001', '444', 'P0002', 'nama pelanggan 1', '0857309875', 'alamat pelanggan 1', '12357', '2020-06-21 06:58:12', 'Kontan', '29500', '1.00', 100, '60400', 'Menunggu pengiriman');
 
 --
 -- Trigger `pemesanan`
@@ -822,6 +848,13 @@ CREATE TABLE `pengiriman` (
   `ID_PEMBAYARAN` char(13) NOT NULL,
   `TGL_PENGIRIMAN` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `pengiriman`
+--
+
+INSERT INTO `pengiriman` (`NO_RESI`, `ID_PEGAWAI`, `ID_PEMBAYARAN`, `TGL_PENGIRIMAN`) VALUES
+('K2106200001', 'P0002', 'B2106200001', '2020-06-21');
 
 --
 -- Trigger `pengiriman`
