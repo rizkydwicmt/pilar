@@ -70,6 +70,7 @@
                                                 if($data->STATUS_TRANSAKSI=='Menunggu pengiriman'){
                                             ?>
                                             <a class="btn btn-sm btn-circle btn-primary" data-toggle="modal" href="#data_<?php echo $number ?>" ><i data-toggle="tooltip" data-title="Tambah Pengiriman" class="fa fa-plus-circle"></i></a>
+                                            <a class="btn btn-sm btn-circle btn-danger" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("T_Pengiriman/Dibatalkan/$data->ID_PEMESANAN") ?>'" ><i data-toggle="tooltip" data-title="Pembatalan" class="fa fa fa-trash"></i></a>
                                             <?php
                                                 }else if($data->STATUS_TRANSAKSI=='Sedang dikirim'){
                                             ?>

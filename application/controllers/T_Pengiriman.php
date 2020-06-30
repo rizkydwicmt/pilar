@@ -30,7 +30,9 @@
 		//cari id_pembayaran
 		$query_transaksi = "SELECT p.SISTEM_BAYAR, count(pe.ID_PEMBAYARAN) as jumlah_pembayaran FROM pemesanan p join pembayaran pe
 		on p.ID_PEMESANAN=pe.ID_PEMESANAN
-		WHERE p.ID_PEMESANAN='$id'";
+		WHERE p.ID_PEMESANAN='$id'
+		AND p.STATUS_TRANSAKSI!='Dibatalkan'
+		";
 		$transaksi = $this->db->query($query_transaksi)->result();
 		
 		foreach ($transaksi as $data) { 
@@ -85,6 +87,13 @@
 		$this->Master->update('pemesanan',$where ,'update', $data);
 
 		$this->session->set_flashdata('konten' , 'Berhasil mengupdate status');
+		redirect( base_url('admin/Pengiriman') );
+	}
+
+	function Dibatalkan($id){
+		$where	= array('ID_PEMESANAN' => $id);
+		$data	= array('STATUS_TRANSAKSI' => 'Dibatalkan');
+		$this->Master->update('pemesanan',$where ,'update', $data);
 		redirect( base_url('admin/Pengiriman') );
 	}
 

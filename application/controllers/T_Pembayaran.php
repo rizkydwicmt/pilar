@@ -18,6 +18,7 @@
 		$query_transaksi = "SELECT p.*, count(pe.ID_PEMBAYARAN) FROM pemesanan p join pembayaran pe
 		on p.ID_PEMESANAN=pe.ID_PEMESANAN
 		WHERE p.SISTEM_BAYAR='Cicilan'
+		AND p.STATUS_TRANSAKSI!='Dibatalkan'
 		GROUP BY p.ID_PEMESANAN
 		HAVING count(pe.ID_PEMBAYARAN) = 1
 		ORDER BY p.ID_PEMESANAN DESC";
@@ -117,6 +118,13 @@
 			$data	= array('STATUS_TRANSAKSI' => 'Selesai');
 			$this->Master->update('pemesanan',$where ,'update', $data);
 		}
+	}
+
+	function Dibatalkan($id){
+		$where	= array('ID_PEMESANAN' => $id);
+		$data	= array('STATUS_TRANSAKSI' => 'Dibatalkan');
+		$this->Master->update('pemesanan',$where ,'update', $data);
+		redirect( base_url('admin/Pembayaran') );
 	}
 }
  ?>

@@ -67,21 +67,25 @@
                                         </td>
                                         <td><?= $data->STATUS_TRANSAKSI ?></td>
                                         <td align="right">
-                                                <form id="form" action="<?php echo base_url("T_Pembayaran/Approve2/$data->ID_PEMESANAN") ?>" method="post" enctype="multipart/form-data" accept-charset="utf-8">
-                                                <a class="btn btn-sm btn-circle btn-success" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("T_Pembayaran/Tunai/$data->ID_PEMESANAN") ?>'" ><i data-toggle="tooltip" data-title="Tunai" class="fa fa-chevron-circle-up"></i></a>
-                                                <label class="btn btn-sm btn-circle btn-success"><i data-toggle="tooltip" data-title="Transfer" class="fa fa-upload" style="color: black"></i>
-                                                    <input type="file" style="display: none;" name="userfile" id='fileInput' onchange="AlertFilesize(this.id,2048,'KB','<?php echo($data->ID_PEMESANAN); ?>')" required>
-                                                </label>
+                                            <form id="form" action="<?php echo base_url("T_Pembayaran/Approve2/$data->ID_PEMESANAN") ?>" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+                                            <a class="btn btn-sm btn-circle btn-success" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("T_Pembayaran/Tunai/$data->ID_PEMESANAN") ?>'" ><i data-toggle="tooltip" data-title="Tunai" class="fa fa-chevron-circle-up"></i></a>
+
+                                            <label class="btn btn-sm btn-circle btn-success"><i data-toggle="tooltip" data-title="Transfer" class="fa fa-upload" style="color: black"></i>
+                                                <input type="file" style="display: none;" name="userfile" id='fileInput' onchange="AlertFilesize(this.id,2048,'KB','<?php echo($data->ID_PEMESANAN); ?>')" required>
+                                            </label>
+                                            
                                             <a class="btn btn-sm btn-circle btn-info" data-toggle="tooltip" data-title="Detail Transaksi" href="javascript:void(0)" onclick="window.open('<?php echo base_url("admin/DetailTransaksi/".(substr($data->ID_PEMESANAN,1))) ?>','_blank')"><i class="fa fa-search"></i></a>
+
+                                            <a class="btn btn-sm btn-circle btn-danger" href="javascript:void(0)" onclick="window.location.href='<?php echo base_url("T_Pembayaran/Dibatalkan/$data->ID_PEMESANAN") ?>'" ><i data-toggle="tooltip" data-title="Pembatalan" class="fa fa fa-trash"></i></a>
                                             </form>
                                         </td>
                                         <td align="center">
                                             <?php 
                                                 if($this->Master->get_tabel('pembayaran',array('ID_PEMESANAN' => $data->ID_PEMESANAN),'JENIS_BAYAR') == 'Transfer'){
                                             ?>
-                                                <a class="btn btn-sm btn-circle btn-secondary" data-toggle="tooltip" data-title="Bukti bayar" href="javascript:void(0)" onclick="window.open('<?php 
-                                                echo base_url('upload/pembayaran/'.$this->Master->get_tabel('pembayaran',array('ID_PEMESANAN' => $data->ID_PEMESANAN),'BUKTI_TRANSFER'))
-                                                ?>','_blank')" ><i class="fa fa-file-text-o" aria-hidden="true"></i></a>
+                                                    <a class="btn btn-sm btn-circle btn-secondary" data-toggle="tooltip" data-title="Bukti bayar" href="javascript:void(0)" onclick="window.open('<?php 
+                                                    echo base_url('upload/pembayaran/'.$this->Master->get_tabel('pembayaran',array('ID_PEMESANAN' => $data->ID_PEMESANAN),'BUKTI_TRANSFER'))
+                                                    ?>','_blank')" ><i class="fa fa-file-text-o" aria-hidden="true"></i></a>
                                             <?php }?>
                                         </td>
 

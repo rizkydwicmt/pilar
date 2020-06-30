@@ -17,7 +17,8 @@
 </head>
 <body>
 	<h4 align="center"><?php echo strtoupper($name); ?></h4><br><br>
-	<p align="right">tanggal pembuatan : <?php echo date("Y-m-d H:i:s"); ?></p> 	<table>
+	<p align="right">tanggal pembuatan : <?php echo date("Y-m-d H:i:s"); ?></p> 	
+	<table border="1">
  		<thead>
  			<tr class="border_bottom">
 	 			<th>Invoice</th>
