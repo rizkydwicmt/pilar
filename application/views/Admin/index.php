@@ -56,6 +56,8 @@
         border-color: red;
     }
     </style>
+    <script src="https://cdn.rawgit.com/taromero/swal-forms/master/swal-forms.js"></script>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/taromero/swal-forms/master/swal-forms.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

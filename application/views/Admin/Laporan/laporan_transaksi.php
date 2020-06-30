@@ -27,14 +27,16 @@
 				<th>Pembayaran</th>
 				<th>Status</th>
 	 			<th style="text-align: right;">Ongkir</th>
-	 			<th style="text-align: right;">Total</th>
+	 			<th style="text-align: right;">Total Harga</th>
+				 <th style="text-align: right;">Total Pendapatan</th>
  			</tr>
  		</thead>
  		<tbody>
  			<?php 
  			$ongkir = 0;
  			$nego = 0;
- 			$total = 0;
+			$total = 0;
+			$total_pendapatan = 0; 
  			foreach ($pemesanan as $data) { ?>
 	 			<tr>
 	 				<td><?php echo '#'.$data->ID_PEMESANAN; ?></td>
@@ -51,25 +53,43 @@
 	 					$ongkir = $ongkir+$data->ONGKOS_KIRIM;
 	 					echo  $this->Master->rupiah($data->ONGKOS_KIRIM); 
 	 				?></td>
+					 <td style="text-align: right;">
+						 <?php 
+							echo $this->Master->rupiah($data->TOTAL_HARGA);
+							 $total = $total+$data->TOTAL_HARGA;
+                         ?>
+	 				</td>
 	 				<td style="text-align: right;">
-	 					<?php 
-                                echo $this->Master->rupiah($data->TOTAL_HARGA);
-                                $total = $total+$data->TOTAL_HARGA;
+						 <?php 
+						 	if($data->STATUS_TRANSAKSI == "Dibatalkan"){
+						 		if($data->SISTEM_BAYAR == "Cicilan"){
+									$totalharga = 0;
+									echo $this->Master->rupiah($totalharga);
+								}else{
+									$totalharga = $data->TOTAL_HARGA/2;
+									echo $this->Master->rupiah($totalharga);
+								}
+							 }else{
+								$totalharga = $data->TOTAL_HARGA;
+								echo $this->Master->rupiah($totalharga);
+							 }
+							 $total_pendapatan = $total_pendapatan+$totalharga;
                          ?>
 	 				</td>
 	 			</tr>
  			<?php } ?>
  			<tr class="border_top">
- 				<td colspan="5" align="center">TOTAL HARGA</td>
+ 				<td colspan="5" align="center">TOTAL</td>
  				<td style="text-align: right;"><?php echo $this->Master->rupiah($ongkir) ?></td>
  				<td style="text-align: right;"><?php echo $this->Master->rupiah($total) ?></td>
+				<td style="text-align: right;"><?php echo $this->Master->rupiah($total_pendapatan) ?></td>
  			</tr>
  		</tbody>
  	</table>
 </body>
 <script type="text/javascript">
- window.print();
- setTimeout(window.close, 0);
+  window.print();
+  setTimeout(window.close, 0);
 
 </script>
 </html>

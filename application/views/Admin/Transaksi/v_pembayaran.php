@@ -120,6 +120,7 @@
         </script>
 <script src="assets/js/jquery/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
+    
     function AlertFilesize(cid,sz,a,b){
         var invoice = b;
         var controllerID = cid;
@@ -145,18 +146,32 @@
             var fs = Math.round(fSize);
             if(fs < fileSize && fSExt[i] == extation)
             {
-                $.ajax({
-                    type: 'post',
-                    url: '<?php echo base_url('T_Pembayaran/Transfer/') ?>'+invoice,
-                    data: formData,
-                    async: false,
-                    contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
-                    processData: false, // NEEDED, DON'T OMIT THIS
-                    success: function () {
-                      alert('Image Successfully Uploaded');
-                      location.reload();
-                    }
-                });
+                swal.withForm({
+                    title: 'Form Transfer',
+                    text: 'Masukkan data bank',
+                    showCancelButton: true,
+                    confirmButtonColor: '#1da1f2',
+                    confirmButtonText: 'Setuju!',
+                    closeOnConfirm: true,
+                    formFields: [
+                    { id: 'nama_bank', placeholder: 'Nama Bank' },
+                    { id: 'atas_nama', placeholder: 'Atas Nama' },
+                    ]
+                }, function (isConfirm) {
+                    // do whatever you want with the form data
+                    $.ajax({
+                        type: 'post',
+                        url: '<?php echo base_url('T_Pembayaran/Transfer/') ?>'+invoice+'/'+this.swalForm.nama_bank+'/'+this.swalForm.atas_nama,
+                        data: formData,
+                        async: false,
+                        contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+                        processData: false, // NEEDED, DON'T OMIT THIS
+                        success: function () {
+                            location.reload();
+                        }
+                    });
+                    console.log(this.swalForm) // { name: 'user name', nickname: 'what the user sends' }
+                })
                 return true;
             }else{
                 alert("Please enter the image size less then "+fileSize+extation);

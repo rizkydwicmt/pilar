@@ -60,7 +60,7 @@
 		redirect( base_url('admin/Pembayaran') );
 	}
 
-	public function Transfer($id){
+	public function Transfer($id,$nama_bank,$atas_nama){
 		//inisialisasi id(primary key)
 		$id_pembayaran = str_replace('T', 'B', $id).'2';
 
@@ -71,7 +71,6 @@
 
 		//upload foto
 		if ($_FILES['userfile']['name']) {
-			$datapem['JENIS_BAYAR'] = 'Transfer';
             $filename = $_FILES['userfile']['name'];
             $format =  pathinfo($filename, PATHINFO_EXTENSION);
             $foto =  $id_pembayaran.'.'.$format;
@@ -99,6 +98,8 @@
 			'ID_PEGAWAI'		=> $_SESSION['id_user'],
 			'ID_PEMESANAN'		=> $id,
 			'JENIS_BAYAR'		=> 'Transfer',
+			'NAMA_BANK'			=> $nama_bank,
+			'ATAS_NAMA'			=> $atas_nama,
 			'TOTAL_PEMBAYARAN'	=> $harga_bayar,
 			'BUKTI_TRANSFER'	=> $foto,
 			'STATUS_PEMBAYARAN'	=> 'Pelunasan',

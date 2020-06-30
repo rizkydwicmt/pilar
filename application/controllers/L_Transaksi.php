@@ -46,6 +46,7 @@ class L_Transaksi extends CI_Controller {
 		//jika ada data maka print laporan, jika tidak muncul tulisan laporan tidak tersedia
 		if ($data['pemesanan'] != null) {
 			$print = $this->load->view('Admin/Laporan/laporan_transaksi',$data,true);
+			var_dump($print);die();
 			$paper = 'A4';
 	    	$orientation = 'landscape';
 			$this->pdfgenerator->generate($print , $filename , $paper , $orientation );
